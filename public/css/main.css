@@ -1,0 +1,148 @@
+     *{
+margin: 0;
+padding:  0;
+}
+
+header{
+	background-color: #dfe4ea;
+	display: flex;
+	justify-content: space-between;
+
+}
+#lil-hero{
+	background-color: #0984e3;
+	flex: 18% 1 0;
+	font-size: 1.3rem;
+	color: #fff;
+	text-align: center;
+	padding: 1rem 0;
+
+
+}
+#head-mid{
+	background-color: white;
+	width: 67%;
+	margin: 0 0.2rem;
+}
+#admin-ic-area{
+	background-color: white;
+	width: 15%;
+	 
+	position: relative;
+
+	 
+}
+#admin-ic-area .avatar{
+	color: black;
+	font-size:2rem;
+	 
+	position: absolute;
+	top: 50%;
+	left: 15%;
+	transform: translateY(-50%);
+}
+
+#admin-ic-area span:nth-child(2){
+	font-size: 1.5rem;
+	 
+	position: absolute;
+	top: 50%;
+	left: 55%;
+	transform: translate(-50%,-50%);
+
+
+}
+#admin-ic-area span:nth-child(3){
+	font-size: 2rem;
+	color: #7f8c8d;
+	 
+	position: absolute;
+	top: 50%;
+	right:10%;
+	transform: translateY(-50%);
+	cursor: pointer;
+
+}
+
+/*banner */
+section#man{
+	display: flex;
+	 min-height: 92vh;
+
+}
+.side-list{
+
+	background-color: white;
+	flex: 18% 1 0;
+	
+	
+}
+.side-list nav{
+	
+	height: 98%;
+
+}
+.side-list nav ul{
+  
+ 	 height: 100%;
+ 	 display: flex;
+ 	 flex-direction: column;
+ 	 justify-content: space-around;
+
+}
+.side-list nav ul .lis-active{
+	background-color: #0984e3;
+    height: 5rem;
+    
+	 
+	position: absolute;
+
+}
+
+.side-list ul li a{
+	color:#2d3436;
+	 text-decoration: none;
+	  
+}
+
+.side-list ul li{
+	 
+	list-style: none;
+	font-size: 1.3rem;
+	color: #c8d6e5;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+	 
+}
+ 
+
+ 
+.side-list ul li span:first-child {
+	 
+	flex: 20% 0 0;
+	align-self: center;
+
+
+     
+    display: inline-block;
+    text-align: center;
+    
+    margin-left: 1.5rem;
+   
+
+
+}
+.side-list ul li span:last-child {
+ 
+	margin-left: 1rem;
+ 
+	display: inline-block;
+}
+
+.sub-main{
+	background-color: #dfe4ea ;
+	width: 100%;
+	 
+}
