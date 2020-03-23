@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="d-flex justify-content-center align-items-center" style="height:85vh;">
-    <div class="card" style="width: 40rem; height:25rem; background-color:#f5f6fa;">
-        <div class="card-body">
+    <div class="card" style="width: 40rem; height:18rem; background-color:#f5f6fa;" id="printJS-card" >
+        <div class="card-body" style="width: 40rem; "  >
             <div style="background-color:#0984e3; color:white;" class="p-1">
                 <h5 class="card-title">Excellent Institute</h5>
                 <h6 class="card-subtitle mb-1 font-weight-normal">Class card</h6>
@@ -19,13 +19,25 @@
                         <li class="list-group-item">Fees Rs.800</li>
                       </ul>
                 </div>
-                <img src="{{asset('/imgs/student/student1.jpg')}}" height="170rem" alt="..." class="float-right">
+                <img src="{{asset('/imgs/student/qr1.png ')}}" height="170rem" alt="..." class="mt-2 float-right">
                 
             </div>
         </div>            
-        <div class="card-footer   text-right">
-            <a href="#" class="btn btn-success btn-lg">Print</a>
-        </div>
+      
+    </div>
+
+    <div class="card-footer   text-right">
+             
+        <button class="btn btn-success btn-lg" type="button" onclick="$('#printJS-card').printThis({
+            
+            importStyle: true,
+        });">
+            Print
+         </button>
+
     </div>
 </div>
+
+ 
+  
 @stop
