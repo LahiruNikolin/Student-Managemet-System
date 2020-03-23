@@ -6,22 +6,25 @@
  
     <div class="container m">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-10">
 
                 
 
 
             </div>
-            <div class="col-md-3 mt-3">
+            <div class="col-md-2 mt-3"  >
                 <div class="row">
-                    <div class="col-md-12 mt-2">
-                        <button class="btn btn-primary float-right" data-toggle="modal" data-target="#scanCardModal">Scan Card</button>
+                    <div class="col-md-12 mt-2 text-white" >
+                        <a style="width:100%;" class="btn btn-lg btn-primary float-right" data-toggle="modal" data-target="#scanCardModal">Scan Card</a>
+                    </div>
+                    <div class="col-md-12 mt-2 text-white">
+                      <button style="width:100%;" class="btn btn-lg btn-primary float-right" data-toggle="modal" data-target="#recordFeeModal" onclick="issueCard()" >Record Fees</button>
+                  </div>
+                    <div class="col-md-12 mt-2 text-white">
+                        <a  style="width:100%;" class="btn btn-lg btn-primary float-right" data-toggle="modal" data-target="#issueCardModal">New Cards</a>
                     </div>
                     <div class="col-md-12 mt-2">
-                        <button class="btn btn-primary float-right" data-toggle="modal" data-target="#issueCardModal">New Cards</button>
-                    </div>
-                    <div class="col-md-12 mt-2">
-                       <a class="btn btn-primary float-right" href="./viewAttendence">Attendence </a> 
+                       <a  style="width:100%;" class="btn btn-lg btn-primary float-right" href="./viewAttendence">Attendence </a> 
                     </div>
                 </div>
                
@@ -50,13 +53,59 @@
                 <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
                   <span class="sr-only">Loading...</span>
                 </div>
-              </div>
+            </div>
         </div>
         
       </div>
     </div>
   </div>
-
+<!--record fees -->
+<div class="modal fade" id="recordFeeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content justify-content-center">
+      <div class="modal-header">
+          <h5 class="modal-title" id="rfmTtitle">Place the Card</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <div class="modal-body">
+        <div id="loader">
+          <div class="d-flex justify-content-center"  >
+            <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+        
+          <div  class="card"  id="printJS-card" >
+            <div class="card-body"    >
+                <div style="background-color:#0984e3; color:white;" class="p-1">
+                    <h5 class="card-title">Excellent Institute</h5>
+                    <h6 class="card-subtitle mb-1 font-weight-normal">Class card</h6>
+                </div>
+                <div style="background-color:red;">
+                    <div class="text-left float-left">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Ravindu Shanthalal</li>
+                            <li class="list-group-item">Chemistry,Physics</li>
+                            <li class="list-group-item">077-3213660</li>
+                            <li class="list-group-item">Fees Rs.800</li>
+                          </ul>
+                    </div>
+                    <img src="{{asset('/imgs/student/qr1.png ')}}" height="170rem" alt="..." class="mt-2 float-right">                   
+                </div>
+            </div>              
+        </div>
+      </div>
+      <div class="modal-footer" id="recordFeesFoot">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Update</button>
+        <button type="button" class="btn btn-success">Paid</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
  
   
    <!-- Issue card modal -->
@@ -152,6 +201,28 @@
     </div>
 </div>
 
+<script>
  
+  function issueCard(){
+
+    $('#recordFeesFoot').hide();
+    $('#printJS-card').hide();
+
+    $('#loader').show()
+      
+     
+
+    setTimeout(function(){
+
+      $('#loader').hide();
+      $('#recordFeesFoot').show();
+      $('#printJS-card').show();
+
+     document.querySelector('#rfmTtitle').textContent="Student Details";
+      
+   
+}, 2000);
+  }
+</script>
 
 @stop

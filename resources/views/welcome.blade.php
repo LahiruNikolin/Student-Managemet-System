@@ -41,6 +41,7 @@
 					  Lahiru
 					</button>
 					<div class="dropdown-menu"  aria-labelledby="dropdownMenu1">
+						<a class="dropdown-item" href="#!">Settings</a>
 					  <a class="dropdown-item" href="#!">Logout</a>
 					   
 					</div>
