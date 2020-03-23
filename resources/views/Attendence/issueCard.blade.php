@@ -1,8 +1,12 @@
 @extends('welcome')
 
 @section('content')
-<div class="d-flex justify-content-center align-items-center" style="height:85vh;">
-    <div class="card" style="width: 40rem; height:18rem; background-color:#f5f6fa;" id="printJS-card" >
+<div class="d-flex justify-content-center align-items-center" style="height:85vh;" id="issueCardParent">
+    
+    <div class="spinner-grow text-primary" style="width:10rem; height:10rem;" role="status" id="loader">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div     class="card" style="width: 40rem; height:18rem; background-color:#f5f6fa;" id="printJS-card" >
         <div class="card-body" style="width: 40rem; "  >
             <div style="background-color:#0984e3; color:white;" class="p-1">
                 <h5 class="card-title">Excellent Institute</h5>
@@ -26,7 +30,7 @@
       
     </div>
 
-    <div class="card-footer   text-right">
+    <div class="card-footer   text-right" id='print-btn'>
              
         <button class="btn btn-success btn-lg" type="button" onclick="$('#printJS-card').printThis({
             
@@ -39,5 +43,14 @@
 </div>
 
  
-  
+<script>
+      
+    $('#printJS-card').hide();
+    $('#print-btn').hide();
+    setTimeout(function(){
+    $('#loader').remove();
+    $('#printJS-card').show();
+    $('#print-btn').show();
+}, 2000);
+</script>
 @stop

@@ -9,15 +9,7 @@
             <div class="col-md-9">
 
                 
- <form method="post" action="#" id="printJS-form">
-   <div>
-       <input type="text" placeholder="Name">
-   </div>
- </form>
 
- <button type="button" onclick="printJS('printJS-form', 'html')">
-    Print Form
- </button>
 
             </div>
             <div class="col-md-3 mt-3">
