@@ -87,9 +87,7 @@
 			<div class="container">
 				@yield('content')
 			</div>
-			<div>
-				
-			</div>
+			 
 		</div>
 	</section>
 	<script src="{{asset('../node_modules/print-js/dist/print.js')}}"></script>
