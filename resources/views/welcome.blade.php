@@ -30,7 +30,22 @@
 <body>
 	<header>
 		<div id='lil-hero'><span><i class="fas fa-plane-departure"></i> Student Management</span></div>
-		<div id='head-mid'></div>
+		<div id='head-mid' class="d-flex justify-content-center">
+
+			<button type="button" class="btn btn-primary m-1">
+				Students <span class="badge badge-danger">234</span>
+			  </button>
+
+			  <button type="button" class="btn btn-primary m-1">
+				Teachers <span class="badge badge-danger">23</span>
+			  </button>
+
+			  <button type="button" class="btn btn-primary m-1">
+				Subjects <span class="badge badge-danger">14</span>
+			  </button>
+
+
+		</div>
 		<div id='admin-ic-area'>
 			<span class="avatar"><i class="fas fa-user-alt"></i></span>
 			<div class="d-flex justify-content-end  mt-3 mr-4">
@@ -54,22 +69,22 @@
 		<div class="side-list">
 			<nav>
 				<ul>
-					<li><span class="ic"><i class="fas fa-home"></i></span>
-						<span><a href="#">Dashboard</a></span>
-						<div class="lis-active"></div>
-					</li>
+					 
 					<li><span  class="ic"><i class="fas fa-bookmark"></i></span>
-						<span> <a href="http://localhost/projct/lsapp/public/attendence"> Attendence</a></span>
+						<span> <a href="http://localhost/projct/lsapp/public/attendence"> Attendence &Card Management</a></span>
 						<div class="lis-active"></div>
 					</li>
+				 
 					<li><span  class="ic"><i class="fab fa-sellsy"></i></span>
 						<span> <a href="#"> Students Management</a></span>
 						<div class="lis-active"></div>
 					</li>
+					 
 					<li><span  class="ic"><i class="fas fa-users"></i></span>
 						<span> <a href="customer.html">Teacher Management</a></span>
 						<div class="lis-active"></div>
 					</li>
+
 					<li><span class="ic"><i class="fas fa-lemon"></i></span>
 						<span> <a href="airport.html"> Subject Management</a></span>
 						<div class="lis-active"></div>

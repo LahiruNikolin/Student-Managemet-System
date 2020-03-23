@@ -92,10 +92,10 @@ section#man{
 }
 .side-list nav ul .lis-active{
 	background-color: #0984e3;
-    height: 5rem;
-    
+	height: 5rem;
+	 align-self: center; 
+	 position: absolute;
 	 
-	position: absolute;
 
 }
 
@@ -114,6 +114,8 @@ section#man{
 	justify-content: flex-start;
 	align-items: center;
 	position: relative;
+	background-color: #f8f8f8;
+	 	 
 	 
 }
  
@@ -129,7 +131,9 @@ section#man{
     display: inline-block;
     text-align: center;
     
-    margin-left: 1.5rem;
+	margin-left: 1rem;
+	color: black;
+	font-size: 2rem;
    
 
 

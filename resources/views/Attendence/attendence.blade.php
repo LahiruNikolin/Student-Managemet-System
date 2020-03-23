@@ -8,7 +8,52 @@
         <div class="row">
             <div class="col-md-10">
 
-                
+              <h3>Upcoming Classes</h3>
+ 
+
+
+              <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-dark">
+                              <thead>
+                                <tr>
+                                  <th>Teacher</th>
+                                  
+                                  <th>Subject</th>
+                                  <th>Time</th>
+                                  
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Sugath Perera</td>
+                                  <td>Combined Maths</td>
+                                  <td>3.00-6.00</td>
+                                  
+                                </tr>
+                                <tr>
+                                    <td>Kamal Perera</td>
+                                    <td>Physicss</td>
+                                    <td>3.00-6.00</td>
+                                  
+                                </tr>
+                                <tr>
+                                    <td>Namal Perera</td>
+                                    <td>Biology</td>
+                                    <td>3.00-6.00</td>
+                                  
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                    </div>
+                    <div class="col-md-6">
+                        <p>hello</p>
+                    </div>
+                </div>
+            </div>
 
 
             </div>
@@ -154,52 +199,7 @@
     </div>
   </div>
 
-<h3>Upcoming Classes</h3>
- 
 
-
-  <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                  <thead>
-                    <tr>
-                      <th>Teacher</th>
-                      
-                      <th>Subject</th>
-                      <th>Time</th>
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Sugath Perera</td>
-                      <td>Combined Maths</td>
-                      <td>3.00-6.00</td>
-                      
-                    </tr>
-                    <tr>
-                        <td>Kamal Perera</td>
-                        <td>Physicss</td>
-                        <td>3.00-6.00</td>
-                      
-                    </tr>
-                    <tr>
-                        <td>Namal Perera</td>
-                        <td>Biology</td>
-                        <td>3.00-6.00</td>
-                      
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-        </div>
-        <div class="col-md-6">
-            <p>hello</p>
-        </div>
-    </div>
-</div>
 
 <script>
  

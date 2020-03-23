@@ -3,7 +3,7 @@ let list=document.querySelectorAll('.side-list ul li');
  console.log("heyy");
  
 list.forEach(e => e.addEventListener('mouseenter',function(){
-	 e.childNodes[4].style.width='0.3rem';
+	 e.childNodes[4].style.width='0.4rem';
 
 	// console.log(e.childNodes);
 }));
