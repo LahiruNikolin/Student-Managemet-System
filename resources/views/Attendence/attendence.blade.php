@@ -4,58 +4,64 @@
 @section('content')
 
  
-    <div class="container m">
+    <div class="container">
         <div class="row">
             <div class="col-md-10">
-
-              <h3>Upcoming Classes</h3>
- 
-
-
-              <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-dark">
-                              <thead>
-                                <tr>
-                                  <th>Teacher</th>
-                                  
-                                  <th>Subject</th>
-                                  <th>Time</th>
-                                  
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>Sugath Perera</td>
-                                  <td>Combined Maths</td>
-                                  <td>3.00-6.00</td>
-                                  
-                                </tr>
-                                <tr>
-                                    <td>Kamal Perera</td>
-                                    <td>Physicss</td>
-                                    <td>3.00-6.00</td>
-                                  
-                                </tr>
-                                <tr>
-                                    <td>Namal Perera</td>
-                                    <td>Biology</td>
-                                    <td>3.00-6.00</td>
-                                  
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                    </div>
-                    <div class="col-md-6">
-                        <p>hello</p>
-                    </div>
-                </div>
-            </div>
-
-
+              <p>Today's Attendence</p>
+              <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar1">
+                  
+                  <table class="table table-hover table-dark" id="stuTble">
+                    <thead>
+                      <tr>
+                        <th>StudentID</th>
+                        
+                        <th>Subject</th>
+                        <th>Year</th>
+                        <th>Time</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>st1243</td>
+                        <td>Combined Maths</td>
+                        <td>2021 A/L</td>
+                        <td>3.13 PM</td>
+                        <td><a class="btn btn-sm btn-success" href="#">View</a></td>
+                        
+                      </tr>
+                      <tr>
+                          <td>st4322</td>
+                          <td>Physicss</td>
+                          <td>2022 A/L</td>
+                          <td>2.56 PM</td>
+                          <td><a class="btn btn-sm btn-success" href="#">View</a></td>
+                      </tr>
+                      <tr>
+                          <td>st4224</td>
+                          <td>Biology</td>
+                          <td>2021 A/L</td>
+                          <td>2.40 PM</td>
+                          <td><a class="btn btn-sm btn-success" href="#">View</a></td>
+                      </tr>
+                      <tr>
+                        <td>st4224</td>
+                        <td>Biology</td>
+                        <td>2021 A/L</td>
+                        <td>2.40 PM</td>
+                        <td><a class="btn btn-sm btn-success" href="#">View</a></td>
+                    </tr>
+                    <tr>
+                      <td>st4224</td>
+                      <td>Biology</td>
+                      <td>2021 A/L</td>
+                      <td>2.40 PM</td>
+                      <td><a class="btn btn-sm btn-success" href="#">View</a></td>
+                  </tr>
+                    </tbody>
+                  </table>
+                </div>  
             </div>
             <div class="col-md-2 mt-3"  >
                 <div class="row">
@@ -71,15 +77,71 @@
                     <div class="col-md-12 mt-2">
                        <a  style="width:100%;" class="btn btn-lg btn-primary float-right" href="./viewAttendence">Attendence </a> 
                     </div>
-                </div>
+                </div>   
+              </div>    
+        </div>
+        <div>
+          <p class="mt-1">Today's Classes</p>
+          <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-hover table-dark">
+              <thead>
+                <tr>
+                  <th>Teacher</th>
+                  
+                  <th>Subject</th>
+                  <th>Size</th>
+                  <th>Year</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Sugath Perera</td>
+                  <td>Combined Maths</td>
+                  <td>119</td>
+                  <td>2021 A/L</td>
+                  <td>3.00-6.00</td>
+                  <td><span class="badge badge-pill badge-info">Finished</span></td>
+                </tr>
+                <tr>
+                  <td>Sugath Perera</td>
+                  <td>Combined Maths</td>
+                  <td>119</td>
+                  <td>2021 A/L</td>
+                  <td>3.00-6.00</td>
+                  <td><span class="badge badge-pill badge-warning">Ongoing</span></td>
+                </tr>
+                <tr>
+                  <td>Sugath Perera</td>
+                  <td>Combined Maths</td>
+                  <td>119</td>
+                  <td>2021 A/L</td>
+                  <td>3.00-6.00</td>
+                  <td><span class="badge badge-pill badge-info">Finished</span></td>
+                </tr>
+                <tr>
+                  <td>Sugath Perera</td>
+                  <td>Combined Maths</td>
+                  <td>119</td>
+                  <td>2021 A/L</td>
+                  <td>3.00-6.00</td>
+                  <td><span class="badge badge-pill badge-warning">Ongoing</span></td>
+                </tr>
+                <tr>
+                  <td>Sugath Perera</td>
+                  <td>Combined Maths</td>
+                  <td>119</td>
+                  <td>2021 A/L</td>
+                  <td>3.00-6.00</td>
+                  <td><span class="badge badge-pill badge-warning">Ongoing</span></td>
+                </tr>
                
                 
-            </div>
-            
-
-        </div>
-        
-        
+                 
+              </tbody>
+          </table>
+        </div>       
     </div>  
  
   
@@ -202,6 +264,16 @@
 
 
 <script>
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+     
+    var value = $(this).val().toLowerCase();
+    $("#stuTble tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
  
   function issueCard(){
 
