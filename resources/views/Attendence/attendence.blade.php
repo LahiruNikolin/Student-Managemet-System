@@ -63,7 +63,7 @@
                   </table>
                 </div>  
             </div>
-            <div class="col-md-2 mt-4"  >
+            <div class="col-md-2"  style="margin-top:2.1rem;">
                 <div class="row">
                     <div class="col-md-12 mt-2 text-white" >
                         <a style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#scanCardModal">Scan Card</a>
