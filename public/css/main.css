@@ -165,3 +165,9 @@ section#man{
 }
 .table-wrapper-scroll-y {
 	display: block;}
+
+
+/* charts*/
+.chart-cont{
+	height: 30rem;
+}
