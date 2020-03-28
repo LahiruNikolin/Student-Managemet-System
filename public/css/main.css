@@ -150,7 +150,13 @@ section#man{
 	width: 100%;
 	 
 }
-
+.sub-main .btn-cust{
+	 
+	height: 4rem;
+	line-height:2.6rem;
+	font-size: larger;
+	 
+}
 /* table scroll*/
 
 .my-custom-scrollbar {

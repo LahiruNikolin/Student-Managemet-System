@@ -63,19 +63,19 @@
                   </table>
                 </div>  
             </div>
-            <div class="col-md-2 mt-5"  >
+            <div class="col-md-2 mt-4"  >
                 <div class="row">
                     <div class="col-md-12 mt-2 text-white" >
-                        <a style="width:100%;" class="btn btn-lg btn-primary float-right" data-toggle="modal" data-target="#scanCardModal">Scan Card</a>
+                        <a style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#scanCardModal">Scan Card</a>
                     </div>
                     <div class="col-md-12 mt-2 text-white">
-                      <button style="width:100%;" class="btn btn-lg btn-primary float-right" data-toggle="modal" data-target="#recordFeeModal" onclick="issueCard()" >Record Fees</button>
+                      <button style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#recordFeeModal" onclick="issueCard()" >Record Fees</button>
                   </div>
                     <div class="col-md-12 mt-2 text-white">
-                        <a  style="width:100%;" class="btn btn-lg btn-primary float-right" data-toggle="modal" data-target="#issueCardModal">New Cards</a>
+                        <a  style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#issueCardModal">New Cards</a>
                     </div>
                     <div class="col-md-12 mt-2">
-                       <a  style="width:100%;" class="btn btn-lg btn-primary float-right" href="./viewAttendence">Attendence </a> 
+                       <a  style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" href="./viewAttendence">Attendence </a> 
                     </div>
                 </div>   
               </div>    
