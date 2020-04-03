@@ -72,7 +72,7 @@
 				<ul>
 					 
 					<li><span  class="ic"><i class="fas fa-bookmark"></i></span>
-						<span> <a href="http://localhost/projct/lsapp/public/attendence"> Attendence & Card Management</a></span>
+						<span> <a href="./attendence"> Attendence & Card Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 				 
