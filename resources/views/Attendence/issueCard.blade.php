@@ -17,13 +17,27 @@
             <div style="background-color:red;">
                 <div class="text-left float-left">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Ravindu Shanthalal</li>
-                        <li class="list-group-item">Chemistry,Physics</li>
-                        <li class="list-group-item">077-3213660</li>
-                        <li class="list-group-item">Fees Rs.800</li>
+                    <li class="list-group-item">{{$name}}</li>
+                        <li class="list-group-item">
+ <small>
+
+                            @foreach ($subs as $sub)
+                                    {{$sub}}
+                                    @if(!$loop->last)
+                                        ,
+                                    @endif
+                                    
+                                   
+                            @endforeach
+                        </small>
+                        </li>
+                        <li class="list-group-item">{{$mobile}}</li>
+                        <li class="list-group-item">Fees Rs.{{$fee}}</li>
                       </ul>
                 </div>
-                <img src="{{asset('/imgs/student/qr1.png ')}}" height="170rem" alt="..." class="mt-2 float-right">
+                <div id="qrcode" class="mt-2 float-right">
+                
+                </div>
                 
             </div>
         </div>            
@@ -42,15 +56,48 @@
     </div>
 </div>
 
+<span id="stuId"  style="display:none;">{{$id}}</span>
+
  
 <script>
       
     $('#printJS-card').hide();
     $('#print-btn').hide();
+
     setTimeout(function(){
-    $('#loader').remove();
-    $('#printJS-card').show();
-    $('#print-btn').show();
-}, 2000);
+        $('#loader').remove();
+        $('#printJS-card').show();
+        $('#print-btn').show();
+        fun();
+    }, 1500);
 </script>
+
+ 
+
+
+<div id="qrcode"></div>
+
+
+ <!--generating qr code-->
+<script src="{{asset('js/qrcode.min.js')}}" ></script>
+
+<script>
+
+
+
+var qrcode = new QRCode(document.getElementById("qrcode"),{
+    
+    width: 150,
+    height: 150,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+});
+
+function fun(){
+   console.log(document.querySelector('#stuId').textContent);
+    qrcode.makeCode(document.querySelector('#stuId').textContent);
+}
+</script>
+
 @stop

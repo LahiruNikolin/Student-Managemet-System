@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "chart.js": "^2.9.3",
-        "print-js": "^1.0.63"
+        "print-js": "^1.0.63",
+        "qr-scanner": "^1.1.1"
     }
 }

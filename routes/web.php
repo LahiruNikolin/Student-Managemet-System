@@ -17,14 +17,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/attendence', function () {
-    return view('Attendence.attendence');
-});
+Route::get('/attendence', 'attendencePageController@attendence');
 
 Route::get('/viewAttendence', function () {
     return view('Attendence.viewAttendence');
 });
 
-Route::get('/issueCard/{id}',function ($id) {
-    return view('Attendence.issueCard')->with('id',$id);
+Route::get('/issueCard/{id}','attendencePageController@issueCard');
+
+ 
+
+Route::get('/test',function () {
+    return view('Attendence.show');
 });
+Route::get('/test',function () {
+    return view('Attendence.test');
+});
+Route::resource('/student', 'studentsController');

@@ -238,18 +238,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">Mark</th>
-                    <td>Otto</td>
-                    <td>340</td>
-                  <td><a href="./issueCard/{{5}}"class="btn btn-success">Issue</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Jacob</th>
-                    <td>Thornton</td>
-                    <td>600</td>
-                    <td><button class="btn btn-success">Issue</button></td>
-                  </tr>
+                  @if (count($newStudents)> 0)
+                      @foreach ($newStudents as $newStudent)
+                      <tr>
+                        <th scope="row">{{$newStudent->fname}}</th>
+                        <td>{{$newStudent->lname}}</td>
+                        <td>{{$newStudent->fee}}</td>
+                      <td><a href="./issueCard/{{$newStudent->id}}"class="btn btn-success">Issue</a></td>
+                      </tr>
+                      @endforeach
+                  
+                  @endif
                 </tbody>
               </table>
           </div>

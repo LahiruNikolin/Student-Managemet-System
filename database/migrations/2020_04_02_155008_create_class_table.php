@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateClassTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('class', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('sub_id');
+            $table->integer('tid');
+            $table->decimal('fee', 8, 2);
+            $table->string('day');
+            $table->time('from');
+            $table->time('to');
+            $table->string('year');
+
+
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('class');
+    }
+}
