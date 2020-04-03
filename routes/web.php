@@ -28,9 +28,14 @@ Route::get('/issueCard/{id}','attendencePageController@issueCard');
  
 
 Route::get('/test',function () {
-    return view('Attendence.show');
+    return view('Inc.scanForm');
 });
-Route::get('/test',function () {
-    return view('Attendence.test');
+Route::get('/test1',function () {
+    return view('Attendence.test1');
 });
 Route::resource('/student', 'studentsController');
+
+
+Route::post('/scan', 'attendencePageController@scanCard');
+
+ 

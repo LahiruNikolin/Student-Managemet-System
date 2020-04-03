@@ -30,29 +30,6 @@
 
   -->
 
-<button onclick="fun()">Qr Code</button> 
+  <p>Soo </p>
 
-
-<div id="qrcode"></div>
-
-
- 
-<script src="{{asset('js/qrcode.min.js')}}" ></script>
-
-<script>
-
-var qrcode = new QRCode(document.getElementById("qrcode"),{
-    
-    width: 128,
-    height: 128,
-    colorDark : "#000000",
-    colorLight : "#ffffff",
-    correctLevel : QRCode.CorrectLevel.H
-});
-
-function fun(){
-
-    qrcode.makeCode("Hello World");
-}
-</script>
 @stop

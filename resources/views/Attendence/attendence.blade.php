@@ -3,6 +3,7 @@
  
 @section('content')
 
+@include('Inc.scanForm')
  
     <div class="container">
         <div class="row">
@@ -66,7 +67,7 @@
             <div class="col-md-2"  style="margin-top:2.1rem;">
                 <div class="row">
                     <div class="col-md-12 mt-2 text-white" >
-                        <a style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#scanCardModal">Scan Card</a>
+                        <a style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#scanCardModal" onclick="initScan()">Scan Card</a>
                     </div>
                     <div class="col-md-12 mt-2 text-white">
                       <button style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#recordFeeModal" onclick="issueCard()" >Record Fees</button>
@@ -146,20 +147,32 @@
  
   
   <!--Scan card Modal -->
-  <div class="modal fade" id="scanCardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="scanCardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog " role="document">
-      <div class="modal-content justify-content-center">
+      <div id="scan-modal" class="modal-content justify-content-center" style="width:42rem;">
         <div class="modal-header">
-            <h5 class="modal-title" >Place the Card</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <div id="spinner1" class="spinner-border" role="status" style="width: 2rem; height: 2rem;">
+            <span class="sr-only">Loading...</span>
+          </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="mod1-close" >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
         <div class="modal-body">
+
+            
+            <div class="video-container mb-2">
+                <video id="video-preview"></video>
+                <canvas id="qr-canvas" style="display: none;" ></canvas>
+          
+            </div>
+            
             <div class="d-flex justify-content-center">
-                <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
-                  <span class="sr-only">Loading...</span>
-                </div>
+              <div id="scan-success" style="display:none;">
+                <span style="color:green; font-size:4rem;"><i class="fas fa-check-circle"></i></span>
+              </div>
+              
+                <h5  id="scan-hint" class="modal-title" >Place the Card</h5>
             </div>
         </div>
         
@@ -276,6 +289,8 @@ $(document).ready(function(){
  
   function issueCard(){
 
+    console.log("yo");
+
     $('#recordFeesFoot').hide();
     $('#printJS-card').hide();
 
@@ -294,6 +309,96 @@ $(document).ready(function(){
    
 }, 2000);
   }
+</script>
+
+ <!-- scanner -->
+<script type="text/javascript">
+
+let suc_flash=document.querySelector('#scan-success');
+let vid_cont=document.querySelector('.video-container');
+let hint=document.querySelector('#scan-hint');
+let scnModal=document.querySelector('#scan-modal');
+let spinner=document.querySelector('#spinner1');
+
+function initScan() {
+
+     //return;
+
+     hint.style.display="block";
+     vid_cont.style.display="block";
+    /* Ask for "environnement" (rear) camera if available (mobile), will fallback to only available otherwise (desktop).
+    * User will be prompted if (s)he allows camera to be started */
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false }).then(function(stream) {
+      var video = document.getElementById("video-preview");
+      video.srcObject = stream;
+      video.setAttribute("playsinline", true); /* otherwise iOS safari starts fullscreen */
+      video.play();
+      setTimeout(tick, 100); /* We launch the tick function 100ms later (see next step) */
+    })
+    .catch(function(err) {
+      console.log(err); /* User probably refused to grant access*/
+    });
+};
+
+
+function tick() {
+      var video                   = document.getElementById("video-preview");
+      var qrCanvasElement         = document.getElementById("qr-canvas");
+      var qrCanvas                = qrCanvasElement.getContext("2d");
+      var width, height;
+
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        qrCanvasElement.height  = video.videoHeight;
+        qrCanvasElement.width   = video.videoWidth;
+        qrCanvas.drawImage(video, 0, 0, qrCanvasElement.width, qrCanvasElement.height);
+        try {
+
+          var result = qrcode.decode();
+         
+          document.querySelector('#stu_id').value=result;
+          // console.log();
+           
+          //console.log(result);
+          updateScanModal();
+
+          setTimeout(function(){  document.getElementById("scanForm").submit(); }, 1000);
+
+         
+          /* Video can now be stopped */
+          video.pause();
+          video.src = "";
+          video.srcObject.getVideoTracks().forEach(track => track.stop());
+
+          /* Display Canvas and hide video stream */
+          qrCanvasElement.classList.remove("hidden");
+          video.classList.add("hidden");
+        } catch(e) {
+          /* No Op */
+        }
+      }
+
+      /* If no QR could be decoded from image copied in canvas */
+      if (!video.classList.contains("hidden"))
+        setTimeout(tick, 100);
+      }
+
+function updateScanModal(){
+  suc_flash.style.display="block";
+  hint.style.display="none";
+  scnModal.style.width="30rem";
+  spinner.style.display="none";
+  //vid_cont.parentNode.removeChild(vid_cont);
+  vid_cont.style.display="none";
+}
+
+document.querySelector('#mod1-close').addEventListener('click', e =>{
+
+        //
+
+        location.reload();
+        return false;
+});
+
 </script>
 
 @stop

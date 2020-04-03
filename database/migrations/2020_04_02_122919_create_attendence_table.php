@@ -18,9 +18,9 @@ class CreateAttendenceTable extends Migration
             $table->bigIncrements('id');
             $table->integer('sid');
             $table->integer('cid');
-            $table->dateTime('arrived_at');
-            
-            
+            $table->date('date');
+            $table->time('arrived_at');
+            $table->timestamps();     
         });
     }
 

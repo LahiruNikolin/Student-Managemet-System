@@ -9,6 +9,7 @@ use App\tution;
 use App\subject;
 use App\class_student;
 use Carbon\Carbon;
+use App\attendence;
 
 class attendencePageController extends Controller
 {
@@ -49,12 +50,68 @@ class attendencePageController extends Controller
         $stu_data['fee']= $fee;
         $stu_data['subs']= $subs;
         $stu_data['id']= $id;
-        $mutable = Carbon::now();
+        
 
        // echo $mutable->isoFormat('dddd'); 
         //echo $fee;
       // print_r($stu_data);
         return view('Attendence.issueCard')->with($stu_data);
+    }
+    public function scanCard(Request $request){
+      $flag=true;
+      $carbon=Carbon::now();
+      $today = $carbon->isoFormat('dddd');
+      $date=$carbon->isoFormat('YYYY-MM-DD');
+      $time=$carbon->isoFormat('HH:mm:ss');
+
+      //$today="Tuesday";
+      $id=$request->stu_id;
+      $classes= class_student::where('sid', '=', $id)->get();
+      
+     // echo $today." ".$date." ".$time;
+      
+      foreach ($classes as $class)
+        {
+            //echo $class->cid." ".$today;
+
+            $cl=tution::where('id', '=', $class->cid)->first();
+
+            if($cl->day==$today){
+
+              //echo "match";
+              $hasAttend=attendence::where(['cid' =>  $class->cid,'sid'=>$id,'date'=>$date])->first();
+
+              if($hasAttend==null){
+                //echo "no atten";
+                $flag=false;
+                $attend= new attendence;
+
+                $attend->sid=$id;
+                $attend->cid=$class->cid;
+                $attend->date=$date;
+                $attend->arrived_at=$time;
+                $attend->save();
+                return redirect('./attendence');
+              }
+              else{
+                //echo "here";
+               
+              }
+
+            }
+        }
+
+        if($flag){
+           return view('Attendence.test');
+        }
+        
+        
+        
+        
+       // return $request->stu_id;
+       //
+
+
     }
 
 }
