@@ -14,12 +14,12 @@ use App\attendence;
 class attendencePageController extends Controller
 {
 
-    
+  
     public function attendence()
     {
          $students=Student::all();
- 
-         return view('Attendence.attendence')->with("newStudents",$students);
+
+         return view('Attendence.attendence', ['newStudents' => $students ,'status'=>0]);
     }
 
     public function issueCard($id)
@@ -58,6 +58,9 @@ class attendencePageController extends Controller
         return view('Attendence.issueCard')->with($stu_data);
     }
     public function scanCard(Request $request){
+
+      $students=Student::all();
+
       $flag=true;
       $carbon=Carbon::now();
       $today = $carbon->isoFormat('dddd');
@@ -91,7 +94,8 @@ class attendencePageController extends Controller
                 $attend->date=$date;
                 $attend->arrived_at=$time;
                 $attend->save();
-                return redirect('./attendence');
+                return view('Attendence.attendence', ['newStudents' => $students,'status'=>2]);
+
               }
               else{
                 //echo "here";
@@ -102,7 +106,11 @@ class attendencePageController extends Controller
         }
 
         if($flag){
-           return view('Attendence.test');
+
+          
+
+          return view('Attendence.attendence', ['newStudents' => $students,'status'=>1]);
+
         }
         
         

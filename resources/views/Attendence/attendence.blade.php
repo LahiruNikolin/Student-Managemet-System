@@ -8,6 +8,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10">
+
+              @include('Inc.scanFeedback')
+
               <p>Today's Attendence</p>
               <input class="form-control" id="myInput" type="text" placeholder="Search..">
                 <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar1">
@@ -175,6 +178,11 @@
                 <h5  id="scan-hint" class="modal-title" >Place the Card</h5>
             </div>
         </div>
+        <div class="modal-footer cardScannerFooter"  style="display:none;" >
+          <div class="alert alert-success " role="alert" style="margin:auto;">
+            <p class="text-center">Scan Completed!</p>
+          </div>
+        </div>
         
       </div>
     </div>
@@ -319,10 +327,12 @@ let vid_cont=document.querySelector('.video-container');
 let hint=document.querySelector('#scan-hint');
 let scnModal=document.querySelector('#scan-modal');
 let spinner=document.querySelector('#spinner1');
+let modalFooter=document.querySelector('div.cardScannerFooter');
 
 function initScan() {
 
      //return;
+     
 
      hint.style.display="block";
      vid_cont.style.display="block";
@@ -389,15 +399,28 @@ function updateScanModal(){
   spinner.style.display="none";
   //vid_cont.parentNode.removeChild(vid_cont);
   vid_cont.style.display="none";
+  modalFooter.style.display="block";
 }
 
 document.querySelector('#mod1-close').addEventListener('click', e =>{
 
         //
 
-        location.reload();
-        return false;
+      //location.reload();
+      window.location.href = "./attendence";
+      //console.log();
+      // window.location.replace("http://localhost/projct/lsapp/public/attendence");
+       // return false;
 });
+
+
+//ALERTs scan related
+if(document.querySelector(".scanFD")!= null){
+
+  setTimeout(function(){  document.querySelector(".scanFD").style.display='none';  }, 3000);
+
+  
+}
 
 </script>
 
