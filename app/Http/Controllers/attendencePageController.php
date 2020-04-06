@@ -10,6 +10,8 @@ use App\subject;
 use App\class_student;
 use Carbon\Carbon;
 use App\attendence;
+use App\class_fee;
+use Illuminate\Support\Facades\DB;
 
 class attendencePageController extends Controller
 {
@@ -120,6 +122,84 @@ class attendencePageController extends Controller
        //
 
 
+    }
+
+    public function recordFees(Request $request){
+
+      $students=Student::all();
+
+      $carbon=Carbon::now();
+      $month = $carbon->isoFormat('MMMM');
+      $year = $carbon->isoFormat('G');
+      $date=$carbon->isoFormat("YYYY-MM-DD");
+      $data= $request->all();
+
+      $size= $data["numOfIds"];
+
+      for ($i = 1; $i <= $size; $i++) {
+
+        $fees=new class_fee;
+
+        $key='class'.$i;
+        $fees->sid=$data['studentId'];
+        $fees->classid=$data[$key];
+        $fees->month=$month;
+        $fees->year=$year;
+        $fees->paid_at=$date;
+
+        $fees->save();
+      
+      }
+     // print_r($data);
+     
+     return view('Attendence.attendence', ['newStudents' => $students,'status'=>4]);
+    }
+
+    public function studentClasses(Request $request){
+      
+      $classesArray = array();
+
+      $id=$request->stu_id;
+      $classes= class_student::where('sid', '=', $id)->get();
+
+     // return  $classes;
+
+
+     foreach ($classes as $class){
+      $classArray = array();
+
+      $cl=tution::where('id', '=', $class->cid)->first();
+      $subject=subject::where('id', '=', $cl->sub_id)->first();
+      $classFees=class_fee::where(['sid' =>  $id,'classid'=>$class->cid])->orderBy('paid_at', 'desc')->first();
+      $classArray['cid']=$class->cid;
+      $classArray['subname']=$subject->name;
+      $classArray['year']=$cl->year;
+      $classArray['day_time']=$cl->day." @".$cl->from;
+      
+      if($classFees!=null){
+          $classArray['last_payment']=$classFees->month.",".$classFees->year;
+      }
+      else{
+        $classArray['last_payment']="No Previous Payments";
+      }
+      
+
+      $classArray['fee']=$cl->fee;
+
+     // return $classFees->month;
+
+       
+
+      array_push($classesArray, $classArray);
+
+      //return $classFees;
+      
+      //return DB::select("select * from class_fees where sid=".$id." order by paid_at desc");
+      
+     }
+
+     return view('Attendence.recordFees',['classesArray'=>$classesArray,'sid'=>$id]);
+       
     }
 
 }

@@ -4,6 +4,7 @@
 @section('content')
 
 @include('Inc.scanForm')
+@include('Inc.feesForm')
  
     <div class="container">
         <div class="row">
@@ -70,10 +71,10 @@
             <div class="col-md-2"  style="margin-top:2.1rem;">
                 <div class="row">
                     <div class="col-md-12 mt-2 text-white" >
-                        <a style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#scanCardModal" onclick="initScan()">Scan Card</a>
+                        <a style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#scanCardModal" onclick="markAttendence()">Scan Card</a>
                     </div>
                     <div class="col-md-12 mt-2 text-white">
-                      <button style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#recordFeeModal" onclick="issueCard()" >Record Fees</button>
+                      <button style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#recordFeeModal" onclick="recordFees()" >Record Fees</button>
                   </div>
                     <div class="col-md-12 mt-2 text-white">
                         <a  style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#issueCardModal">New Cards</a>
@@ -161,21 +162,21 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-        <div class="modal-body">
+        <div id="scanModalBody" class="modal-body">
 
-            
-            <div class="video-container mb-2">
+            <!--
+            <div id="video-container" class="mb-2">
                 <video id="video-preview"></video>
                 <canvas id="qr-canvas" style="display: none;" ></canvas>
           
-            </div>
+            </div>-->
             
             <div class="d-flex justify-content-center">
               <div id="scan-success" style="display:none;">
                 <span style="color:green; font-size:4rem;"><i class="fas fa-check-circle"></i></span>
               </div>
               
-                <h5  id="scan-hint" class="modal-title" >Place the Card</h5>
+                <h5  id="scan-hint" class="modal-title " >Place the Card</h5>
             </div>
         </div>
         <div class="modal-footer cardScannerFooter"  style="display:none;" >
@@ -190,14 +191,16 @@
 <!--record fees -->
 <div class="modal fade" id="recordFeeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog " role="document">
-    <div class="modal-content justify-content-center">
+    <div class="modal-content justify-content-center" style="width:42rem;">
       <div class="modal-header">
           <h5 class="modal-title" id="rfmTtitle">Place the Card</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" id='mod2-close' class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-      <div class="modal-body">
+      <div id="recordFeeModalBody" class="modal-body">
+         
+        <!--
         <div id="loader">
           <div class="d-flex justify-content-center"  >
             <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
@@ -225,10 +228,10 @@
                 </div>
             </div>              
         </div>
+      -->
       </div>
       <div class="modal-footer" id="recordFeesFoot">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Update</button>
-        <button type="button" class="btn btn-success">Paid</button>
+         
       </div>
       
     </div>
@@ -295,10 +298,11 @@ $(document).ready(function(){
   });
 });
  
-  function issueCard(){
+  function markAttendence(){
 
-    console.log("yo");
-
+    initScan(document.querySelector('#scanModalBody'),1);
+    
+    /*
     $('#recordFeesFoot').hide();
     $('#printJS-card').hide();
 
@@ -315,7 +319,11 @@ $(document).ready(function(){
      document.querySelector('#rfmTtitle').textContent="Student Details";
       
    
-}, 2000);
+}, 2000); */
+  }
+  
+  function recordFees(){
+    initScan(document.querySelector('#recordFeeModalBody'),2);
   }
 </script>
 
@@ -323,19 +331,21 @@ $(document).ready(function(){
 <script type="text/javascript">
 
 let suc_flash=document.querySelector('#scan-success');
-let vid_cont=document.querySelector('.video-container');
+
 let hint=document.querySelector('#scan-hint');
 let scnModal=document.querySelector('#scan-modal');
 let spinner=document.querySelector('#spinner1');
 let modalFooter=document.querySelector('div.cardScannerFooter');
+let modalType=1;
 
-function initScan() {
+function initScan(body,type) {
 
      //return;
      
-
+     insertVideoContainer(body);
+     modalType=type;
      hint.style.display="block";
-     vid_cont.style.display="block";
+     //vid_cont.style.display="block";
     /* Ask for "environnement" (rear) camera if available (mobile), will fallback to only available otherwise (desktop).
     * User will be prompted if (s)he allows camera to be started */
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false }).then(function(stream) {
@@ -364,15 +374,22 @@ function tick() {
         try {
 
           var result = qrcode.decode();
-         
-          document.querySelector('#stu_id').value=result;
-          // console.log();
-           
-          //console.log(result);
-          updateScanModal();
+          if(modalType==1){
+            document.querySelector('#stu_id').value=result;
+            // console.log();
+            
+            //console.log(result);
+            updateScanModal();
 
-          setTimeout(function(){  document.getElementById("scanForm").submit(); }, 1000);
-
+            setTimeout(function(){  document.getElementById("scanForm").submit(); }, 1000);
+          }
+          else if(modalType==2){
+            document.querySelector('#stu_id2').value=result;
+            document.querySelector('#recordFeeModalBody')
+            .removeChild(document.querySelector('#video-container'));
+            setTimeout(function(){  document.getElementById("feesForm").submit(); }, 1000);
+          }
+        
          
           /* Video can now be stopped */
           video.pause();
@@ -393,26 +410,26 @@ function tick() {
       }
 
 function updateScanModal(){
+  
   suc_flash.style.display="block";
   hint.style.display="none";
   scnModal.style.width="30rem";
   spinner.style.display="none";
   //vid_cont.parentNode.removeChild(vid_cont);
-  vid_cont.style.display="none";
+  document.querySelector('#video-container').style.display="none";
   modalFooter.style.display="block";
 }
 
 document.querySelector('#mod1-close').addEventListener('click', e =>{
-
-        //
-
-      //location.reload();
+ 
       window.location.href = "./attendence";
-      //console.log();
-      // window.location.replace("http://localhost/projct/lsapp/public/attendence");
-       // return false;
+      
 });
-
+document.querySelector('#mod2-close').addEventListener('click', e =>{
+ 
+window.location.href = "./attendence";
+ 
+});
 
 //ALERTs scan related
 if(document.querySelector(".scanFD")!= null){
@@ -424,4 +441,27 @@ if(document.querySelector(".scanFD")!= null){
 
 </script>
 
+<!--fees record js
+<script src="{{asset('js/attendence/recordFees.js')}}"></script> -->
+<script>
+
+function insertVideoContainer(body){
+ // console.log(div);
+    let div=document.createElement('div');
+    let video=document.createElement('video');
+    let canvas=document.createElement('canvas');
+    div.setAttribute("id", "video-container");
+    div.setAttribute("class", "mb-2");
+    video.setAttribute("id", "video-preview");
+    canvas.setAttribute("id", "qr-canvas");
+    canvas.setAttribute("style", "display:none;");
+
+    div.appendChild(video);
+    div.appendChild(canvas);
+    body.appendChild(div);
+
+}
+ 
+ 
+</script>
 @stop

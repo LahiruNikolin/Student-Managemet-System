@@ -20,6 +20,12 @@
         <span> Payments overdue</span>
         <span><i class="fas fa-exclamation"></i></span>
       </div>
+
+    @case(4)
+    <div class="alert alert-success scanFD" role="alert">
+        <span> Payment recorded successfully!</span>
+        <span><i class="fas fa-check"></i></span>
+      </div>
     @default
 
 @endswitch

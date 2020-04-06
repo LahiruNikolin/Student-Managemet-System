@@ -14,6 +14,8 @@
 		
         <!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">  
+
+		<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-toggle.min.css')}}">  
 		
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -93,11 +95,16 @@
 						<div class="lis-active"></div>
                     </li>
                     <li><span class="ic"><i class="fas fa-ticket-alt"></i></span>
-						<span> <a href="ticket.html"> Staff Management</a></span>
+						<span> <a href="ticket.html"> External Staff Management</a></span>
 						<div class="lis-active"></div>
 					</li>
+					
 					<li><span class="ic"><i class="fas fa-city"></i></span>
-						<span> <a href="#"> Payment</a></span>
+						<span> <a href="#"> Payment Management</a></span>
+						<div class="lis-active"></div>
+					</li>
+					<li><span class="ic"><i class="fas fa-file-invoice-dollar"></i></span>
+						<span> <a href="#"> Expenses Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					
@@ -123,6 +130,7 @@
 
  
 <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('js/bootstrap-toggle.min.js')}}"></script>
 
  
 </body>
