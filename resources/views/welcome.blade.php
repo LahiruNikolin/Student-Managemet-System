@@ -34,7 +34,7 @@
 </head>
 <body>
 	<header>
-		<div id='lil-hero'><span><i class="fas fa-plane-departure"></i> Student Management</span></div>
+		<div id='lil-hero'><span class="mr-2"  ><i class="fas fa-universal-access"></i></span>Student Manager</div>
 		<div id='head-mid' class="d-flex justify-content-center">
 
 			<button type="button" class="btn btn-primary m-1">
