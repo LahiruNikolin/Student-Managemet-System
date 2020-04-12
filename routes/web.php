@@ -75,4 +75,35 @@ Route::post('/StudentManagement_index','RStudentController@test');
 Route::post('/updatetask','RStudentController@taskupdate');
  
 
- 
+ //Chamathka routes
+ Route::get('allocate', function () {
+    return view('allocate');
+});
+
+Route::get('subject', function () {
+    return view('subject');
+});
+
+Route::get('allocate-teacher', function () {
+    return view('allocate-teacher');
+});
+
+Route::get('add-subject', function () {
+    return view('add-subject');
+});
+
+Route::get('edit-subject', function () {
+    return view('edit-subject');
+});
+
+Route::post('addSubject','mainController@addSubject');
+
+Route::post('updateSubject','mainController@updateSubject');
+
+Route::post('updateDateTime','mainController@updateDateTime');
+
+Route::post('allocateSub','mainController@allocateSub');
+
+Route::post('deleteSub','mainController@deleteSub');
+
+Route::post('deleteAllocation','mainController@deleteAllocation');
