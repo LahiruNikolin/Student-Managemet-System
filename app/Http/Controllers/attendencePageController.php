@@ -54,9 +54,9 @@ class attendencePageController extends Controller
         $stu_data['id']= $id;
         
 
-       // echo $mutable->isoFormat('dddd'); 
-        //echo $fee;
-      // print_r($stu_data);
+      //echo $mutable->isoFormat('dddd'); 
+      //echo $fee;
+      //print_r($stu_data);
         return view('Attendence.issueCard')->with($stu_data);
     }
     public function scanCard(Request $request){
