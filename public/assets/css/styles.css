@@ -1,0 +1,84 @@
+.subject-allocate-button-edit {
+	display: block;
+}
+
+.subject-allocate-button-delete {
+	display: block;
+	background-color: #ff3a3a;
+	border-color: #ff3a3a;
+}
+
+.subject-allocate-button-delete:hover {
+	background-color: red;
+	border-color: red;
+}
+
+.add-subject-category-wrapper {
+	max-width: 23%;
+}
+
+.add-subject-button-wrapper {
+	text-align: center;
+}
+
+.before-add-subject-button {
+	background-color: #01dd01;
+	border-color: #01dd01;
+}
+
+.before-add-subject-button:hover {
+	background-color: green;
+}
+
+.after-add-subject-button {
+	background-color: #01dd01;
+	border-color: #01dd01;
+}
+
+.after-add-subject-button:hover {
+	background-color: green;
+}
+
+.btn.btn-primary {
+	margin-left: 0px;
+}
+
+.search-button {
+	margin-top: 0px !important;
+}
+
+.teacher-absent-button {
+	background-color: #ff3a3a;
+	border-color: #ff3a3a;
+}
+
+.teacher-absent-button:hover {
+	background-color: red;
+	border-color: red;
+}
+
+.error-modal {
+	margin-top: 0px !important;
+	background-color: #ff3a3a;
+	border-color: #ff3a3a;
+}
+
+.error-modal:hover {
+	background-color: red;
+	border-color: red;
+}
+
+.teacher-wrapper {
+	margin-top: 10px;
+}
+
+.allocate-teacher-button {
+	margin-top: 0px !important;
+	background-color: #01dd01;
+	border-color: #01dd01;
+}
+
+.allocate-teacher-button:hover {
+	margin-top: 0px !important;
+	background-color: green;
+}

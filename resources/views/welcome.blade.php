@@ -91,7 +91,7 @@
 					</li>
 
 					<li><span class="ic"><i class="fas fa-lemon"></i></span>
-						<span> <a href="airport.html"> Subject Management</a></span>
+						<span> <a href="subject"> Subject Management</a></span>
 						<div class="lis-active"></div>
                     </li>
                     <li><span class="ic"><i class="fas fa-ticket-alt"></i></span>
