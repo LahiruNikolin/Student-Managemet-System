@@ -3,4 +3,5 @@
     
     <input type="text" name="stu_id" id="stu_id" />
     <button type="submit">submit</button>
+    
 </form>

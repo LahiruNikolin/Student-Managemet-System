@@ -16,13 +16,52 @@ use Illuminate\Support\Facades\DB;
 class attendencePageController extends Controller
 {
 
+    public function attendenceDataReturning(){
+
+      $carbon=Carbon::now();
+      $date=$carbon->isoFormat('YYYY-MM-DD');
+      $attendences=attendence::where(['date' =>  $date])->orderBy('arrived_at', 'desc') ->get();
+      $students=array();
+      //
+
+      foreach ($attendences as $attendence)
+      {
+        $student=array();
+        $st=Student::where('id', '=', $attendence->sid)->first();
+
+        $cl=tution::where('id', '=', $attendence->cid)->first();
+
+        $subname=subject::where('id', '=', $cl->sub_id)->first()->name;
+
+       
+        $student['sid']=$st->id;
+        $student['subject']=$subname;
+        $student['year']=$st->year;
+        $student['time']=$attendence->arrived_at;
+         
+       array_push($students,$student);
+
+      }
+
+        return $students;
+
+    }
   
     public function attendence()
     {
+       
          $students=Student::all();
+       
+         
 
-         return view('Attendence.attendence', ['newStudents' => $students ,'status'=>0]);
+        $todayAttend= $this->attendenceDataReturning();
+
+         
+         
+
+         return view('Attendence.attendence', ['newStudents' => $students ,'todayStudents'=> $todayAttend,'status'=>0]);
     }
+
 
     public function issueCard($id)
     {
@@ -80,6 +119,7 @@ class attendencePageController extends Controller
             //echo $class->cid." ".$today;
 
             $cl=tution::where('id', '=', $class->cid)->first();
+           
 
             if($cl->day==$today){
 
@@ -96,7 +136,9 @@ class attendencePageController extends Controller
                 $attend->date=$date;
                 $attend->arrived_at=$time;
                 $attend->save();
-                return view('Attendence.attendence', ['newStudents' => $students,'status'=>2]);
+
+                $todayAttend= $this->attendenceDataReturning();
+                return view('Attendence.attendence', ['newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>2]);
 
               }
               else{
@@ -109,9 +151,9 @@ class attendencePageController extends Controller
 
         if($flag){
 
-          
-
-          return view('Attendence.attendence', ['newStudents' => $students,'status'=>1]);
+           
+          $todayAttend= $this->attendenceDataReturning();
+          return view('Attendence.attendence', ['newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>1]);
 
         }
         
@@ -151,8 +193,9 @@ class attendencePageController extends Controller
       
       }
      // print_r($data);
-     
-     return view('Attendence.attendence', ['newStudents' => $students,'status'=>4]);
+     $todayAttend= $this->attendenceDataReturning();
+
+     return view('Attendence.attendence', ['newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>4]);
     }
 
     public function studentClasses(Request $request){

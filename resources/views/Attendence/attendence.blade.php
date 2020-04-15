@@ -28,42 +28,21 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @if (count($todayStudents)> 0)
+                      @foreach ($todayStudents as $todayStudent)
+
                       <tr>
-                        <td>st1243</td>
-                        <td>Combined Maths</td>
-                        <td>2021 A/L</td>
-                        <td>3.13 PM</td>
+                      
+
+                        <td>{{$todayStudent["sid"]}}</td>
+                        <td>{{$todayStudent["subject"]}} </td>
+                        <td>{{$todayStudent["year"]}} </td>
+                        <td>{{$todayStudent["time"]}} </td>
                         <td><a class="btn btn-sm btn-success" href="#">View</a></td>
                         
                       </tr>
-                      <tr>
-                          <td>st4322</td>
-                          <td>Physicss</td>
-                          <td>2022 A/L</td>
-                          <td>2.56 PM</td>
-                          <td><a class="btn btn-sm btn-success" href="#">View</a></td>
-                      </tr>
-                      <tr>
-                          <td>st4224</td>
-                          <td>Biology</td>
-                          <td>2021 A/L</td>
-                          <td>2.40 PM</td>
-                          <td><a class="btn btn-sm btn-success" href="#">View</a></td>
-                      </tr>
-                      <tr>
-                        <td>st4224</td>
-                        <td>Biology</td>
-                        <td>2021 A/L</td>
-                        <td>2.40 PM</td>
-                        <td><a class="btn btn-sm btn-success" href="#">View</a></td>
-                    </tr>
-                    <tr>
-                      <td>st4224</td>
-                      <td>Biology</td>
-                      <td>2021 A/L</td>
-                      <td>2.40 PM</td>
-                      <td><a class="btn btn-sm btn-success" href="#">View</a></td>
-                  </tr>
+                      @endforeach
+                       @endif
                     </tbody>
                   </table>
                 </div>  
@@ -104,41 +83,41 @@
                 <tr>
                   <td>Sugath Perera</td>
                   <td>Combined Maths</td>
-                  <td>119</td>
+                  <td>27</td>
                   <td>2021 A/L</td>
                   <td>3.00-6.00</td>
                   <td><span class="badge badge-pill badge-info">Finished</span></td>
                 </tr>
                 <tr>
-                  <td>Sugath Perera</td>
-                  <td>Combined Maths</td>
-                  <td>119</td>
+                  <td>Jagath Perera</td>
+                  <td>Physics</td>
+                  <td>19</td>
                   <td>2021 A/L</td>
-                  <td>3.00-6.00</td>
+                  <td>10.00-12.00</td>
                   <td><span class="badge badge-pill badge-warning">Ongoing</span></td>
                 </tr>
                 <tr>
-                  <td>Sugath Perera</td>
-                  <td>Combined Maths</td>
+                  <td>Thissa Jananayake</td>
+                  <td>Biology</td>
                   <td>119</td>
-                  <td>2021 A/L</td>
-                  <td>3.00-6.00</td>
+                  <td>2022 A/L</td>
+                  <td>8.00-10.00</td>
                   <td><span class="badge badge-pill badge-info">Finished</span></td>
                 </tr>
                 <tr>
-                  <td>Sugath Perera</td>
-                  <td>Combined Maths</td>
-                  <td>119</td>
-                  <td>2021 A/L</td>
-                  <td>3.00-6.00</td>
+                  <td>Saman Kumara</td>
+                  <td>Logic</td>
+                  <td>39</td>
+                  <td>2020 A/L</td>
+                  <td>10.00-12.00</td>
                   <td><span class="badge badge-pill badge-warning">Ongoing</span></td>
                 </tr>
                 <tr>
-                  <td>Sugath Perera</td>
-                  <td>Combined Maths</td>
-                  <td>119</td>
+                  <td>Malaka Perera</td>
+                  <td>Accounts</td>
+                  <td>17</td>
                   <td>2021 A/L</td>
-                  <td>3.00-6.00</td>
+                  <td>9.00-3.00</td>
                   <td><span class="badge badge-pill badge-warning">Ongoing</span></td>
                 </tr>
                
