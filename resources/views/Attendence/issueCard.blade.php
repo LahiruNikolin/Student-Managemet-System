@@ -1,6 +1,8 @@
 @extends('welcome')
 
 @section('content')
+<script type="text/javascript" src="{{asset('js/download.js')}}"></script>
+
 <div class="d-flex justify-content-center align-items-center" style="height:85vh;" id="issueCardParent">
     
     <div class="spinner-grow text-primary" style="width:10rem; height:10rem;" role="status" id="loader">
@@ -53,6 +55,10 @@
             Print
          </button>
 
+         <button id="save_but" class="btn btn-success btn-lg" type="button"  >send
+         
+         </button>
+
     </div>
 </div>
 
@@ -98,6 +104,21 @@ function fun(){
    console.log(document.querySelector('#stuId').textContent);
     qrcode.makeCode(document.querySelector('#stuId').textContent);
 }
+</script>
+
+
+<script>
+    let  getUrl=window.location;
+
+    let dwldPath=getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+ "/" 
+    + getUrl.pathname.split('/')[2]
+    + "/" + getUrl.pathname.split('/')[3];
+    let img=document.querySelector("img");
+    $('#save_but').click(function() {
+
+    download($(img).attr('src'),"strcode.png","image/png");
+
+    });
 </script>
 
 @stop

@@ -32,7 +32,7 @@ Route::get('/issueCard/{id}','attendencePageController@issueCard');
  
 
 Route::get('/test',function () {
-    return view('Attendence.recordFees');
+    return view('mail');
 });
 
 Route::post('/fees','attendencePageController@studentClasses');
@@ -43,6 +43,11 @@ Route::resource('/student', 'studentsController');
 Route::post('/scan', 'attendencePageController@scanCard');
 
 Route::post('/record', 'attendencePageController@recordFees');
+
+//maill
+Route::get('/sendbasicemail','MailController@basic_email');
+Route::get('/sendhtmlemail','MailController@html_email');
+Route::get('/sendattachmentemail','MailController@attachment_email');
 
 //ravi routes
 //Route::get('/allS','RStudentController@fun1');

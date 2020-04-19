@@ -114,6 +114,9 @@
 		</div>
 		<div class="sub-main">
 			<div class="container">
+
+				 	
+				
 				@yield('content')
 			</div>
 			 
