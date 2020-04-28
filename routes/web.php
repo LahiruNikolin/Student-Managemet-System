@@ -18,22 +18,25 @@ use App\StudentDel;
 */
 
 Route::get('/', function () {
+    
     return view('welcome');
 });
 
 Route::get('/attendence', 'attendencePageController@attendence');
 
-Route::get('/viewAttendence', function () {
-    return view('Attendence.viewAttendence');
-});
+Route::get('/viewAttendence', 'attendencePageController@writeJSON');
 
 Route::get('/issueCard/{id}','attendencePageController@issueCard');
 
  
-
+/*
 Route::get('/test',function () {
     return view('mail');
-});
+    
+}); */
+
+Route::get('/test','attendencePageController@writeJSON');
+
 
 Route::post('/fees','attendencePageController@studentClasses');
 
@@ -41,6 +44,8 @@ Route::resource('/student', 'studentsController');
 
 
 Route::post('/scan', 'attendencePageController@scanCard');
+
+Route::post('/send', 'attendencePageController@movePic');
 
 Route::post('/record', 'attendencePageController@recordFees');
 
@@ -112,3 +117,7 @@ Route::post('allocateSub','mainController@allocateSub');
 Route::post('deleteSub','mainController@deleteSub');
 
 Route::post('deleteAllocation','mainController@deleteAllocation');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -8,15 +8,29 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class MailController extends Controller {
-   public function basic_email() {
-      $data = array('name'=>"Virat Gandhi");
+
    
-      Mail::send(['text'=>'mail'], $data, function($message) {
-         $message->to('nikolinlahiru@gmail.com', 'Tutorials Point')->subject
-            ('Laravel Basic Testing Mail');
+
+
+   public function basic_email($emailer) {
+
+    $email=$emailer;
+
+      $data = array('email'=> $email);
+
+   
+      Mail::send(['text'=>'mail'], $data, function($message) use($data) {
+
+
+
+         $message->to( $data['email'], 'Branch_Negombo_St')->subject
+            ('QR Code to your class card');
          $message->from('ImTheBest@gmail.com','Excellent Institute');
+
       });
-      echo "Basic Email Sent. Check your inbox.";
+     // echo "Basic Email Sent. Check your inbox.";
+
+     
    }
    public function html_email() {
       $data = array('name'=>"Virat Gandhi");

@@ -20,6 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('fee');
             $table->string('year');
             $table->string('mobile');
+            $table->text('email');
             $table->text('address');
             $table->timestamps();
 

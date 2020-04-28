@@ -75,13 +75,19 @@
         $('#printJS-card').show();
         $('#print-btn').show();
         fun();
+        
     }, 1500);
 </script>
 
  
 
-
-<div id="qrcode"></div>
+<form id="movePicForm"  style="display:none;" method="POST"   action="{{action('attendencePageController@movePic') }}"  >
+    {{csrf_field()}}
+    
+    <input type="text" name="email" id="email" value="{{$email}}"/>
+    <button type="submit">submit</button>
+    
+</form>
 
 
  <!--generating qr code-->
@@ -93,8 +99,8 @@
 
 var qrcode = new QRCode(document.getElementById("qrcode"),{
     
-    width: 150,
-    height: 150,
+    width: 190,
+    height: 190,
     colorDark : "#000000",
     colorLight : "#ffffff",
     correctLevel : QRCode.CorrectLevel.H
@@ -103,22 +109,42 @@ var qrcode = new QRCode(document.getElementById("qrcode"),{
 function fun(){
    console.log(document.querySelector('#stuId').textContent);
     qrcode.makeCode(document.querySelector('#stuId').textContent);
+
+   
 }
 </script>
 
 
 <script>
-    let  getUrl=window.location;
+    
+ 
+    $( document ).ready(function() {
+        
+        });
 
-    let dwldPath=getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+ "/" 
-    + getUrl.pathname.split('/')[2]
-    + "/" + getUrl.pathname.split('/')[3];
-    let img=document.querySelector("img");
+        setTimeout(function(){
+
+            let img=document.querySelector("img");
+             console.log(img.style.border);
+        
+          download($(img).attr('src'),"strcode.png","image/png");
+    }, 1700);
+
+
     $('#save_but').click(function() {
 
-    download($(img).attr('src'),"strcode.png","image/png");
+        
+        
 
+        formSub();
+       
     });
+
+    function formSub(){
+
+        document.getElementById("movePicForm").submit(); 
+
+    }
 </script>
 
 @stop

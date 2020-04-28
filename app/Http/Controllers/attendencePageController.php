@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Student;
 use App\tution;
@@ -91,6 +92,7 @@ class attendencePageController extends Controller
         $stu_data['fee']= $fee;
         $stu_data['subs']= $subs;
         $stu_data['id']= $id;
+        $stu_data['email']= $st->email;;
         
 
       //echo $mutable->isoFormat('dddd'); 
@@ -244,5 +246,187 @@ class attendencePageController extends Controller
      return view('Attendence.recordFees',['classesArray'=>$classesArray,'sid'=>$id]);
        
     }
+
+
+    public function movePic(Request $request){
+
+      $email=$request->email;
+
+      
+      rename('C:/Users/Nikolin/Downloads/strcode.png', 'imgs/QRcode.png');
+
+      
+
+      app('App\Http\Controllers\MailController')->basic_email( $email);
+
+      $students=Student::all();
+       
+         
+
+      $todayAttend= $this->attendenceDataReturning();
+
+      return view('Attendence.attendence', ['newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>5]);
+
+    }
+
+    public function writeJSON(){
+
+     // return"FM";
+
+    //  $students=Student::all();
+
+      //Storage::disk('public')->put('json/st.json', json_encode($students));
+
+      
+      $lastSixMonths=array();
+      $lastSixDays=array();
+      $lastSixDaysName=array();
+
+      $date =  Carbon::now();
+
+      //return $date->dayName->subs(1,'day');
+    // return $date->subDays(3)->dayName;
+    // return $date->subDays(4)->isoFormat('GGGG-MM-DD');
+
+
+     array_push($lastSixDays,$date->isoFormat('GGGG-MM-DD'));
+     array_push($lastSixDaysName,$date->dayName);
+
+      for ($x = 1; $x <= 6; $x++) {
+
+        $d= Carbon::now()->subDays($x)->isoFormat('GGGG-MM-DD');
+        $dName=Carbon::now()->subDays($x)->dayName;
+         
+
+        array_push($lastSixDays,$d);
+        array_push($lastSixDaysName,$dName);
+  
+      }
+
+    //  dd( $lastSixDays);
+     // dd( $lastSixDaysName);
+      
+
+      $thisMonth =  Carbon::now()->startOfMonth();
+      $months=explode(" ",$thisMonth);
+
+      array_push($lastSixMonths,$months[0]) ;
+
+      for ($x = 0; $x <= 4; $x++) {
+        
+        $months= $date->subMonth()->startOfMonth();
+        $months=explode(" ",$months);
+
+        array_push($lastSixMonths,$months[0]) ;
+  
+      }
+    
+   
+
+    
+    $this->lastMonthsAttend($lastSixMonths);
+    $this->lastDaysAttend($lastSixDays,$lastSixDaysName);
+
+    return view('Attendence.viewAttendence');
+
+   // print_r($lastSixMonths);
+     // echo $date->format('F'); // July
+     // echo $date->subMonth()->format('F');
+
+       
+  
+      //echo( $ok);
+      
+
+   // $json = Storage::disk('public')->get('json/st.json');
+   // $json = json_decode($json, true);
+
+   // dd($json);
+
+    
+      
+    }
+
+    public function lastMonthsAttend($months){
+      
+      $date =  Carbon::now(); 
+
+      $mainArray=array();
+
+      $lastSixAttend=array();
+
+     /// dd($months);
+
+     $dRay=array("Volvo", "BMW", "Toyotarr");
+
+      for ($x = 0; $x <= 5; $x++) {
+        
+       
+
+        if($x==0){
+          $results = DB::select( DB::raw("select count(*) as total FROM attendence where date>".$months[$x]));
+          $month= $date->format('F');
+          $lastSixAttend[$month]=$results[0]->total;
+
+        }
+        else{
+
+          $f=$x;
+
+
+        $results = DB::select( DB::raw("select count(*) as total 
+        FROM attendence where date>".$months[$x]." AND date<".$months[--$f]));
+
+        $month= $date->subMonth()->format('F');
+        $lastSixAttend[$month]=$results[0]->total;
+      
+
+        }
+
+   
+     
+  
+  
+    }
+
+     
+
+     // $results=DB::table('students')->get();
+     array_push($mainArray,$lastSixAttend);
+     //array_push($mainArray,$dRay);
+
+   // print_r($mainArray);
+     
+    //foreach()
+
+    Storage::disk('public')->put('json/attendence.json', json_encode($mainArray));
+
+ 
+    }
+
+    public function lastDaysAttend($dates,$daysName){
+      $mainArray=array();
+
+      $lastSixAttend=array();
+
+      for ($x = 0; $x <= 6; $x++) {
+
+        $results = DB::select( DB::raw("select count(*) as total FROM attendence
+        where date='".$dates[$x])."'");
+        
+         
+        $lastSixAttend[$daysName[$x]]=$results[0]->total;
+
+      }
+
+      array_push($mainArray,$lastSixAttend);
+      
+
+    //print_r($mainArray);
+
+    Storage::disk('public')->put('json/attendenceWeekly.json', json_encode($mainArray));
+    }
+
+     
 
 }

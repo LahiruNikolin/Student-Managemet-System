@@ -26,6 +26,12 @@
         <span> Payment recorded successfully!</span>
         <span><i class="fas fa-check"></i></span>
       </div>
+      @break
+    @case(5)
+    <div class="alert alert-success scanFD" role="alert">
+          <span> Email has been sent successfully!</span>
+          <span><i class="fas fa-check"></i></span>
+      </div>
     @default
 
 @endswitch
