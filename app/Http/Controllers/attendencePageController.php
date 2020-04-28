@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\DB;
 class attendencePageController extends Controller
 {
 
+  public function __construct(){
+    $this->middleware('auth');
+  }
+
     public function attendenceDataReturning(){
 
       $carbon=Carbon::now();

@@ -17,10 +17,7 @@ use App\StudentDel;
 |
 */
 
-Route::get('/', function () {
-    
-    return view('welcome');
-});
+Route::get('/', 'attendencePageController@attendence');
 
 Route::get('/attendence', 'attendencePageController@attendence');
 
@@ -120,4 +117,8 @@ Route::post('deleteAllocation','mainController@deleteAllocation');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'attendencePageController@attendence');
+Route::get('/logout',  function () {
+    Auth::logout();
+    return redirect('login');
+});

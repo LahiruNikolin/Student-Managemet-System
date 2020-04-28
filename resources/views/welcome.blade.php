@@ -17,7 +17,7 @@
 
 		<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-toggle.min.css')}}">  
 		
-		<script src="js/jquery.js" ></script>
+		<script src="{{asset('js/jquery.js')}}" ></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="{{asset('../node_modules/chart.js/dist/Chart.bundle.js')}}"></script>
 	 
@@ -58,11 +58,11 @@
 					<button class="btn btn-light dropdown-toggle"
 							type="button" id="dropdownMenu1" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">
-					  Lahiru
+					  {{auth::user()->name}}
 					</button>
 					<div class="dropdown-menu"  aria-labelledby="dropdownMenu1">
 						<a class="dropdown-item" href="#!">Settings</a>
-					  <a class="dropdown-item" href="#!">Logout</a>
+					  <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
 					   
 					</div>
 				  </div>
