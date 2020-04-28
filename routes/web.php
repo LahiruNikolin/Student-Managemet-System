@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\StudentReg;
 use App\StudentDel;
-
+use Illuminate\Support\Facades\Session;
  
 
 /*
@@ -117,7 +117,21 @@ Route::post('deleteAllocation','mainController@deleteAllocation');
 
 Auth::routes();
 
-Route::get('/home', 'attendencePageController@attendence');
+Route::get('/home', function () {
+
+    if (Session::has('RegFlag'))
+    {
+        Session::forget('RegFlag');
+        return app('App\Http\Controllers\attendencePageController')->redirectAfterReg(6);
+    }
+    else{
+        return app('App\Http\Controllers\attendencePageController')->redirectAfterReg(0);
+    }
+
+   
+
+})->middleware('auth');
+
 Route::get('/logout',  function () {
     Auth::logout();
     return redirect('login');

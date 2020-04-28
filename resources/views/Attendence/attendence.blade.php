@@ -3,6 +3,8 @@
  
 @section('content')
 
+ 
+
 @include('Inc.scanForm')
 @include('Inc.feesForm')
  

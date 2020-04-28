@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('welcome')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top:6rem;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -59,6 +59,29 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                        <div style=" 
+                        display:flex;
+                        text-align:center;
+                        
+                        align-items:center;
+                        margin-left:1rem;
+                        
+                        ">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline1" name="role" value="p" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline1">Priviledged Access</label>
+                              </div>
+                              <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline2" name="role" value="n" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline2">Regular Access</label>
+                              </div>
+
+                        </div>
+                            
                         </div>
 
                         <div class="form-group row mb-0">

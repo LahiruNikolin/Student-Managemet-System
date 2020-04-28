@@ -1,4 +1,14 @@
+<?php
+use Illuminate\Support\Facades\DB;
+use App\Student;
+use App\subject;
 
+$students=Student::all();
+$subs=subject::all();
+$stCount=count($students);
+$subCount=count($subs);
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -38,15 +48,15 @@
 		<div id='head-mid' class="d-flex justify-content-center">
 
 			<button type="button" class="btn btn-primary m-1">
-				Students <span class="badge badge-danger">234</span>
+				Students <span class="badge badge-danger"><?php echo $stCount;?></span>
 			  </button>
 
 			  <button type="button" class="btn btn-primary m-1">
-				Teachers <span class="badge badge-danger">23</span>
+				Teachers <span class="badge badge-danger">Not available</span>
 			  </button>
 
 			  <button type="button" class="btn btn-primary m-1">
-				Subjects <span class="badge badge-danger">14</span>
+				Subjects <span class="badge badge-danger"><?php echo $subCount;?></span>
 			  </button>
 
 
@@ -58,10 +68,13 @@
 					<button class="btn btn-light dropdown-toggle"
 							type="button" id="dropdownMenu1" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">
+ 
 					  {{auth::user()->name}}
 					</button>
 					<div class="dropdown-menu"  aria-labelledby="dropdownMenu1">
-						<a class="dropdown-item" href="#!">Settings</a>
+				 
+                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                   
 					  <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
 					   
 					</div>

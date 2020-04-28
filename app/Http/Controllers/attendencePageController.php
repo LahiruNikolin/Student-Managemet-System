@@ -431,6 +431,19 @@ class attendencePageController extends Controller
     Storage::disk('public')->put('json/attendenceWeekly.json', json_encode($mainArray));
     }
 
+
+    public function redirectAfterReg($stu){
+
+      
+      $students=Student::all();
+       
+         
+
+      $todayAttend= $this->attendenceDataReturning();
+
+      return view('Attendence.attendence', ['newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>$stu]);
+    }
+
      
 
 }

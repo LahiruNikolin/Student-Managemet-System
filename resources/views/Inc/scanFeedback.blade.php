@@ -32,6 +32,13 @@
           <span> Email has been sent successfully!</span>
           <span><i class="fas fa-check"></i></span>
       </div>
+      @break
+      @case(6)
+      <div class="alert alert-success scanFD" role="alert">
+          <span> User has been created successfully!</span>
+          <span><i class="fas fa-check"></i></span>
+        </div>
+        @break
     @default
 
 @endswitch
