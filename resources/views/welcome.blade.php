@@ -71,9 +71,9 @@ $subCount=count($subs);
  
 					  {{auth::user()->name}}
 					</button>
-					<div class="dropdown-menu"  aria-labelledby="dropdownMenu1">
+					<div class="dropdown-menu dropdown-menu-right" style=" " aria-labelledby="dropdownMenu1" data-container="body">
 				 
-                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('New Admin') }}</a>
                    
 					  <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
 					   

@@ -32,7 +32,9 @@ Route::get('/test',function () {
     
 }); */
 
-Route::get('/test','attendencePageController@writeJSON');
+Route::get('/test','attendencePageController@todayClasses');
+
+Route::post('/search_attendence','attendencePageController@searchAttendence');
 
 
 Route::post('/fees','attendencePageController@studentClasses');

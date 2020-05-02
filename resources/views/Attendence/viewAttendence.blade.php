@@ -2,26 +2,110 @@
 
  
 @section('content')
+<?php
+ $flag=false;
+if (Session::has('futureDate'))
+{
+    Session::forget('futureDate');
+     $flag=true;
+}
+
+?>
 <div class="row">
-    <div class="col-md-8"  style="  margin:auto;">
+    <div id="attendence" class="col-md-8"  style="  margin:auto;">
         <div  class="mt-3" >
             <form>
                 <div class="form-group">
                     <select id="chart-toggle" class="form-control form-control-lg">
-                        <option selected value="monthly"  >Monthly</option>
-                        <option  value="weekly" >Weekly</option>
+                        <option selected value="monthly"  >Recent Months</option>
+                        <option  value="weekly" >Recent Days</option>
                          
                       </select>
                 </div>
               </form>
             
         </div>
-        <canvas style="display:none;" id="Chart1" width="700" height="500"></canvas>
-        <canvas style="display:none;" id="Chart2" width="700" height="500"></canvas>
+        <canvas style="display:none;" id="Chart1"   width="700" height="500"></canvas>
+        <canvas style="display:none;" id="Chart2"   width="700" height="500"></canvas>
+    </div>
+    <div class="col-md-3">
+        @if($flag)
+            <div class="alert alert-danger scanFD mt-3" role="alert">
+                <span>Can't select a future date!</span> 
+                <span><i class="fas fa-exclamation-triangle"></i></span>
+            </div>
+        @endif
+        <form method="POST" 
+        action="{{action('attendencePageController@searchAttendence') }}" >
+            {{ csrf_field() }}
+             
+            <div class="form-row pt-2">
+              <div class="form-group col-md-12">
+                <label for="inputState">Year</label>
+                <select id="inputState" class="form-control" name='month' required>
+                  
+                  <option selected value='01'>January</option>
+                  <option value='02'>February</option>
+                  <option value='03'>March</option>
+                  <option value='04'>April</option>
+                  <option value='05'>May</option>
+                  <option value='06'>June</option>
+                  <option value='07'>July</option>
+                  <option value='08'>August</option>
+                  <option value='09'>September</option>
+                  <option value='10'>October</option>
+                  <option value='11'>November</option>
+                  <option value='12'>December</option>
+                </select>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="inputState">Month</label>
+                <select id="inputState" class="form-control" name='year' required>
+                    
+                    @foreach ($years as $year)
+
+                        <option value="{{$year}}"> {{$year}}</option>
+                    @endforeach
+                  
+                  
+                </select>
+              </div>
+              
+            </div>
+            <div style="  display:flex; justify-content:center;">
+                <button type="submit" class="btn btn-primary" 
+                style="width:100%;">View</button>
+            </div>
+            
+          </form>
+
+          <div class="mt-3" style=" display:flex; justify-content:center;">
+            <button href="#" class="btn btn-primary" onclick="  printCanvas()"
+            style="width:100%;">Print</button>
+        </div>
+
     </div>
     
 </div>
 <script>
+
+function printCanvas(){
+    
+
+if(document.querySelector('#Chart1').style.display=="block"){
+            printJS({printable: document.querySelector("#Chart1").toDataURL(), 
+        type: 'image', 
+        imageStyle: 'width:100%'});
+    }
+    else{
+                printJS({printable: document.querySelector("#Chart2").toDataURL(), 
+        type: 'image', 
+        imageStyle: 'width:100%'});
+    }
+  
+    
+}
+
 
     document.querySelector('#chart-toggle').addEventListener('change',e=>{
 
@@ -221,10 +305,18 @@ var myChart = new Chart(ctx, {
 });
 
 }
+
    
  </script>    
 
+<script>
 
+          
+if(document.querySelector(".scanFD")!= null){
+
+setTimeout(function(){  document.querySelector(".scanFD").style.display='none';  }, 3000);
+}
+</script>
  
 
 </div>

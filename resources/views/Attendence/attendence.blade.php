@@ -82,49 +82,31 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($todayClasses as $todayClass)
                 <tr>
-                  <td>Sugath Perera</td>
-                  <td>Combined Maths</td>
-                  <td>27</td>
-                  <td>2021 A/L</td>
-                  <td>3.00-6.00</td>
-                  <td><span class="badge badge-pill badge-info">Finished</span></td>
+                  <td> {{$todayClass["teacherName"]}}</td>
+                  <td>{{$todayClass["subName"]}}</td>
+                  <td>{{$todayClass["size"]}}</td>
+                  <td>{{$todayClass["year"]}}</td>
+                  <td>{{$todayClass["time"]}}</td>
+                  <td><span class="badge badge-pill 
+                    @if($todayClass["status"]=='Ongoing')
+                    badge-warning
+                    @elseif($todayClass["status"]=='Coming up')
+                    badge-info
+                    @else
+                    badge-success
+                    @endif
+                    "  
+                    >
+                    
+                    {{$todayClass["status"]}}</span>
+                  
+                  </td>
                 </tr>
-                <tr>
-                  <td>Jagath Perera</td>
-                  <td>Physics</td>
-                  <td>19</td>
-                  <td>2021 A/L</td>
-                  <td>10.00-12.00</td>
-                  <td><span class="badge badge-pill badge-warning">Ongoing</span></td>
-                </tr>
-                <tr>
-                  <td>Thissa Jananayake</td>
-                  <td>Biology</td>
-                  <td>119</td>
-                  <td>2022 A/L</td>
-                  <td>8.00-10.00</td>
-                  <td><span class="badge badge-pill badge-info">Finished</span></td>
-                </tr>
-                <tr>
-                  <td>Saman Kumara</td>
-                  <td>Logic</td>
-                  <td>39</td>
-                  <td>2020 A/L</td>
-                  <td>10.00-12.00</td>
-                  <td><span class="badge badge-pill badge-warning">Ongoing</span></td>
-                </tr>
-                <tr>
-                  <td>Malaka Perera</td>
-                  <td>Accounts</td>
-                  <td>17</td>
-                  <td>2021 A/L</td>
-                  <td>9.00-3.00</td>
-                  <td><span class="badge badge-pill badge-warning">Ongoing</span></td>
-                </tr>
-               
+
+                @endforeach
                 
-                 
               </tbody>
           </table>
         </div>       
