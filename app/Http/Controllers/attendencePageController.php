@@ -156,7 +156,11 @@ class attendencePageController extends Controller
         $stu_data['subs']= $subs;
         $stu_data['id']= $id;
         $stu_data['email']= $st->email;;
-        
+        if( file_exists ("C:/Users/Lahiru Nikolin/Downloads/strcode.png" )){ 
+
+          unlink("C:/Users/Lahiru Nikolin/Downloads/strcode.png");
+
+         }
 
       //echo $mutable->isoFormat('dddd'); 
       //echo $fee;
@@ -328,9 +332,9 @@ class attendencePageController extends Controller
 
       
          
-       if( file_exists ("C:/Users/Nikolin/Downloads/strcode.png" )){
+       if( file_exists ("C:/Users/Lahiru Nikolin/Downloads/strcode.png" )){
        
-        rename('C:/Users/Nikolin/Downloads/strcode.png', 'imgs/QRcode.png');
+        rename('C:/Users/Lahiru Nikolin/Downloads/strcode.png', 'imgs/QRcode.png');
         app('App\Http\Controllers\MailController')->basic_email( $email);
   
         $students=Student::all();
