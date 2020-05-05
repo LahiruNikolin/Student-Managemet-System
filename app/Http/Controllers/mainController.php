@@ -8,6 +8,8 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use App\tution;
+use App\subject;
 
 class mainController extends Controller
 {
@@ -73,20 +75,43 @@ class mainController extends Controller
       $id = $request->input('id');
       $sub = $request->input('sub');
 
-      $date = $request->input('date');
-      $time = $request->input('time');
+    //  $date = $request->input('date');
+      $starttime = $request->input('starttime');
+      $endtime = $request->input('endtime');
+      $day = $request->input('day');
+      $fee = $request->input('fee');
+      $year = $request->input('year');
+ 
 
+ 
       DB::table('teacher')
                 ->where('id', $id)
                 ->update(['subject' => $sub]);
 
       DB::table('teacher')
                 ->where('id', $id)
-                ->update(['date' => $date]);
+                ->update(['date' => $day]);
+
+      $time=$starttime.'-'.$endtime;
 
       DB::table('teacher')
                 ->where('id', $id)
                 ->update(['time' => $time]);
+ 
+
+
+      $sub_id=subject::where('subjectName', '=', $sub)->first()->id;
+
+      $class= new tution;
+
+      $class->sub_id=$sub_id;
+      $class->tid=$id;
+      $class->fee=$fee;
+      $class->day=$day;
+      $class->from=Carbon::parse($starttime);
+      $class->to=Carbon::parse($endtime);
+      $class->year=$year;
+      $class->save();
 
       return Redirect::back();
     }

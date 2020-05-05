@@ -115,9 +115,13 @@ $subid=$_GET['subid'];
         background-color: green;
       }
 
+      .timepicker {
+      z-index: 3600 !important; /* has to be larger than 1050 */
+    }
+
 
     </style>
-   
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 </head>
 <body>
   <header>
@@ -227,14 +231,41 @@ $subid=$_GET['subid'];
                   <input type="text" name="id" class="form-control" value="{{ $item->id }}" hidden>
                   <input type="text" name="sub" class="form-control" value="<?php echo $subid; ?>" hidden>
                 <div class="modal-body">
+                
+                    
+
+                    <div class="form-group" >
+                      <label for="inputGroupSelect01">Day:</label>
+                      <select name='day' class="custom-select" id="inputGroupSelect01">
+                        <option selected value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                      </select>
+                    </div>
+
+
+                     
                     <div class="form-group">
-                      <label for="day">Day:</label>
-                      <input type="text" name="date" class="form-control" id="day">
+                      <label for="fee">Fee:</label>
+                      <input type="text" name="fee" class="form-control" id="fee">
                     </div>
                     <div class="form-group">
-                      <label for="time">Time:</label>
-                      <input type="text" name="time" class="form-control" id="time">
+                      <label for="year">year:</label>
+                      <input type="text" name="year" class="form-control" id="year">
                     </div>
+                    <div class="form-group">
+                      <label for="time">Start Time:(24hr Format)</label>
+                      <input type="text" name="starttime" class="form-control timepicker" id="starttime">
+                    </div>
+                    <div class="form-group">
+                      <label for="time">End Time:(24hr Format)</label>
+                      <input type="text" name="endtime" class="form-control timepicker" id="endtime">
+                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -306,9 +337,13 @@ $subid=$_GET['subid'];
               </div>
           </div>
       </div>
+
+       
        
     </div>
   </section>
+
+ 
   <script src="{{asset('../node_modules/print-js/dist/print.js')}}"></script>
   
   
@@ -322,7 +357,22 @@ $subid=$_GET['subid'];
 <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/bootstrap-toggle.min.js')}}"></script>
 
- 
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<script>
+  $('.timepicker').timepicker({
+    timeFormat: 'HH:mm ',
+    interval: 30,
+  
+   
+    defaultTime: '11',
+    
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true,
+    zindex: 2000
+});
+  </script>
 </body>
 
 </html>

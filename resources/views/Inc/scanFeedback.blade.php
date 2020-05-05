@@ -56,6 +56,12 @@ if (Session::has('status'))
             <span><i class="fas fa-exclamation"></i></span>
           </div>
           @break
+          @case(8)
+        <div class="alert alert-warning scanFD" role="alert">
+            <span> Student has no classes today!</span> 
+            <span><i class="fas fa-exclamation-triangle"></i></span>
+        </div>
+        @break
     @default
 
 @endswitch
