@@ -3,14 +3,17 @@ use Illuminate\Support\Facades\DB;
 use App\Student;
 use App\subject;
 use App\teacher;
+use App\tution;
 
 $students=Student::all();
 $subs=subject::all();
 $teachers=teacher::all();
+$classes=tution::all();
+
 $stCount=count($students);
 $subCount=count($subs);
 $tCount=count($teachers);
-
+$clzCount=count($classes);
 ?>
 
 
@@ -19,16 +22,20 @@ $tCount=count($teachers);
 		<div id='head-mid' class="d-flex justify-content-center">
 
 			<button type="button" class="btn btn-primary m-1">
-				Students <span class="badge badge-danger"><?php echo $stCount;?></span>
+				Students <span class="badge badge-light"><?php echo $stCount;?></span>
 			  </button>
 
 			  <button type="button" class="btn btn-primary m-1">
-				Teachers <span class="badge badge-danger"><?php echo $tCount;?></span>
+				Teachers <span class="badge badge-light"><?php echo $tCount;?></span>
 			  </button>
 
 			  <button type="button" class="btn btn-primary m-1">
-				Subjects <span class="badge badge-danger"><?php echo $subCount;?></span>
+				Subjects <span class="badge badge-light"><?php echo $subCount;?></span>
 			  </button>
+			  <button type="button" class="btn btn-primary m-1">
+				Classes <span class="badge badge-light"><?php echo $clzCount;?></span>
+			  </button>
+
 
 
 		</div>
