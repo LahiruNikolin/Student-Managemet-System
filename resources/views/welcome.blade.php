@@ -1,4 +1,8 @@
- 
+<?php
+
+$userType=auth::user()->role;
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -63,7 +67,7 @@
 						<span> <a href="ticket.html"> External Staff Management</a></span>
 						<div class="lis-active"></div>
 					</li>
-					
+					@if($userType=='p')
 					<li><span class="ic"><i class="fas fa-city"></i></span>
 						<span> <a href="#"> Payment Management</a></span>
 						<div class="lis-active"></div>
@@ -72,7 +76,7 @@
 						<span> <a href="#"> Expenses Management</a></span>
 						<div class="lis-active"></div>
 					</li>
-					
+					@endif
 				</ul>
 			</nav>
 			

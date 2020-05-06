@@ -22,18 +22,18 @@ $clzCount=count($classes);
 		<div id='head-mid' class="d-flex justify-content-center">
 
 			<button type="button" class="btn btn-primary m-1">
-				Students <span class="badge badge-light"><?php echo $stCount;?></span>
+				Students <span class="badge badge-warning"><?php echo $stCount;?></span>
 			  </button>
 
 			  <button type="button" class="btn btn-primary m-1">
-				Teachers <span class="badge badge-light"><?php echo $tCount;?></span>
+				Teachers <span class="badge badge-warning"><?php echo $tCount;?></span>
 			  </button>
 
 			  <button type="button" class="btn btn-primary m-1">
-				Subjects <span class="badge badge-light"><?php echo $subCount;?></span>
+				Subjects <span class="badge badge-warning"><?php echo $subCount;?></span>
 			  </button>
 			  <button type="button" class="btn btn-primary m-1">
-				Classes <span class="badge badge-light"><?php echo $clzCount;?></span>
+				Classes <span class="badge badge-warning"><?php echo $clzCount;?></span>
 			  </button>
 
 
