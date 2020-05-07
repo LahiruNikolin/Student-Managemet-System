@@ -9,8 +9,7 @@ $userType=auth::user()->role;
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-
+        
         <!-- Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -27,7 +26,7 @@ $userType=auth::user()->role;
 	 
 	@include('Inc.scannerImports')
 
-    <title>Admin Panel</title>
+    <title>Student Manager</title>
     
     <style>
  
@@ -60,7 +59,7 @@ $userType=auth::user()->role;
 					</li>
 
 					<li><span class="ic"><i class="fas fa-lemon"></i></span>
-						<span> <a href="subject"> Subject Management</a></span>
+						<span> <a href="{{asset('subject')}}"> Subject Management</a></span>
 						<div class="lis-active"></div>
                     </li>
                     <li><span class="ic"><i class="fas fa-ticket-alt"></i></span>

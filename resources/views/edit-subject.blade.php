@@ -172,7 +172,7 @@ $emp = DB::table('subject')->where('id',$id)->get();
     <div class="sub-main">
       <div class="container">
         @yield('content')
-        <a class="btn btn-primary" role="button" href="subject">Subject Management</a>
+        <a class="btn btn-dark" role="button" href="subject">Back</a>
         <div>
             <h1 class="text-center" style="font-size: 31px;">Subject</h1>
         </div>
