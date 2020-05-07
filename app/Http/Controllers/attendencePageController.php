@@ -259,6 +259,10 @@ class attendencePageController extends Controller
 
       $size= $data["numOfIds"];
 
+      if($size==0){
+        return $this->attendence();
+      }
+
       for ($i = 1; $i <= $size; $i++) {
 
         $fees=new class_fee;
