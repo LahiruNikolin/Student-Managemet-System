@@ -6,7 +6,7 @@
 }
 
 #img2{
-	margin: -50px 0px 0px 950px;
+	margin: -50px 0px 0px 750px;
 	height: 150px;
 	width: 150px;
 	border-radius: 50%;
@@ -19,10 +19,10 @@
 
 #profile1{
 	border-radius: 0px 25px 0px 25px;
-	background-color: #dddddd;
+	background-color: #b2b8be;
 	height: 450px;
 	width: 900px;
-	margin: 80px 0px 0px 300px;
+	margin: 80px 0px 0px 100px;
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	align-content: center;
 	font-size: 20px;
@@ -32,32 +32,32 @@
 	width: 500px;
 	margin: 80px 0px 0px 330px;
 }
-.btn{
+#delStForm .btn{
   width: 100%;
-  color: white;
+  color: rgb(15, 15, 15);
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #4c82e6;
-  font-family: 'Comic Sans MS'; 
+  background-color: gray;
+
 }
-.btn1{
+#updatetForm .btn1{
   width: 100%;
-  color: white;
+  color: rgb(15, 15, 15);
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #139e2a; 
-  font-family: 'Comic Sans MS';
+  background-color: gray; 
+
 }
 
-.bar {
-  margin: 3px 0px 0px 300px;
-  width: 870px;
+.serbar {
+  margin: 3px 0px 0px 100px;
+  width: 900px;
   height: 30px;
   padding: 14px 16px;
   overflow: hidden;
@@ -66,12 +66,12 @@
 }
 
 
-.dropdown {
+.serbar .cust-dropdown {
   float: left;
   overflow: hidden;
 }
 
-.dropdown .dropbtn {
+.serbar .cust-dropdown .cust-dropbtn {
   font-size: 16px;  
   border: none;
   outline: none;
@@ -82,11 +82,11 @@
   margin: 0;
 }
 
-.bar a:hover, .dropdown:hover .dropbtn {
+.serbar a:hover, .cust-dropdown:hover .cust-dropbtn {
   background-color: red;
 }
 
-.dropdown-content {
+.serbar .cust-dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -95,7 +95,7 @@
   z-index: 1;
 }
 
-.dropdown-content a {
+.serbar .cust-dropdown-content a {
   float: none;
   color: black;
   padding: 12px 16px;
@@ -104,11 +104,11 @@
   text-align: left;
 }
 
-.dropdown-content a:hover {
+.serbar .cust-dropdown-content a:hover {
   background-color: #ddd;
 }
 
-.dropdown:hover .dropdown-content {
+.serbar .cust-dropdown:hover .cust-dropdown-content {
   display: block;
 }
 table {

@@ -11,8 +11,6 @@ class RStudentController extends Controller
     public function store(Request $request){
 
         $StudentReg = new StudentReg; 
-
-        
         
         $rowsArray=array();
 
@@ -51,7 +49,7 @@ class RStudentController extends Controller
             
             $dataArray = array();
         
-            $data=StudentReg::where(['email'=> $email])->orderBy('created_at', 'desc')->first();
+            $data=StudentReg::where(['email'=> $email])->orderBy('created_at', 'desc')->take(1)->first();
             $dataArray['id']= $data->id;
             $dataArray['fullname']= $firstname." ".$lastname;
             $dataArray['address']=$address;
@@ -70,7 +68,7 @@ class RStudentController extends Controller
             array_push($rowsArray, $dataArray);
 
            // print_r($data);
-
+        break;
 
         }
 
@@ -97,47 +95,81 @@ class RStudentController extends Controller
         return view('StudentManagemt.deleted_students')->with('DeleteData',$deleteData);
  
      }
+     public function DelretriveTablePrint(){
+        
+        $deleteData=StudentDel::all();
+ 
+        return view('StudentManagemt.StudentPrint')->with('DeleteData',$deleteData);
+ 
+     }
 
 
 public function searchDetails(Request $request){
 
-        $s=$request->input('s');
+    $s=$request->input('s');
 
-        $StudentReg = StudentReg::latest()->paginate(20);
+    $DeleteData = StudentDel::where([
+        
+        ['firstname', 'like', '%' . $s . '%'],
+        ['lastname', 'like','%' . $s . '%'],
+        ['address', 'like','%' . $s . '%'],
+        ['email', 'like','%' . $s . '%'],
+        ['DOB', 'like','%' . $s . '%'],
+        ['telephone', 'like','%' . $s . '%'],
 
-        return veiw('StudentManagemt.allStudentsDetails',compact($StudentReg));
+    ])->get();
+
+   return view('StudentManagemt.deleted_students', compact('DeleteData'));
 
 
 }
 
 public function test(Request $request){
 
-   // $StudentDel = new StudentDel;
+
 
     $studentdata=StudentReg::find($request->st_id);
-/*
-    $StudentDel->firstname=$request->firstname;
-    $StudentDel->lastname=$request->lastname;
-    $StudentDel->address=$request->address;
-    $StudentDel->email=$request->email;
-    $StudentDel->telephone=$request->telephone;
-    $StudentDel->DOB=$request->birthday;
-    $StudentDel->subject1=$request->Subject1;
-    $StudentDel->teacher1=$request->Teach1;
-    $StudentDel->subject2=$request->Subject2;
-    $StudentDel->teacher2=$request->Teach2;
-    $StudentDel->subject3=$request->Subject3;
-    $StudentDel->teacher3=$request->Teach3;
-    $StudentDel->subject4=$request->Subject4;
-    $StudentDel->teacher4=$request->Teach4;
-    $StudentDel->save(); */
-
     $studentdata->delete();
+    
+    $firstname=$studentdata->firstname;
+    $lastname=$studentdata->lastname;
+    $address=$studentdata->address;
+    $email=$studentdata->email;
+    $tp=$studentdata->telephone;
+    $dob=$studentdata->DOB;
+    $subject1=$studentdata->subject1;
+    $teacher1=$studentdata->teacher1;
+    $subject2=$studentdata->subject2;
+    $teacher2=$studentdata->teacher2;
+    $subject3=$studentdata->subject3;
+    $teacher3=$studentdata->teacher3;
+    $subject4=$studentdata->subject4;
+    $teacher4=$studentdata->teacher4;
+
+    $StudentDel = new StudentDel;
+
+    $StudentDel->firstname=$firstname;
+    $StudentDel->lastname=$lastname;
+    $StudentDel->address=$address;
+    $StudentDel->email=$email;
+    $StudentDel->telephone=$tp;
+    $StudentDel->DOB=$dob;
+    $StudentDel->subject1=$subject1;
+    $StudentDel->teacher1=$teacher1;
+    $StudentDel->subject2=$subject2;
+    $StudentDel->teacher2=$teacher2;
+    $StudentDel->subject3=$subject3;
+    $StudentDel->teacher3=$teacher3;
+    $StudentDel->subject4=$subject4;
+    $StudentDel->teacher4=$teacher4;
+    $StudentDel->save();
 
     return view('StudentManagemt.student_Management_index')->with('status',1);
 
         
   }
+
+
 
 
 public function testupdate(Request $request){
@@ -231,6 +263,138 @@ public function testupdate(Request $request){
     return view('StudentManagemt.StudentProfile',['rowsArray'=>$rowsArray,'id'=>$id]);
 
 }
+
+public function viewprofile($id){
+
+    $rowsArray=array();
+
+    $student=StudentReg::where('id', '=', $id)->first();
+
+    $firstname=$student->firstname;
+    $lastname=$student->lastname;
+    $address=$student->address;
+    $email=$student->email;
+    $tp=$student->telephone;
+    $dob=$student->DOB;
+    $subject1=$student->subject1;
+    $teacher1=$student->teacher1;
+    $subject2=$student->subject2;
+    $teacher2=$student->teacher2;
+    $subject3=$student->subject3;
+    $teacher3=$student->teacher3;
+    $subject4=$student->subject4;
+    $teacher4=$student->teacher4;
+
+    foreach ($student as $data){
+
+        $dataArray=array();
+
+            $data=StudentReg::where(['id'=> $id])->first();
+            $dataArray['id']= $data->id;
+            $dataArray['fullname']= $firstname." ".$lastname;
+            $dataArray['address']=$address;
+            $dataArray['email']=$email;
+            $dataArray['telephone']=$tp;
+            $dataArray['DOB']=$dob;
+            $dataArray['subject1']=$subject1;
+            $dataArray['teacher1']=$teacher1;
+            $dataArray['subject2']=$subject2; 
+            $dataArray['teacher2']=$teacher2;
+            $dataArray['subject3']=$subject3;
+            $dataArray['teacher3']=$teacher3;
+            $dataArray['subject4']=$subject4;
+            $dataArray['teacher4']=$teacher4;
+
+            array_push($rowsArray, $dataArray);
+
+    break;
+    }
+
+    return view('StudentManagemt.StudentProfile',['rowsArray'=>$rowsArray]);
+
+}
+public function Delviewprofile($id){
+
+    $rowsArray=array();
+
+    $student=StudentDel::where('id', '=', $id)->first();
+
+    $firstname=$student->firstname;
+    $lastname=$student->lastname;
+    $address=$student->address;
+    $email=$student->email;
+    $tp=$student->telephone;
+    $dob=$student->DOB;
+    $subject1=$student->subject1;
+    $teacher1=$student->teacher1;
+    $subject2=$student->subject2;
+    $teacher2=$student->teacher2;
+    $subject3=$student->subject3;
+    $teacher3=$student->teacher3;
+    $subject4=$student->subject4;
+    $teacher4=$student->teacher4;
+
+    foreach ($student as $data){
+
+        $dataArray=array();
+
+            $data=StudentDel::where(['id'=> $id])->first();
+            $dataArray['id']= $data->id;
+            $dataArray['fullname']= $firstname." ".$lastname;
+            $dataArray['address']=$address;
+            $dataArray['email']=$email;
+            $dataArray['telephone']=$tp;
+            $dataArray['DOB']=$dob;
+            $dataArray['subject1']=$subject1;
+            $dataArray['teacher1']=$teacher1;
+            $dataArray['subject2']=$subject2; 
+            $dataArray['teacher2']=$teacher2;
+            $dataArray['subject3']=$subject3;
+            $dataArray['teacher3']=$teacher3;
+            $dataArray['subject4']=$subject4;
+            $dataArray['teacher4']=$teacher4;
+
+            array_push($rowsArray, $dataArray);
+
+    break;
+    }
+
+    return view('StudentManagemt.Del_Stu_Profile',['rowsArray'=>$rowsArray]);
+
+}
+
+
+public function recoverData(Request $request){
+
+    $studenRec= new StudentReg;;
+
+    $student=StudentDel::where('id', '=', $request->st_id)->first();
+    
+    $student->delete();
+
+    $studenRec->firstname=$firstname=$student->firstname;
+    $studenRec->lastname=$lastname=$student->lastname;
+    $studenRec->address=$address=$student->address;
+    $studenRec->email=$email=$student->email;
+    $studenRec->telephone=$tp=$student->telephone;
+    $studenRec->dob=$DOB=$student->DOB;
+    $studenRec->subject1=$subject1=$student->subject1;
+    $studenRec->teacher1=$teacher1=$student->teacher1;
+    $studenRec->subject2=$subject2=$student->subject2;
+    $studenRec->teacher2=$teacher2=$student->teacher2;
+    $studenRec->subject3=$subject3=$student->subject3;
+    $studenRec->teacher3=$teacher3=$student->teacher3;
+    $studenRec->subject4=$subject4=$student->subject4;
+    $studenRec->teacher4=$teacher4=$student->teacher4;
+
+    $studenRec->save();
+    
+
+    return view('StudentManagemt.student_Management_index')->with('status',2);
+
+
+}
+
 
 
 }
