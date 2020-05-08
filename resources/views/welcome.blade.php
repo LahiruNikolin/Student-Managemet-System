@@ -113,11 +113,11 @@ $subCount=count($subs);
 					</li>
 					
 					<li><span class="ic"><i class="fas fa-city"></i></span>
-						<span> <a href="#"> Payment Management</a></span>
+						<span> <a href="./payemntManagement"> Payment Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					<li><span class="ic"><i class="fas fa-file-invoice-dollar"></i></span>
-						<span> <a href="#"> Expenses Management</a></span>
+						<span> <a href="./home"> Expenses Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					
