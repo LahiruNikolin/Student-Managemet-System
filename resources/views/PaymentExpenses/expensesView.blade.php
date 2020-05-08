@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="tcss/style.css" />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    
     @stop
     
  
@@ -51,7 +48,7 @@
             <td class="table-btn">
               <input type="text" id="id" name="id" value="{{ $item->id }}" hidden>
               <button type="button" onclick="window.location.href = 'deleteExpense?id={{ $item->id }}';" class="btn btn-primary" id="del-button">
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                <i class="fa fa-trash" aria-hidden="true"></i>
               </button>
             </td>
           </tr>
