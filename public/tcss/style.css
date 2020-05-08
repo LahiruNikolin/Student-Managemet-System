@@ -114,6 +114,13 @@ td.table-btn {
 .button-nxt-padding {
   width: 13.9rem;
 }
+ 
+
+div#lst li{
+ 
+  display: flex;
+  justify-content: space-between;
+}
 button#linked {
   float: right;
 }
@@ -146,6 +153,8 @@ h2.expense-manage {
 }
 .list-wrapper {
   padding-top: 7px;
+  
+
 }
 #col-id {
   padding: 0px 45px;

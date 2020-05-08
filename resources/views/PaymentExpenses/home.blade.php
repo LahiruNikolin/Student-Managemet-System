@@ -47,11 +47,11 @@
                     </div>
                   </li>
                 </div>
-                <div class="list-wrapper">
-                  <li class="list-group-item" id="items-access">
+                <div class="list-wrapper" id="lst">
+                  <li class="list-group-item" id="items-access" >
                     <div class="msg">Expenses Reports</div>
-                    <div class="button-nxt-padding">
-                      <button type="button" onclick="window.location.href = '#';" class="btn btn-primary" id="linked">
+                    <div >
+                      <button  type="button" onclick="window.location.href = '#';" class="btn btn-primary" id="linked">
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                       </button>
                     </div>
