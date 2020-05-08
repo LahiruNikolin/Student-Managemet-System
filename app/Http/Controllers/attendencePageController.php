@@ -192,8 +192,7 @@ class attendencePageController extends Controller
 
             if($cl->day==$today){
 
-              $todayAttend= $this->attendenceDataReturning();
-              $todayClasses=$this->todayClasses();
+            
 
               //echo "match";
               $hasAttend=attendence::where(['cid' =>  $class->cid,'sid'=>$id,'date'=>$date])->first();
@@ -210,14 +209,17 @@ class attendencePageController extends Controller
                 $attend->save();
 
                
-
+                $todayAttend= $this->attendenceDataReturning();
+                $todayClasses=$this->todayClasses();
                  
                 return view('Attendence.attendence', ['todayClasses'=> $todayClasses,'newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>2]);
 
               }
               else{
 
-             
+              
+                $todayAttend= $this->attendenceDataReturning();
+                $todayClasses=$this->todayClasses();
 
                 return view('Attendence.attendence', ['todayClasses'=> $todayClasses,'newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>1]);
                
