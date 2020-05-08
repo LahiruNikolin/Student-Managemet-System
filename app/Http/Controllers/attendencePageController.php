@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Student;
 use App\tution;
+use App\teacher;
 use App\subject;
 use App\class_student;
 use Carbon\Carbon;
 use App\attendence;
 use App\class_fee;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class attendencePageController extends Controller
 {
@@ -36,7 +38,7 @@ class attendencePageController extends Controller
 
         $cl=tution::where('id', '=', $attendence->cid)->first();
 
-        $subname=subject::where('id', '=', $cl->sub_id)->first()->name;
+        $subname=subject::where('id', '=', $cl->sub_id)->first()->subjectName;
 
        
         $student['sid']=$st->id;
@@ -60,11 +62,68 @@ class attendencePageController extends Controller
          
 
         $todayAttend= $this->attendenceDataReturning();
-
+        $todayClasses=$this->todayClasses();
          
          
 
-         return view('Attendence.attendence', ['newStudents' => $students ,'todayStudents'=> $todayAttend,'status'=>0]);
+        return view('Attendence.attendence', ['newStudents' => $students ,'todayStudents'=> $todayAttend,'todayClasses'=> $todayClasses,'status'=>0]);
+    }
+
+    public function todayClasses(){
+      $mainArray=array();
+
+      $now=Carbon::now()->isoFormat('HH:mm:ss');
+
+
+      
+      $today=Carbon::now()->isoFormat('dddd');
+      $classes=tution::where('day', '=',  $today)->get();
+
+      foreach( $classes as $class){
+
+        $subArray=array();
+        $subname=subject::where('id', '=', $class->sub_id)->first()->subjectName;
+        $teacherName=teacher::where('id', '=', $class->tid)->first()->fname.
+        " ".teacher::where('id', '=', $class->tid)->first()->lname;
+
+        $year=$class->year;
+        $time=$class->from.'-'.$class->to;
+        $status="Coming up";
+        if($now>$class->from){
+          $status="Ongoing";
+        }
+        if($now>$class->to){
+          $status="Finished";
+        }
+        $size=0;
+        $clzs=class_student::where('cid', '=', $class->id)->get();
+
+        
+        foreach( $clzs as $clz){
+
+           
+          $size++;
+        }
+
+
+        $subArray['teacherName']= $teacherName;
+        $subArray['subName']= $subname;
+        $subArray['size']=$size;
+        $subArray['year']=$year;
+        $subArray['time']=$time;
+        $subArray['status'] =$status; 
+
+        array_push($mainArray,$subArray);
+
+      }
+
+     
+  return $mainArray;
+
+//class_student
+
+
+   //   return teacher::all();
     }
 
 
@@ -86,7 +145,7 @@ class attendencePageController extends Controller
           // echo $class->cid;
            $cl=tution::where('id', '=', $class->cid)->first();
            
-           $subname=subject::where('id', '=', $cl->sub_id)->first()->name;
+           $subname=subject::where('id', '=', $cl->sub_id)->first()->subjectName;
             $fee+=$cl->fee;
            array_push($subs,$subname);
         }
@@ -97,7 +156,11 @@ class attendencePageController extends Controller
         $stu_data['subs']= $subs;
         $stu_data['id']= $id;
         $stu_data['email']= $st->email;;
-        
+        if( file_exists ("C:/Users/Lahiru Nikolin/Downloads/strcode.png" )){ 
+
+          unlink("C:/Users/Lahiru Nikolin/Downloads/strcode.png");
+
+         }
 
       //echo $mutable->isoFormat('dddd'); 
       //echo $fee;
@@ -129,6 +192,9 @@ class attendencePageController extends Controller
 
             if($cl->day==$today){
 
+              $todayAttend= $this->attendenceDataReturning();
+              $todayClasses=$this->todayClasses();
+
               //echo "match";
               $hasAttend=attendence::where(['cid' =>  $class->cid,'sid'=>$id,'date'=>$date])->first();
 
@@ -143,12 +209,17 @@ class attendencePageController extends Controller
                 $attend->arrived_at=$time;
                 $attend->save();
 
-                $todayAttend= $this->attendenceDataReturning();
-                return view('Attendence.attendence', ['newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>2]);
+               
+
+                 
+                return view('Attendence.attendence', ['todayClasses'=> $todayClasses,'newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>2]);
 
               }
               else{
-                //echo "here";
+
+             
+
+                return view('Attendence.attendence', ['todayClasses'=> $todayClasses,'newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>1]);
                
               }
 
@@ -159,7 +230,11 @@ class attendencePageController extends Controller
 
            
           $todayAttend= $this->attendenceDataReturning();
-          return view('Attendence.attendence', ['newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>1]);
+
+          $todayClasses=$this->todayClasses();
+
+          
+          return view('Attendence.attendence', ['todayClasses'=> $todayClasses,'newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>8]);
 
         }
         
@@ -184,6 +259,10 @@ class attendencePageController extends Controller
 
       $size= $data["numOfIds"];
 
+      if($size==0){
+        return $this->attendence();
+      }
+
       for ($i = 1; $i <= $size; $i++) {
 
         $fees=new class_fee;
@@ -201,7 +280,11 @@ class attendencePageController extends Controller
      // print_r($data);
      $todayAttend= $this->attendenceDataReturning();
 
-     return view('Attendence.attendence', ['newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>4]);
+     $todayClasses=$this->todayClasses();
+
+     
+
+     return view('Attendence.attendence', ['todayClasses'=> $todayClasses,'newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>4]);
     }
 
     public function studentClasses(Request $request){
@@ -221,7 +304,7 @@ class attendencePageController extends Controller
       $subject=subject::where('id', '=', $cl->sub_id)->first();
       $classFees=class_fee::where(['sid' =>  $id,'classid'=>$class->cid])->orderBy('paid_at', 'desc')->first();
       $classArray['cid']=$class->cid;
-      $classArray['subname']=$subject->name;
+      $classArray['subname']=$subject->subjectName;
       $classArray['year']=$cl->year;
       $classArray['day_time']=$cl->day." @".$cl->from;
       
@@ -257,19 +340,34 @@ class attendencePageController extends Controller
       $email=$request->email;
 
       
-      rename('C:/Users/Nikolin/Downloads/strcode.png', 'imgs/QRcode.png');
+         
+       if( file_exists ("C:/Users/Lahiru Nikolin/Downloads/strcode.png" )){
+       
+        rename('C:/Users/Lahiru Nikolin/Downloads/strcode.png', 'imgs/QRcode.png');
+        app('App\Http\Controllers\MailController')->basic_email( $email);
+  
+        $students=Student::all();
+         
+           
+  
+        $todayAttend= $this->attendenceDataReturning();
+  
+        $todayClasses=$this->todayClasses();
+  
+       
+  
+        return view('Attendence.attendence', [ 'todayClasses'=> $todayClasses,'newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>5]);
 
-      
+       }
+       else{
 
-      app('App\Http\Controllers\MailController')->basic_email( $email);
+        Session::put('status','7');
 
-      $students=Student::all();
+        return redirect('/attendence');
+       }
        
          
-
-      $todayAttend= $this->attendenceDataReturning();
-
-      return view('Attendence.attendence', ['newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>5]);
+    
 
     }
 
@@ -285,6 +383,7 @@ class attendencePageController extends Controller
       $lastSixMonths=array();
       $lastSixDays=array();
       $lastSixDaysName=array();
+      $lastYears=array();
 
       $date =  Carbon::now();
 
@@ -310,6 +409,7 @@ class attendencePageController extends Controller
     //  dd( $lastSixDays);
      // dd( $lastSixDaysName);
       
+    
 
       $thisMonth =  Carbon::now()->startOfMonth();
       $months=explode(" ",$thisMonth);
@@ -326,12 +426,20 @@ class attendencePageController extends Controller
       }
     
    
-
+  // dd($lastSixMonths);
     
     $this->lastMonthsAttend($lastSixMonths);
     $this->lastDaysAttend($lastSixDays,$lastSixDaysName);
 
-    return view('Attendence.viewAttendence');
+     
+     for ($x = 0; $x <= 5; $x++) {
+        
+      
+      array_push($lastYears,Carbon::now()->subYears($x)->isoFormat('GGGG')) ;
+
+    }
+     
+    return view('Attendence.viewAttendence',['years' => $lastYears] );
 
    // print_r($lastSixMonths);
      // echo $date->format('F'); // July
@@ -353,53 +461,48 @@ class attendencePageController extends Controller
 
     public function lastMonthsAttend($months){
       
-      $date =  Carbon::now(); 
-
+      
       $mainArray=array();
 
       $lastSixAttend=array();
 
-     /// dd($months);
-
-     $dRay=array("Volvo", "BMW", "Toyotarr");
+     //dd(Carbon::now()->subDays(85)->format('F'));
 
       for ($x = 0; $x <= 5; $x++) {
         
        
 
         if($x==0){
-          $results = DB::select( DB::raw("select count(*) as total FROM attendence where date>".$months[$x]));
-          $month= $date->format('F');
+          $results = DB::select( DB::raw("select count(*) as total FROM attendence where date>='".$months[$x]."'"));
+          $month=Carbon::now()->format('F');
           $lastSixAttend[$month]=$results[0]->total;
-
+          
         }
         else{
 
           $f=$x;
 
 
-        $results = DB::select( DB::raw("select count(*) as total 
-        FROM attendence where date>".$months[$x]." AND date<".$months[--$f]));
+          $results = DB::select( DB::raw("select count(*) as total 
+          FROM attendence where date>='".$months[$x]."' AND date<'".$months[--$f]."'"));
 
-        $month= $date->subMonth()->format('F');
-        $lastSixAttend[$month]=$results[0]->total;
-      
-
+         // $month= Carbon::now()->subMonth($x)->format('F');
+          $month= Carbon::now()->startOfMonth()->subDays($x*30)->format('F');
+          $lastSixAttend[$month]=$results[0]->total;    
+ 
         }
-
-   
-     
   
   
     }
 
+     
      
 
      // $results=DB::table('students')->get();
      array_push($mainArray,$lastSixAttend);
      //array_push($mainArray,$dRay);
 
-   // print_r($mainArray);
+   // dd($mainArray);
      
     //foreach()
 
@@ -441,7 +544,77 @@ class attendencePageController extends Controller
 
       $todayAttend= $this->attendenceDataReturning();
 
-      return view('Attendence.attendence', ['newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>$stu]);
+      $todayClasses=$this->todayClasses();
+
+     
+
+      return view('Attendence.attendence', [ 'todayClasses'=> $todayClasses,'newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>$stu]);
+    }
+
+    public function searchAttendence(Request $request){
+
+       $year= $request->year;
+       $month=$request->month;
+
+       $datesInMonth=array();
+
+       $date=$year.'-'.$month.'-'.'01';
+       
+       $current_date=Carbon::parse($date);
+
+      if(Carbon::parse($date)->isFuture()>0){
+        Session::put('futureDate','positive');
+        return redirect('viewAttendence');
+        
+      }
+         
+       
+
+      $i=0;
+       //return  $starDate->addDays(1)->isoFormat('MM');;
+       while($current_date->addDays(1)->isoFormat('MM')==$month){
+
+        
+        $current_date=Carbon::parse($date)->addDays($i);
+
+        array_push($datesInMonth,$current_date->isoFormat('GGGG-MM-DD'));
+
+        $i++;
+
+       
+
+       }
+
+       $this->getSpecificAttendencce($datesInMonth);
+
+      return view('Attendence.specificAttendence',['year'=>Carbon::parse($date)->isoFormat('GGGG')
+      ,'month'=>Carbon::parse($date)->isoFormat('MMMM')]);
+    }
+
+    public function getSpecificAttendencce($dates){
+
+      $mainArray=array();
+
+      $attends=array();
+
+      foreach($dates as $date){
+
+        $results = DB::select( DB::raw("select count(*) as total FROM attendence
+        where date='".$date."'"));
+
+        $attends[$date]=$results[0]->total;
+
+      }
+
+      array_push($mainArray,$attends);
+      
+
+      //print_r($mainArray);
+  
+      Storage::disk('public')->put('json/specificAttendence.json', json_encode($mainArray));
+
+    
+
     }
 
      

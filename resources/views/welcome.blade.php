@@ -1,12 +1,6 @@
 <?php
-use Illuminate\Support\Facades\DB;
-use App\Student;
-use App\subject;
 
-$students=Student::all();
-$subs=subject::all();
-$stCount=count($students);
-$subCount=count($subs);
+$userType=auth::user()->role;
 
 ?>
 <!DOCTYPE html>
@@ -15,8 +9,7 @@ $subCount=count($subs);
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-
+        
         <!-- Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -31,9 +24,9 @@ $subCount=count($subs);
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="{{asset('../node_modules/chart.js/dist/Chart.bundle.js')}}"></script>
 	 
-	@include('Inc.scannerImports')
+	
 
-    <title>Admin Panel</title>
+    <title>Student Manager</title>
     
     <style>
  
@@ -43,46 +36,8 @@ $subCount=count($subs);
 	 
 </head>
 <body>
-	<header>
-		<div id='lil-hero'><span class="mr-2"  ><i class="fas fa-universal-access"></i></span>Student Manager</div>
-		<div id='head-mid' class="d-flex justify-content-center">
-
-			<button type="button" class="btn btn-primary m-1">
-				Students <span class="badge badge-danger"><?php echo $stCount;?></span>
-			  </button>
-
-			  <button type="button" class="btn btn-primary m-1">
-				Teachers <span class="badge badge-danger">Not available</span>
-			  </button>
-
-			  <button type="button" class="btn btn-primary m-1">
-				Subjects <span class="badge badge-danger"><?php echo $subCount;?></span>
-			  </button>
-
-
-		</div>
-		<div id='admin-ic-area'>
-			<span class="avatar"><i class="fas fa-user-alt"></i></span>
-			<div class="d-flex justify-content-end  mt-3 mr-4">
-				<div class="dropdown">
-					<button class="btn btn-light dropdown-toggle"
-							type="button" id="dropdownMenu1" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">
- 
-					  {{auth::user()->name}}
-					</button>
-					<div class="dropdown-menu"  aria-labelledby="dropdownMenu1">
-				 
-                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
-                   
-					  <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
-					   
-					</div>
-				  </div>
-			</div>
-			 
-		</div>
-	</header>
+	    <!-- header-->
+	@include('Inc.header')
 	<section id='man'>
 		<div class="side-list">
 			<nav>
@@ -104,14 +59,14 @@ $subCount=count($subs);
 					</li>
 
 					<li><span class="ic"><i class="fas fa-lemon"></i></span>
-						<span> <a href="subject"> Subject Management</a></span>
+						<span> <a href="{{asset('subject')}}"> Subject Management</a></span>
 						<div class="lis-active"></div>
                     </li>
                     <li><span class="ic"><i class="fas fa-ticket-alt"></i></span>
 						<span> <a href="ticket.html"> External Staff Management</a></span>
 						<div class="lis-active"></div>
 					</li>
-					
+					@if($userType=='p')
 					<li><span class="ic"><i class="fas fa-city"></i></span>
 						<span> <a href="./payemntManagement"> Payment Management</a></span>
 						<div class="lis-active"></div>
@@ -120,7 +75,7 @@ $subCount=count($subs);
 						<span> <a href="./home"> Expenses Management</a></span>
 						<div class="lis-active"></div>
 					</li>
-					
+					@endif
 				</ul>
 			</nav>
 			

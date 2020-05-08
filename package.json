@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "chart.js": "^2.9.3",
+        "jquery-timepicker": "^1.3.3",
         "print-js": "^1.0.63",
         "qr-scanner": "^1.1.1"
     }

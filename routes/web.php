@@ -26,13 +26,15 @@ Route::get('/viewAttendence', 'attendencePageController@writeJSON');
 Route::get('/issueCard/{id}','attendencePageController@issueCard');
 
  
-/*
-Route::get('/test',function () {
-    return view('mail');
-    
-}); */
 
-Route::get('/test','attendencePageController@writeJSON');
+Route::get('/test',function () {
+    return view('Attendence.test');
+    
+}); 
+
+//Route::get('/test','attendencePageController@todayClasses');
+
+Route::post('/search_attendence','attendencePageController@searchAttendence');
 
 
 Route::post('/fees','attendencePageController@studentClasses');

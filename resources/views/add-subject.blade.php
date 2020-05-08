@@ -1,3 +1,4 @@
+ 
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -38,43 +39,9 @@
    
 </head>
 <body>
-  <header>
-    <div id='lil-hero'><span class="mr-2"  ><i class="fas fa-universal-access"></i></span>Student Manager</div>
-    <div id='head-mid' class="d-flex justify-content-center">
-
-      <button type="button" class="btn btn-primary m-1">
-        Students <span class="badge badge-danger">234</span>
-        </button>
-
-        <button type="button" class="btn btn-primary m-1">
-        Teachers <span class="badge badge-danger">23</span>
-        </button>
-
-        <button type="button" class="btn btn-primary m-1">
-        Subjects <span class="badge badge-danger">14</span>
-        </button>
-
-
-    </div>
-    <div id='admin-ic-area'>
-      <span class="avatar"><i class="fas fa-user-alt"></i></span>
-      <div class="d-flex justify-content-end  mt-3 mr-4">
-        <div class="dropdown">
-          <button class="btn btn-light dropdown-toggle"
-              type="button" id="dropdownMenu1" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-            Lahiru
-          </button>
-          <div class="dropdown-menu"  aria-labelledby="dropdownMenu1">
-            <a class="dropdown-item" href="#!">Settings</a>
-            <a class="dropdown-item" href="#!">Logout</a>
-             
-          </div>
-          </div>
-      </div>
-       
-    </div>
-  </header>
+  
+   <!-- header-->
+   @include('Inc.header')
   <section id='man'>
     <div class="side-list">
       <nav>
@@ -120,7 +87,7 @@
     <div class="sub-main">
       <div class="container">
         @yield('content')
-        <a class="btn btn-primary" role="button" href="subject">Subject Management</a>
+        <a class="btn btn-dark" role="button" href="subject">Back</a>
         <div class="border rounded border-white shadow" id="Names">
             <div class="container">
                 <form method="post" action="addSubject">

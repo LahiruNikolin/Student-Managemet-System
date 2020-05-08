@@ -1,3 +1,5 @@
+
+
 <?php
 $subid=$_GET['subid'];
 
@@ -115,48 +117,17 @@ $subid=$_GET['subid'];
         background-color: green;
       }
 
+      .timepicker {
+      z-index: 3600 !important; /* has to be larger than 1050 */
+    }
+
 
     </style>
-   
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 </head>
 <body>
-  <header>
-    <div id='lil-hero'><span class="mr-2"  ><i class="fas fa-universal-access"></i></span>Student Manager</div>
-    <div id='head-mid' class="d-flex justify-content-center">
-
-      <button type="button" class="btn btn-primary m-1">
-        Students <span class="badge badge-danger">234</span>
-        </button>
-
-        <button type="button" class="btn btn-primary m-1">
-        Teachers <span class="badge badge-danger">23</span>
-        </button>
-
-        <button type="button" class="btn btn-primary m-1">
-        Subjects <span class="badge badge-danger">14</span>
-        </button>
-
-
-    </div>
-    <div id='admin-ic-area'>
-      <span class="avatar"><i class="fas fa-user-alt"></i></span>
-      <div class="d-flex justify-content-end  mt-3 mr-4">
-        <div class="dropdown">
-          <button class="btn btn-light dropdown-toggle"
-              type="button" id="dropdownMenu1" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-            Lahiru
-          </button>
-          <div class="dropdown-menu"  aria-labelledby="dropdownMenu1">
-            <a class="dropdown-item" href="#!">Settings</a>
-            <a class="dropdown-item" href="#!">Logout</a>
-             
-          </div>
-          </div>
-      </div>
-       
-    </div>
-  </header>
+<!-- header-->
+@include('Inc.header')
   <section id='man'>
     <div class="side-list">
       <nav>
@@ -210,14 +181,14 @@ $subid=$_GET['subid'];
             }
         ?>
 
-          <a class="btn btn-primary" role="button" href="subject">Back</a>
+          <a class="btn btn-dark" role="button" href="subject">Back</a>
           <!-- Modal -->
           @foreach($teachers as $item)
           <div class="modal fade" id="allocate-teacher{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalCenterTitle">Allocating Mr. {{ $item->fname }} for ITP Subject</h5>
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Allocating Mr. {{ $item->fname }} for {{$subid}}</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -227,14 +198,41 @@ $subid=$_GET['subid'];
                   <input type="text" name="id" class="form-control" value="{{ $item->id }}" hidden>
                   <input type="text" name="sub" class="form-control" value="<?php echo $subid; ?>" hidden>
                 <div class="modal-body">
+                
+                    
+
+                    <div class="form-group" >
+                      <label for="inputGroupSelect01">Day:</label>
+                      <select name='day' class="custom-select" id="inputGroupSelect01">
+                        <option selected value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                      </select>
+                    </div>
+
+
+                     
                     <div class="form-group">
-                      <label for="day">Day:</label>
-                      <input type="text" name="date" class="form-control" id="day">
+                      <label for="fee">Fee:</label>
+                      <input type="text" name="fee" class="form-control" id="fee">
                     </div>
                     <div class="form-group">
-                      <label for="time">Time:</label>
-                      <input type="text" name="time" class="form-control" id="time">
+                      <label for="year">year:</label>
+                      <input type="text" name="year" class="form-control" id="year">
                     </div>
+                    <div class="form-group">
+                      <label for="time">Start Time:(24hr Format)</label>
+                      <input type="text" name="starttime" class="form-control timepicker" id="starttime">
+                    </div>
+                    <div class="form-group">
+                      <label for="time">End Time:(24hr Format)</label>
+                      <input type="text" name="endtime" class="form-control timepicker" id="endtime">
+                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -306,9 +304,13 @@ $subid=$_GET['subid'];
               </div>
           </div>
       </div>
+
+       
        
     </div>
   </section>
+
+ 
   <script src="{{asset('../node_modules/print-js/dist/print.js')}}"></script>
   
   
@@ -322,7 +324,22 @@ $subid=$_GET['subid'];
 <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/bootstrap-toggle.min.js')}}"></script>
 
- 
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<script>
+  $('.timepicker').timepicker({
+    timeFormat: 'HH:mm ',
+    interval: 30,
+  
+   
+    defaultTime: '11',
+    
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true,
+    zindex: 2000
+});
+  </script>
 </body>
 
 </html>
