@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
+@extends('PaymentExpenses.mainLayout')
+
+ 
+@section('styles')
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="tcss/style.css" />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  </head>
-  <body>
+    @stop
+    
+ 
+    @section('content')
     <div class="heading-class">
       <h2>Teacher's Payment</h2>
     </div>
@@ -78,6 +81,7 @@
 
     <script src="./assets/js/jquery-3.2.1.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
+    @stop
     
-  </body>
-</html>
+ 
+  

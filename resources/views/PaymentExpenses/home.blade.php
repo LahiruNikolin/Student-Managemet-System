@@ -1,6 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+@extends('PaymentExpenses.mainLayout')
+
+ 
+@section('styles')
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -10,8 +11,10 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <title>Expense Management</title>
-  </head>
-  <body>
+    @stop
+    
+ 
+    @section('content')
     <div class="heading-class">
       <h2 class="expense-manage">Expenses Management</h2>
     </div>
@@ -70,5 +73,4 @@
     </div>
     <script src="./assets/js/jquery-3.2.1.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
-  </body>
-</html>
+  @stop

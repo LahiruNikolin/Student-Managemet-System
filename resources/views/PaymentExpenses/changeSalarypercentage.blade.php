@@ -1,14 +1,17 @@
 <?php
       $exp = DB::table('salary_percentage')->get();
   ?>
-<!DOCTYPE html>
-<html>
-  <head>
+@extends('PaymentExpenses.mainLayout')
+
+ 
+@section('styles')
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="tcss/style.css" />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  </head>
-  <body>
+    @stop
+    
+ 
+    @section('content')
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if(Session::has('success'))
       <script>
@@ -73,5 +76,7 @@
         document.getElementById("salaryPercentage").value="";
       }
     </script>
-  </body>
-</html>
+ @stop
+    
+ 
+

@@ -20,7 +20,7 @@ h2 {
 }
 #btn3 {
   color: #e6f7ff;
-  background-color:#ff0000;
+  background-color: black;
 }
 btn3:hover{
   background-color:#ff6565;
@@ -112,7 +112,11 @@ td.table-btn {
   width: 20rem;
 }
 .button-nxt-padding {
+  background-color: #1aa3ff;
   width: 13.9rem;
+
+
+
 }
 button#linked {
   float: right;
