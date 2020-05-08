@@ -71,11 +71,11 @@ $userType=auth::user()->role;
 					</li>
 					@if($userType=='p')
 					<li><span class="ic"><i class="fas fa-city"></i></span>
-						<span> <a href="#"> Payment Management</a></span>
+						<span> <a href="{{asset('payemntManagement')}}"> Payment Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					<li><span class="ic"><i class="fas fa-file-invoice-dollar"></i></span>
-						<span> <a href="#"> Expenses Management</a></span>
+						<span> <a href="{{asset('expensesView')}}"> Expenses Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					@endif

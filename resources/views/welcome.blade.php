@@ -26,7 +26,7 @@ $userType=auth::user()->role;
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="{{asset('../node_modules/chart.js/dist/Chart.bundle.js')}}"></script>
 	 
-
+	
 
     <title>Student Manager</title>
     
@@ -70,7 +70,7 @@ $userType=auth::user()->role;
 					</li>
 					@if($userType=='p')
 					<li><span class="ic"><i class="fas fa-city"></i></span>
-						<span> <a href="{{asset('payment')}}"> Payment Management</a></span>
+						<span> <a href="{{asset('payemntManagement')}}"> Payment Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					<li><span class="ic"><i class="fas fa-file-invoice-dollar"></i></span>
