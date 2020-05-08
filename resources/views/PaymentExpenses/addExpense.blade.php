@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
+@extends('PaymentExpenses.mainLayout')
+
+ 
+@section('styles')
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="tcss/style.css" />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  </head>
-  <body>
+    @stop
+    
+ 
+    @section('content')
+      
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if(Session::has('success'))
       <script>
@@ -74,5 +78,8 @@
 
     <script src="./assets/js/jquery-3.2.1.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
-  </body>
-</html>
+    @stop
+    
+ 
+ 
+      
