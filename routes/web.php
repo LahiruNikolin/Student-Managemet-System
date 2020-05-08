@@ -26,13 +26,13 @@ Route::get('/viewAttendence', 'attendencePageController@writeJSON');
 Route::get('/issueCard/{id}','attendencePageController@issueCard');
 
  
-/*
-Route::get('/test',function () {
-    return view('mail');
-    
-}); */
 
-Route::get('/test','attendencePageController@todayClasses');
+Route::get('/test',function () {
+    return view('Attendence.test');
+    
+}); 
+
+//Route::get('/test','attendencePageController@todayClasses');
 
 Route::post('/search_attendence','attendencePageController@searchAttendence');
 
@@ -149,3 +149,47 @@ Route::get('/logout',  function () {
     Auth::logout();
     return redirect('login');
 });
+
+//thisura routes
+Route::get('/home', function () {
+    return view('PaymentExpenses.home');
+});
+
+Route::get('/addExpense', function () {
+    return view('PaymentExpenses.addExpense');
+});
+
+Route::get('/expensesView', function () {
+    return view('PaymentExpenses.expensesView');
+});
+
+Route::get('/payemntManagement', function () {
+    return view('PaymentExpenses.payemntManagement');
+});
+Route::get('payment', function () {
+    return view('PaymentExpenses.payment');
+});
+
+Route::get('/TeacherpaymentView', function () {
+    return view('PaymentExpenses.TeacherpaymentView');
+});
+Route::get('/TeacherSalaryCalculate', function () {
+    return view('PaymentExpenses.TeacherSalaryCalculate');
+});
+Route::get('/expensesView', function () {
+    return view('PaymentExpenses.expensesView');
+});
+
+Route::get('/changeSalarypercentage', function () {
+    return view('PaymentExpenses.changeSalarypercentage');
+});
+
+Route::post('addExpenses','mainController@addExpenses');
+
+Route::post('updateSalaryPercentage','mainController@updateSalaryPercentage');
+
+Route::get('deleteExpense','mainController@deleteExpense');
+
+Route::post('calSal','mainController@calSal');
+
+Route::post('addPayment','mainController@addPayment');
