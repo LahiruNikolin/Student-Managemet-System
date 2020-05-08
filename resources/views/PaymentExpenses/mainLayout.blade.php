@@ -9,11 +9,12 @@ $userType=auth::user()->role;
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        		@yield('styles')
+		@yield('styles')
         <!-- Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ 
+	    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 		
         <!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">  
@@ -24,9 +25,9 @@ $userType=auth::user()->role;
 		
 		<script src="{{asset('js/jquery.js')}}" ></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="{{asset('../node_modules/chart.js/dist/Chart.bundle.js')}}"></script>
+ 
 	 
-
+ 
 
     <title>Student Manager</title>
     
@@ -70,11 +71,11 @@ $userType=auth::user()->role;
 					</li>
 					@if($userType=='p')
 					<li><span class="ic"><i class="fas fa-city"></i></span>
-						<span> <a href="{{asset('payment')}}"> Payment Management</a></span>
+						<span> <a href="#"> Payment Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					<li><span class="ic"><i class="fas fa-file-invoice-dollar"></i></span>
-						<span> <a href="{{asset('expensesView')}}"> Expenses Management</a></span>
+						<span> <a href="#"> Expenses Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					@endif
@@ -98,13 +99,9 @@ $userType=auth::user()->role;
 	
 	 
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script type="text/javascript" src="{{asset('js/all.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/printThis.js')}}"></script>
 
- 
-<script type="text/javascript" src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/bootstrap-toggle.min.js')}}"></script>
-
+<script type="text/javascript" src="{{asset('js/all.js')}}"></script>
  
 </body>
 

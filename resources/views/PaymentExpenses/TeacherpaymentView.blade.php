@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="tcss/style.css" />
+
+@extends('PaymentExpenses.mainLayout')
+
+ 
+@section('styles')
+
+<link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="tcss/style.css" />
+@stop
+    
+ 
+@section('content')
+  
     <div class="heading-class">
       <h2>Teacher Payment View</h2>
     </div>
@@ -47,5 +58,5 @@
 
     <script src="./assets/js/jquery-3.2.1.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
-  </body>
-</html>
+ 
+@stop

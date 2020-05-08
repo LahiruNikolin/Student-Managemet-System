@@ -46,7 +46,7 @@ div#content {
   padding: 20px 0px;
 }
 .heading-class {
-  padding: 6px 25px;
+  padding: 1px 25px;
   width: auto;
   height: 5rem;
   background-color: #1aa3ff;
@@ -80,8 +80,10 @@ div#content {
 }
 .white-space-chg {
   width: auto;
-  height: 8.8rem;
+  height:4.8rem;
 }
+
+ 
 td.table-btn {
   text-align: center;
 }
