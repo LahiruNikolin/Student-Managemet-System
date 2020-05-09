@@ -135,7 +135,7 @@ h2{
       </div>
 
         <div id="btndiv">
-          <button  onclick="location.href='{{url('home')}}';" type="button" class="btn btn-dark " id="btn3"  >Back</button>
+          <button  onclick="location.href='{{url('PaymentExpenses')}}';" type="button" class="btn btn-dark " id="btn3"  >Back</button>
         </div>
 
       </form>
