@@ -10,13 +10,13 @@
     }
 
     td, {
-    border: 1px solid #dddddd;
+    border: 1px solid ;
     text-align: left;
     padding: 8px;
     }
 
     tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #b2b8be;
     }
 
     .bar {
@@ -25,18 +25,28 @@
   height: 50px;
   padding: 8px 10px;
   overflow: hidden;
-  background-color: rgb(47, 128, 83);
+  background-color: #454d55;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-h3{
-
-font-family : 	'Comic Sans MS';
-
-
-}
-
   </style>
+  <script >
+	function myFunction1() {
+    	var txt;
+    	var r = confirm("do you want recover this account!");
+		
+		if (r == true) {
+        	txt = "You chose OK!";
+
+        	document.getElementById("recForm").submit(); 
+	
+		} else {
+        	txt = "You Cancelled!";
+    	}
+	
+		
+}
+</script>
 
 </head>
 
@@ -48,9 +58,14 @@ font-family : 	'Comic Sans MS';
             
             <div class="bar">
 
-            <input type="text" id="search" name="search" placeholder="Search here..">
+            <form action="" method="GET">
+
+            <input type="text" id="search" name="s" placeholder="Search here..">
             <button type="submit"><i class="fa fa-search"></i></button>
 
+            <a href="./studentPrint" class="btn btn-success">print document</a>
+
+            </form>
             </div>   </br></br>         
 
             
@@ -66,14 +81,7 @@ font-family : 	'Comic Sans MS';
             <th>Email</th>
             <th>Tel. Number</th>
             <th>Date of Birth</th>
-            <th>Subject1</th>
-            <th>Teacher1</th>
-            <th>Subject2</th>
-            <th>Teacher2</th>
-            <th>Subject3</th>
-            <th>Teacher3</th>
-            <th>Subject4</th>
-            <th>Teacher4</th>
+            <th>Profile</th>
             <th>Action</th>
 
             </tr>
@@ -87,19 +95,21 @@ font-family : 	'Comic Sans MS';
             <td>{{$Deletestudentdata->email}}</td>
             <td>{{$Deletestudentdata->telephone}}</td>
             <td>{{$Deletestudentdata->DOB}}</td>
-    		    <td>{{$Deletestudentdata->subject1}}</td>
-    		    <td>{{$Deletestudentdata->teacher1}}</td>
-    		    <td>{{$Deletestudentdata->subject2}}</td>
-    		    <td>{{$Deletestudentdata->teacher2}}</td>    
-    	      <td>{{$Deletestudentdata->subject3}}</td>
-    		    <td>{{$Deletestudentdata->teacher3}}</td>
-    		    <td>{{$Deletestudentdata->subject4}}</td>
-            <td>{{$Deletestudentdata->teacher4}}</td>
-            <td><button class="btn btn-warning">Recover</button></td>
-            
+
+            <td><a href="./DelProfiles/{{$Deletestudentdata->id}}"class="btn btn-success">View</a></td>
+            <td><form id='recForm' action="{{action('RStudentController@recoverData') }}" method="get" >
+
+            {{ csrf_field() }}
+
+            <input type="hidden" name="st_id"  value="{{$Deletestudentdata['id']}}"></input>
+            <button class="btn btn-success" onclick="myFunction1()" >Recover</button>	
+
+            </form></td>
+
             </tr>
 
             @endforeach
+
 
 
 	  </table></CENTER>

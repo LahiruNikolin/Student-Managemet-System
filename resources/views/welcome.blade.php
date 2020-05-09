@@ -51,7 +51,7 @@ $userType=auth::user()->role;
 					</li>
 				 
 					<li><span  class="ic"><i class="fab fa-sellsy"></i></span>
-						<span> <a href="#"> Students Management</a></span>
+						<span> <a href="{{url('StudentManagement_index')}}"> Students Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					 

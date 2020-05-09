@@ -50,26 +50,6 @@
 
 }
 
-#updatetForm .btn1{
-  width: 100%;
-  color: rgb(15, 15, 15);
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: gray; 
-
-}
-#updatetForm .btn1:hover{
-
-background-color:#454d55;
-}
-#delStForm .btn:hover{
-
-background-color:#454d55;
-}
-
 
 .serbar {
   margin: 3px 0px 0px 100px;
@@ -143,19 +123,7 @@ tr:nth-child(even) {
 }
 
 </style>
-<script >
-	function myFunction() {
-		
-		var r = confirm("do you want delete this account!");
-		
-		if (r == true) {
 
-        	document.getElementById("delStForm").submit(); 
-	
-		} 
-		
-}
-</script>
 
 <div class="hero-image">
   <img id="img1" src="imgs/images/student.jpg" width="900px" height="300px">
@@ -166,33 +134,7 @@ tr:nth-child(even) {
 	@foreach($rowsArray as $studentdata)
 
 <div class="serbar" style="  height:4rem;">
-  <div class="cust-dropdown">
-    <button class="cust-dropbtn">More</button>
-    <div class="cust-dropdown-content">
-		
-
-		<form id='updatetForm' action="{{action('RStudentController@testupdate') }}" method="GET" >
-		
-		{{ csrf_field() }}
-
-		<input type="hidden" name="st_id"  value="{{$studentdata['id']}}"></input>
-		<button class="btn1" >Update Profile</button>	
-
-		</form>
-
-		<form id='delStForm' action="{{action('RStudentController@test') }}" method="POST" >
-
-			{{ csrf_field() }}
-
-			<input type="hidden" name="st_id"  value="{{$studentdata['id']}}"></input>
-			<button class="btn" onclick="myFunction()" >Delete Profile</button>	
-
-		</form>
-
-	  	 
-
-    </div>
-  </div>
+ 
 </div>
   			<div id="profile1">
   				
