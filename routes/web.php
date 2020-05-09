@@ -140,7 +140,7 @@ Route::get('/logout',  function () {
 });
 
 //thisura routes
-Route::get('/home', function () {
+Route::get('/PaymentExpenses', function () {
     return view('PaymentExpenses.home');
 });
 
