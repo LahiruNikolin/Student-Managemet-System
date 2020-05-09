@@ -52,9 +52,9 @@
                 </div>
                 <div class="list-wrapper" id="lst">
                   <li class="list-group-item" id="items-access" >
-                    <div class="msg">Expenses Reports</div>
+                    <div class="msg">Generate Expenses Reports</div>
                     <div >
-                      <button  type="button" onclick="window.location.href = '#';" class="btn btn-primary" id="linked">
+                      <button  type="button" onclick="window.location.href = 'ExpensesReport';" class="btn btn-primary" id="linked">
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                       </button>
                     </div>

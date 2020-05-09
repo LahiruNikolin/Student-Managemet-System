@@ -21,6 +21,7 @@ h2 {
 #btn3 {
   color: #e6f7ff;
   background-color: black;
+  cursor: pointer;
 }
 btn3:hover{
   background-color:#ff6565;
