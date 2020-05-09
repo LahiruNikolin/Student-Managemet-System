@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\StudentReg;
 use App\StudentDel;
+use App\student;
+
 
 class RStudentController extends Controller
 {
     public function store(Request $request){
 
-        $StudentReg = new StudentReg; 
-        
+        $StudentReg = new student; 
+
         $rowsArray=array();
 
  
@@ -21,18 +22,21 @@ class RStudentController extends Controller
             'address'=>'required',
             'email'=>'required|email',
             'telephone'=>'required',
+            'year'=>'required',
             'birthday'=>'required|date',
             
 
         ]);
          
 
-        $firstname=$StudentReg->firstname=$request->input('firstname');
-        $lastname=$StudentReg->lastname=$request->input('lastname');
+        $firstname=$StudentReg->fname=$request->input('firstname');
+        $lastname=$StudentReg->lname=$request->input('lastname');
         $address=$StudentReg->address=$request->input('address');
         $email=$StudentReg->email=$request->input('email');
-        $tp=$StudentReg->telephone=$request->input('telephone');
+        $tp=$StudentReg->mobile=$request->input('telephone');
         $dob=$StudentReg->DOB=$request->input('birthday');
+        $year=$StudentReg->year=$request->input('year');
+        $status=$StudentReg->status=$request->input('status');
         $subject1=$StudentReg->subject1=$request->input('Subject1');
         $teacher1=$StudentReg->teacher1=$request->input('Teach1');
         $subject2=$StudentReg->subject2=$request->input('Subject2');
@@ -41,21 +45,26 @@ class RStudentController extends Controller
         $teacher3=$StudentReg->teacher3=$request->input('Teach3');
         $subject4=$StudentReg->subject4=$request->input('Subject4');
         $teacher4=$StudentReg->teacher4=$request->input('Teach4');
+        
+        
         $StudentReg->save();
 
-        $alldata= StudentReg::where('email', '=', $email)->get();
+        $alldata= student::where('email', '=', $email)->get();
         
         foreach ($alldata as $data){
             
             $dataArray = array();
         
-            $data=StudentReg::where(['email'=> $email])->orderBy('created_at', 'desc')->take(1)->first();
+            $data=student::where(['email'=> $email])->orderBy('created_at', 'desc')->take(1)->first();
             $dataArray['id']= $data->id;
             $dataArray['fullname']= $firstname." ".$lastname;
             $dataArray['address']=$address;
             $dataArray['email']=$email;
+            $dataArray['year']=$year;
             $dataArray['telephone']=$tp;
             $dataArray['DOB']=$dob;
+            $dataArray['year']=$year;
+            $dataArray['status']=$status;
             $dataArray['subject1']=$subject1;
             $dataArray['teacher1']=$teacher1;
             $dataArray['subject2']=$subject2; 
@@ -82,7 +91,7 @@ class RStudentController extends Controller
     
     public function retriveTable(){
 
-       $data2=StudentReg::all();
+       $data2=student::all();
        
        return view('StudentManagemt.allStudentsDetails')->with('StudentsData',$data2);
 
@@ -128,14 +137,16 @@ public function test(Request $request){
 
 
 
-    $studentdata=StudentReg::find($request->st_id);
+    $studentdata=student::find($request->st_id);
     $studentdata->delete();
     
-    $firstname=$studentdata->firstname;
-    $lastname=$studentdata->lastname;
+    $firstname=$studentdata->fname;
+    $lastname=$studentdata->lname;
     $address=$studentdata->address;
     $email=$studentdata->email;
-    $tp=$studentdata->telephone;
+    $tp=$studentdata->mobile;
+    $year=$studentdata->year;
+    $status=$studentdata->status;
     $dob=$studentdata->DOB;
     $subject1=$studentdata->subject1;
     $teacher1=$studentdata->teacher1;
@@ -153,6 +164,8 @@ public function test(Request $request){
     $StudentDel->address=$address;
     $StudentDel->email=$email;
     $StudentDel->telephone=$tp;
+    $StudentDel->year=$year;
+    $StudentDel->status=$status;
     $StudentDel->DOB=$dob;
     $StudentDel->subject1=$subject1;
     $StudentDel->teacher1=$teacher1;
@@ -162,6 +175,7 @@ public function test(Request $request){
     $StudentDel->teacher3=$teacher3;
     $StudentDel->subject4=$subject4;
     $StudentDel->teacher4=$teacher4;
+    
     $StudentDel->save();
 
     return view('StudentManagemt.student_Management_index')->with('status',1);
@@ -175,7 +189,7 @@ public function test(Request $request){
 public function testupdate(Request $request){
 
             
-    $studentdata=StudentReg::find($request->st_id);
+    $studentdata=student::find($request->st_id);
     return view('StudentManagemt.studentUpdate')->with('stuUpdate',$studentdata);
 
 
@@ -191,6 +205,7 @@ public function testupdate(Request $request){
             'address'=>'required',
             'email'=>'required|email',
             'telephone'=>'required',
+            'year'=>'required',
             'birthday'=>'required|date',
             
 
@@ -203,6 +218,8 @@ public function testupdate(Request $request){
     $email=$request->email;
     $tp=$request->telephone;
     $dob=$request->birthday;
+    $year=$request->year;
+    $status=$request->status;
     $subject1=$request->Subject1;
     $teacher1=$request->Teach1;
     $subject2=$request->Subject2;
@@ -212,14 +229,16 @@ public function testupdate(Request $request){
     $subject4=$request->Subject4;
     $teacher4=$request->Teach4;
 
-    $studentdata1=StudentReg::find($id);
+    $studentdata1=student::find($id);
     
-    $studentdata1->firstname=$firstname;
-    $studentdata1->lastname= $lastname;
+    $studentdata1->fname=$firstname;
+    $studentdata1->lname= $lastname;
     $studentdata1->address=$address;
     $studentdata1->email=$email;
-    $studentdata1->telephone=$tp;
+    $studentdata1->mobile=$tp;
     $studentdata1->DOB=$dob;
+    $studentdata1->year=$year;
+    $studentdata1->status=$status;
     $studentdata1->Subject1=$subject1;
     $studentdata1->teacher1=$teacher1;
     $studentdata1->Subject2=$subject2;
@@ -234,19 +253,21 @@ public function testupdate(Request $request){
 
 
     
-    $alldata= StudentReg::where('id', '=', $id)->get();
+    $alldata= student::where('id', '=', $id)->get();
         
     foreach ($alldata as $data){
         
         $dataArray = array();
     
-        $data=StudentReg::where(['id'=> $id])->orderBy('created_at', 'desc')->first();
+        $data=student::where(['id'=> $id])->orderBy('created_at', 'desc')->first();
         $dataArray['id']= $data->id;
         $dataArray['fullname']= $firstname." ".$lastname;
         $dataArray['address']=$address;
         $dataArray['email']=$email;
         $dataArray['telephone']=$tp;
         $dataArray['DOB']=$dob;
+        $dataArray['year']=$year;
+        $dataArray['status']=$status;
         $dataArray['subject1']=$subject1;
         $dataArray['teacher1']=$teacher1;
         $dataArray['subject2']=$subject2; 
@@ -268,14 +289,16 @@ public function viewprofile($id){
 
     $rowsArray=array();
 
-    $student=StudentReg::where('id', '=', $id)->first();
+    $student=student::where('id', '=', $id)->first();
 
-    $firstname=$student->firstname;
-    $lastname=$student->lastname;
+    $firstname=$student->fname;
+    $lastname=$student->lname;
     $address=$student->address;
     $email=$student->email;
-    $tp=$student->telephone;
+    $tp=$student->mobile;
     $dob=$student->DOB;
+    $year=$student->year;
+    $status=$student->status;
     $subject1=$student->subject1;
     $teacher1=$student->teacher1;
     $subject2=$student->subject2;
@@ -289,13 +312,15 @@ public function viewprofile($id){
 
         $dataArray=array();
 
-            $data=StudentReg::where(['id'=> $id])->first();
+            $data=student::where(['id'=> $id])->first();
             $dataArray['id']= $data->id;
             $dataArray['fullname']= $firstname." ".$lastname;
             $dataArray['address']=$address;
             $dataArray['email']=$email;
             $dataArray['telephone']=$tp;
             $dataArray['DOB']=$dob;
+            $dataArray['year']=$year;
+            $dataArray['status']=$status;
             $dataArray['subject1']=$subject1;
             $dataArray['teacher1']=$teacher1;
             $dataArray['subject2']=$subject2; 
@@ -325,6 +350,8 @@ public function Delviewprofile($id){
     $email=$student->email;
     $tp=$student->telephone;
     $dob=$student->DOB;
+    $year=$student->year;
+    $status=$student->status;
     $subject1=$student->subject1;
     $teacher1=$student->teacher1;
     $subject2=$student->subject2;
@@ -345,6 +372,8 @@ public function Delviewprofile($id){
             $dataArray['email']=$email;
             $dataArray['telephone']=$tp;
             $dataArray['DOB']=$dob;
+            $dataArray['year']=$year;
+            $dataArray['status']=$status;
             $dataArray['subject1']=$subject1;
             $dataArray['teacher1']=$teacher1;
             $dataArray['subject2']=$subject2; 
@@ -366,26 +395,28 @@ public function Delviewprofile($id){
 
 public function recoverData(Request $request){
 
-    $studenRec= new StudentReg;;
+    $studenRec= new student;
 
     $student=StudentDel::where('id', '=', $request->st_id)->first();
     
     $student->delete();
 
-    $studenRec->firstname=$firstname=$student->firstname;
-    $studenRec->lastname=$lastname=$student->lastname;
-    $studenRec->address=$address=$student->address;
-    $studenRec->email=$email=$student->email;
-    $studenRec->telephone=$tp=$student->telephone;
-    $studenRec->dob=$DOB=$student->DOB;
-    $studenRec->subject1=$subject1=$student->subject1;
-    $studenRec->teacher1=$teacher1=$student->teacher1;
-    $studenRec->subject2=$subject2=$student->subject2;
-    $studenRec->teacher2=$teacher2=$student->teacher2;
-    $studenRec->subject3=$subject3=$student->subject3;
-    $studenRec->teacher3=$teacher3=$student->teacher3;
-    $studenRec->subject4=$subject4=$student->subject4;
-    $studenRec->teacher4=$teacher4=$student->teacher4;
+    $studenRec->fname=$student->firstname;
+    $studenRec->lname=$student->lastname;
+    $studenRec->address=$student->address;
+    $studenRec->email=$student->email;
+    $studenRec->mobile=$student->telephone;
+    $studenRec->DOB=$student->DOB;
+    $studenRec->year=$student->year;
+    $studenRec->status=$student->status;
+    $studenRec->subject1=$student->subject1;
+    $studenRec->teacher1=$student->teacher1;
+    $studenRec->subject2=$student->subject2;
+    $studenRec->teacher2=$student->teacher2;
+    $studenRec->subject3=$student->subject3;
+    $studenRec->teacher3=$student->teacher3;
+    $studenRec->subject4=$student->subject4;
+    $studenRec->teacher4=$student->teacher4;
 
     $studenRec->save();
     

@@ -85,11 +85,11 @@ tr:nth-child(even) {
     {{ csrf_field() }}
 
       <label for="fname">First Name________________________________________</label>
-      <input type="text" id="fname" name="firstname" value="{{$stuUpdate['firstname']}}">
+      <input type="text" id="fname" name="firstname" value="{{$stuUpdate['fname']}}">
       <input type="hidden" name="id" value="{{$stuUpdate['id']}}">
 
       <label for="lname">Last Name_________________________________________</label>
-      <input type="text" id="lname" name="lastname" value="{{$stuUpdate['lastname']}}">
+      <input type="text" id="lname" name="lastname" value="{{$stuUpdate['lname']}}">
 
       <label for="add">Address___________________________________________</label>
       <input type="text" id="add" name="address" value="{{$stuUpdate['address']}}">
@@ -98,10 +98,16 @@ tr:nth-child(even) {
       <input type="text" id="ema" name="email" value="{{$stuUpdate['email']}}">
 
       <label for="tp">Tel. Number______________________________________</label>
-      <input type="text" id="tp" name="telephone" value="{{$stuUpdate['telephone']}}">
+      <input type="text" id="tp" name="telephone" value="{{$stuUpdate['mobile']}}">
 
       <label for="tp">Date of Birth______________________________________</label>
       <input type="text" id="DOB" name="birthday" value="{{$stuUpdate['DOB']}}">
+
+      <label for="year">Year___________________________________________</label>
+      <input type="text" id="year" name="year" value="{{$stuUpdate['year']}}">
+
+      <label for="status">Status___________________________________________</label>
+      <input type="text" id="status" name="status" value="{{$stuUpdate['status']}}">
       
       <table>
     <tr>

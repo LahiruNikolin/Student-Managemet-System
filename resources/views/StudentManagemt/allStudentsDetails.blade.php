@@ -67,10 +67,10 @@
  
     	    <tr>
             
-            <td>{{$studentdata->firstname}} {{$studentdata->lastname}}</td>
+            <td>{{$studentdata->fname}} {{$studentdata->lname}}</td>
             <td>{{$studentdata->address}}</td>
             <td>{{$studentdata->email}}</td>
-            <td>{{$studentdata->telephone}}</td>
+            <td>{{$studentdata->mobile}}</td>
             <td>{{$studentdata->DOB}}</td>
     		    
             <td><a href="./savetask/{{$studentdata->id}}"class="btn btn-success">View</a></td>

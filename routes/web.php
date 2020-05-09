@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\StudentReg;
+use App\student;
 use App\StudentDel;
 use Illuminate\Support\Facades\Session;
  

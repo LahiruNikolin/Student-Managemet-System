@@ -26,7 +26,7 @@
 #profile1{
 	border-radius: 0px 25px 0px 25px;
 	background-color: #b2b8be;
-	height: 450px;
+	height: 500px;
 	width: 900px;
 	margin: 80px 0px 0px 100px;
 	align-content: center;
@@ -126,10 +126,10 @@ tr:nth-child(even) {
 
 
 <div class="hero-image">
-  <img id="img1" src="imgs/images/student.jpg" width="900px" height="300px">
+  <img id="img1" src="{{asset('imgs/images/student.jpg')}}" width="900px" height="300px">
 </div>
 
-	<img id="img2" src="imgs/images/stu.png">
+	<img id="img2" src="{{asset('imgs/images/stu.png')}}">
 	
 	@foreach($rowsArray as $studentdata)
 
@@ -155,7 +155,13 @@ tr:nth-child(even) {
       		<span>{{$studentdata['telephone']}}</span></br></br>
 
       		<span class="class1">Date of Birth:</span>
-      		<span>{{$studentdata['DOB']}}</span>  
+      		<span>{{$studentdata['DOB']}}</span></br></br>  
+
+			<span class="class1">Year:</span>
+      		<span>{{$studentdata['year']}}</span></br></br>
+
+      		<span class="class1">status:</span>
+      		<span>{{$studentdata['status']}}</span>
 
             </div>
 

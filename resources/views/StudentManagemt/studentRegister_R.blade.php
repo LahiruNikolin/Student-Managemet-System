@@ -101,8 +101,19 @@ tr:nth-child(even) {
       <label for="tp">Tel. Number______________________________________</label>
       <input type="text" id="tp" name="telephone" placeholder="Your telephone number..">
 
-      <label for="tp">Date of Birth______________________________________</label>
+      <label for="dob">Date of Birth______________________________________</label>
       <input type="text" id="DOB" name="birthday" placeholder="Your birthday..">
+
+      <label for="yr">Year______________________________________________</label>
+      <input type="text" id="year" name="year" placeholder="year..">
+      
+      <label for="status">Status______________________________________</label>
+      <select name="status">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+  
+  
   <table>
     <tr>
       <th>SUBJECT</th>  

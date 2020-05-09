@@ -21,6 +21,8 @@ class CreateStudentDelsTable extends Migration
             $table->string('email')->uniqid();
             $table->Integer('telephone');
             $table->date('DOB');
+            $table->string('year');
+            $table->string('status');
             $table->string('subject1');
             $table->string('teacher1');
             $table->string('subject2');
