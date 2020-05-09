@@ -64,14 +64,15 @@ Route::get('/StudentManagement_index', function () {
 
 });
 
-Route::get('/register', function () {
+Route::get('/studentregister', function () {
     return view('StudentManagemt.studentRegister_R');
 });
-
 
 Route::get('/Studentprofile', function () {
     return view('StudentManagemt.StudentProfile');
 });
+
+Route::get('/studentPrint','RStudentController@DelretriveTablePrint');
 
 Route::get('/studentUpdate','RStudentController@testupdate');
 
@@ -82,6 +83,16 @@ Route::post('/savetask','RStudentController@store');
 Route::post('/StudentManagement_index','RStudentController@test');
 
 Route::post('/updatetask','RStudentController@taskupdate');
+
+Route::get('/savetask/{id}','RStudentController@viewprofile');
+
+Route::get('/DelProfiles/{id}','RStudentController@Delviewprofile');
+
+Route::get('indexxx','RStudentController@recoverData');
+
+Route::get('deletedStudentsDetails', 'RStudentController@searchDetails');
+//Route::get('/deletedStudentsDetails/{id}','RStudentController@searchDetails');
+
  
 
  //Chamathka routes
@@ -140,7 +151,7 @@ Route::get('/logout',  function () {
 });
 
 //thisura routes
-Route::get('/home', function () {
+Route::get('/PaymentExpenses', function () {
     return view('PaymentExpenses.home');
 });
 

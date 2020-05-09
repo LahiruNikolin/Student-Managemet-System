@@ -51,7 +51,7 @@ $userType=auth::user()->role;
 					</li>
 				 
 					<li><span  class="ic"><i class="fab fa-sellsy"></i></span>
-						<span> <a href="#"> Students Management</a></span>
+						<span> <a href="{{url('StudentManagement_index')}}"> Students Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					 
@@ -74,7 +74,7 @@ $userType=auth::user()->role;
 						<div class="lis-active"></div>
 					</li>
 					<li><span class="ic"><i class="fas fa-file-invoice-dollar"></i></span>
-						<span> <a href="{{asset('home')}}"> Expenses Management</a></span>
+						<span> <a href="{{asset('PaymentExpenses')}}"> Expenses Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					@endif
