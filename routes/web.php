@@ -151,7 +151,7 @@ Route::get('/logout',  function () {
 });
 
 //thisura routes
-Route::get('/home', function () {
+Route::get('/PaymentExpenses', function () {
     return view('PaymentExpenses.home');
 });
 
@@ -183,6 +183,25 @@ Route::get('/expensesView', function () {
 Route::get('/changeSalarypercentage', function () {
     return view('PaymentExpenses.changeSalarypercentage');
 });
+
+//added routes
+Route::get('ExpensesReport', function () {
+    return view('PaymentExpenses.ExpensesReport');
+});
+
+Route::get('paymentreport', function () {
+    return view('PaymentExpenses.paymentReport');
+});
+
+Route::post('exRep', function () {
+    return view('PaymentExpenses.exReport');
+});
+
+
+
+Route::get('exReport','mainController@expenseReport');
+
+Route::get('paymentReport','mainController@paymentReport');
 
 Route::post('addExpenses','mainController@addExpenses');
 

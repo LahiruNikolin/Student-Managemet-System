@@ -66,9 +66,9 @@
                 </div>
                 <div class="list-wrap">
                   <li class="list-group-item" id="items-access">
-                    <div class="msg">Generate Payment Reports</div>
+                    <div class="msg">Generate Payment Report</div>
                     <div class="button-cls-child-second">
-                      <button type="button" onclick="window.location.href = '#';" class="btn btn-primary" id="linked">
+                      <button type="button" onclick="window.location.href = 'paymentreport';" class="btn btn-primary" id="linked">
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                       </button>
                     </div>

@@ -56,7 +56,7 @@
         </tbody>
       </table>
       <div class="button-class-nxt">
-        <button onclick="location.href='{{url('home')}}';" type="button" 
+        <button onclick="location.href='{{url('PaymentExpenses')}}';" type="button" 
          class="btn btn-dark " id="btn3"  >Back</button>
       </div>
     </div>

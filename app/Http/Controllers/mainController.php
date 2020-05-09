@@ -254,6 +254,24 @@ class mainController extends Controller
   
     }
 
+    public function expenseReport(Request $request){
+      $from = $request->input('from');
+      $to = $request->input('to');
+
+      return view('PaymentExpenses.exReport')
+        ->with('from', $from)
+        ->with('to', $to);
+    }
+
+    public function paymentReport(Request $request){
+      $from = $request->input('from');
+      $to = $request->input('to');
+
+      return view('PaymentExpenses.paymentRep')
+        ->with('from', $from)
+        ->with('to', $to);
+    }
+
 
 
 }
