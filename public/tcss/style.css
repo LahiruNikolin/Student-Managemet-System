@@ -1,0 +1,244 @@
+p {
+  /* font-family: georgia; */
+  font-size: 18px;
+  color: #424242;
+}
+h2 {
+  font-size: 35px;
+  color: #6b6b6b;
+}
+#btn1 {
+  margin-top: 12px;
+  /* margin-right: 12px; */
+}
+
+#btn2 {
+  margin-top: 12px;
+}
+#btn3 {
+  margin-top: 12px;
+}
+#btn3 {
+  color: #e6f7ff;
+  background-color: black;
+  cursor: pointer;
+}
+btn3:hover{
+  background-color:#ff6565;
+}
+.form-padding {
+  padding: 35px 0px;
+}
+.pay-details,
+.db-data {
+  display: inline-block;
+  padding-bottom: 20px;
+}
+div#content {
+  /* width: 25rem; */
+  font-size: 25px;
+  padding-top: 15px;
+}
+.frontend,
+.backend {
+  padding: 5px;
+}
+.details-wrap {
+  padding: 20px 0px;
+}
+.heading-class {
+  padding: 1px 25px;
+  width: auto;
+  height: 5rem;
+  background-color: #1aa3ff;
+  text-align: center;
+  color: white;
+}
+.heading-class h2 {
+  margin-top: 11px;
+}
+.btn-main {
+  display: flex;
+  flex-direction: row-reverse;
+  float: left;
+  padding-bottom: 25px;
+}
+.button-class {
+  display: inline-block;
+  width: auto;
+  padding-left: 25px;
+}
+
+.button-class-nxt {
+  display: inline-block;
+  width: auto;
+  padding-left: 4px;
+  padding-right: 30px;
+}
+.white-space-add {
+  width: auto;
+  height: 5rem;
+}
+.white-space-chg {
+  width: auto;
+  height:4.8rem;
+}
+
+ 
+td.table-btn {
+  text-align: center;
+}
+.new-wrap {
+  width: auto;
+  padding: 35px 0px;
+  margin: 0% 11%;
+  border-radius: 15px;
+  background-color: #f0f4f5;
+}
+.list-wrap {
+  width: auto;
+  height: 5rem;
+}
+
+/* expenceManagemant.html */
+.white-space {
+  /* padding: 10px; */
+  padding: 20px;
+}
+.msg {
+  padding-right: 20px;
+  font-size: 16px;
+}
+.button-padding {
+  width: 20rem;
+}
+.button-nxt-padding {
+  width: 13.9rem;
+}
+ 
+
+div#lst li{
+ 
+  display: flex;
+  justify-content: space-between;
+}
+button#linked {
+  float: right;
+}
+.button-cls {
+  width: 14.6rem;
+}
+.button-cls-child-first {
+  width: 17.1rem;
+}
+
+.button-cls-child-second {
+  width: 13.5rem;
+}
+#contain-child {
+  padding: 0%;
+  border-radius: 20px;
+  background-color: #f0f4f5;
+}
+/* expenses management.html */
+h2.expense-manage {
+  color: white;
+}
+.list-wrap .button-padding {
+  width: auto;
+  padding-left: 22px;
+}
+.list-wrap .button-second-padding {
+  padding-left: 59px;
+  width: auto;
+}
+.list-wrapper {
+  padding-top: 7px;
+  
+
+}
+#col-id {
+  padding: 0px 45px;
+}
+
+* {
+  /* font-family: georgia; */
+  box-sizing: border-box;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+#contain {
+  border-radius: 20px;
+  background-color: #f0f4f5;
+  padding: 45px;
+}
+.wrap-up {
+  width: auto;
+  transform: translate(0%, 26%);
+}
+#Amount {
+  /* font-family: georgia; */
+  font-size: 15px;
+  color: #424242;
+}
+#Purpose {
+  /* font-family: georgia; */
+  font-size: 15px;
+  color: #424242;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.addW{
+  width: auto;
+  height: 4rem;
+}
+
+.table-striped #table-body tr:nth-of-type(odd) {
+  background-color: #e6f7ff;
+}
+#table-body tr td {
+  border-style: unset;
+}
+#table-body tr {
+  width: auto;
+  height: 2.3rem;
+}
+thead {
+  font-size: 17.5px;
+}
+/* responsive */
+@media screen and (max-width: 600px) {
+  .column,
+  input[type="submit"] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+@media (max-width: 991px) {
+  .card {
+    width: 24rem;
+  }
+  #col-id {
+    padding: 0px 0px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .expense-manage {
+    /* color: white; */
+    margin-right: -5%;
+  }
+}

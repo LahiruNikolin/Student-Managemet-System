@@ -63,7 +63,7 @@
     </div>
     <div  >
         <form class="form-inline float-right" method="POST" 
-        action="{{action('attendencePageController@recordFees') }}">
+        action="{{action('attendencePageController@recordFees') }}" >
         {{ csrf_field() }}
             <div class="form-group">
 
@@ -80,7 +80,7 @@
             <div class="classID-container" style="display:none;">
 
             </div>
-            <button type="submit" class="btn btn-primary ml-1">Proceed</button>
+            <button type="submit" class="btn btn-primary ml-1"  >Proceed</button>
         </form>
     </div>
 
@@ -88,6 +88,7 @@
 
 <!--adding classids to form -->
 <script>
+         
  
     function updateForm(){
        let div =document.querySelector('.classID-container');

@@ -220,7 +220,7 @@
                     
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Class Fee</th>
+                    <th>Year</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -230,7 +230,7 @@
                       <tr>
                         <th scope="row">{{$newStudent->fname}}</th>
                         <td>{{$newStudent->lname}}</td>
-                        <td>{{$newStudent->fee}}</td>
+                        <td>{{$newStudent->year}}</td>
                       <td><a href="./issueCard/{{$newStudent->id}}"class="btn btn-success">Issue</a></td>
                       </tr>
                       @endforeach

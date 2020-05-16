@@ -16,7 +16,7 @@ input[type=text], select {
 
 input[type=submit] {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #454d55;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -26,30 +26,27 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #212529;
 }
 
 .form_1 {
-  width: 30%;
+  width: 40%;
   border-radius: 5px;
-  background-color: #7a7597;
+  background-color: #7c848a;
   padding: 20px;
 }
-h2{
-  font-family: "Comic Sans MS", cursive, sans-serif;
-}
+
 .page_1{
   width: 100%;
   border-radius: 5px;
   padding: 20px;
-  background-image:url('/images/book1.jpg');
+  
 }
 .page_2{
   margin: auto;
   border-radius: 5px;
-  background-color: #c8c3cc;
   padding: 20px;
-  background-image: url('public/student2.jpg');
+  
 }
 
 table {
@@ -87,24 +84,30 @@ tr:nth-child(even) {
     <form action="updatetask" method="post">
     {{ csrf_field() }}
 
-      <label for="fname">First Name_____________________________________________</label>
-      <input type="text" id="fname" name="firstname" value="{{$stuUpdate['firstname']}}">
+      <label for="fname">First Name________________________________________</label>
+      <input type="text" id="fname" name="firstname" value="{{$stuUpdate['fname']}}">
       <input type="hidden" name="id" value="{{$stuUpdate['id']}}">
 
-      <label for="lname">Last Name_______________________________________________</label>
-      <input type="text" id="lname" name="lastname" value="{{$stuUpdate['lastname']}}">
+      <label for="lname">Last Name_________________________________________</label>
+      <input type="text" id="lname" name="lastname" value="{{$stuUpdate['lname']}}">
 
-      <label for="add">Address________________________________________________</label>
+      <label for="add">Address___________________________________________</label>
       <input type="text" id="add" name="address" value="{{$stuUpdate['address']}}">
 
-      <label for="ema">Email_________________________________________________</label>
+      <label for="ema">Email_______________________________________________</label>
       <input type="text" id="ema" name="email" value="{{$stuUpdate['email']}}">
 
-      <label for="tp">Tel. Number____________________________________________</label>
-      <input type="text" id="tp" name="telephone" value="{{$stuUpdate['telephone']}}">
+      <label for="tp">Tel. Number______________________________________</label>
+      <input type="text" id="tp" name="telephone" value="{{$stuUpdate['mobile']}}">
 
-      <label for="tp">Date of Birth____________________________________________</label>
+      <label for="tp">Date of Birth______________________________________</label>
       <input type="text" id="DOB" name="birthday" value="{{$stuUpdate['DOB']}}">
+
+      <label for="year">Year___________________________________________</label>
+      <input type="text" id="year" name="year" value="{{$stuUpdate['year']}}">
+
+      <label for="status">Status___________________________________________</label>
+      <input type="text" id="status" name="status" value="{{$stuUpdate['status']}}">
       
       <table>
     <tr>

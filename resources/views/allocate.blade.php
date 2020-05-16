@@ -181,7 +181,7 @@ foreach($sub as $subject_new) {
           $teachers = DB::table('teacher')->where('subject',$subject_name)->where('status','1')->get();
           $count_number = 0;
         ?>
-        <a class="btn btn-primary" role="button" href="subject">Subject Management</a>
+        <a class="btn btn-dark" role="button" href="subject">Back</a>
           @foreach($teachers as $item)
           <?php $count_number ++ ;?>
           <div class="modal fade" id="edit-allocated-teacher{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

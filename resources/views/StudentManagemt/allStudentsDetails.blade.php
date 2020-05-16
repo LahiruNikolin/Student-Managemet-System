@@ -11,13 +11,13 @@
     }
 
     td, {
-    border: 1px solid #dddddd;
+    border: 1px solid ;
     text-align: left;
     padding: 8px;
     }
 
     tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #b2b8be;
     }
 
     .bar {
@@ -26,15 +26,8 @@
   height: 50px;
   padding: 8px 10px;
   overflow: hidden;
-  background-color: rgb(47, 128, 83);
+  background-color: #454d55;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-h3{
-
-font-family : 	'Comic Sans MS';
-
-
 }
 
   </style>
@@ -65,14 +58,8 @@ font-family : 	'Comic Sans MS';
             <th>email</th>
             <th>Tel. Number</th>
             <th>Date of Birth</th>
-            <th>Subject</th>
-            <th>Teacher</th>
-            <th>Subject</th>
-            <th>Teacher</th>
-            <th>Subject</th>
-            <th>Teacher</th>
-            <th>Subject</th>
-            <th>Teacher</th>
+            <th>Profile</th>
+            
 
             </tr>
  
@@ -80,20 +67,14 @@ font-family : 	'Comic Sans MS';
  
     	    <tr>
             
-            <td>{{$studentdata->firstname}} {{$studentdata->lastname}}</td>
+            <td>{{$studentdata->fname}} {{$studentdata->lname}}</td>
             <td>{{$studentdata->address}}</td>
             <td>{{$studentdata->email}}</td>
-            <td>{{$studentdata->telephone}}</td>
+            <td>{{$studentdata->mobile}}</td>
             <td>{{$studentdata->DOB}}</td>
-    		    <td>{{$studentdata->subject1}}</td>
-    		    <td>{{$studentdata->teacher1}}</td>
-    		    <td>{{$studentdata->subject2}}</td>
-    		    <td>{{$studentdata->teacher2}}</td>    
-    	      <td>{{$studentdata->subject3}}</td>
-    		    <td>{{$studentdata->teacher3}}</td>
-    		    <td>{{$studentdata->subject4}}</td>
-    		    <td>{{$studentdata->teacher4}}</td>
-            
+    		    
+            <td><a href="./savetask/{{$studentdata->id}}"class="btn btn-success">View</a></td>
+
             </tr>
 
             @endforeach

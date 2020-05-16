@@ -181,7 +181,7 @@ $subid=$_GET['subid'];
             }
         ?>
 
-          <a class="btn btn-primary" role="button" href="subject">Back</a>
+          <a class="btn btn-dark" role="button" href="subject">Back</a>
           <!-- Modal -->
           @foreach($teachers as $item)
           <div class="modal fade" id="allocate-teacher{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

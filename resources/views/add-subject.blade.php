@@ -87,7 +87,7 @@
     <div class="sub-main">
       <div class="container">
         @yield('content')
-        <a class="btn btn-primary" role="button" href="subject">Subject Management</a>
+        <a class="btn btn-dark" role="button" href="subject">Back</a>
         <div class="border rounded border-white shadow" id="Names">
             <div class="container">
                 <form method="post" action="addSubject">
