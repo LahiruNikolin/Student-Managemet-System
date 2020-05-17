@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\student;
 use App\StudentDel;
+use App\User;
+
 use Illuminate\Support\Facades\Session;
  
 
@@ -25,7 +27,9 @@ Route::get('/viewAttendence', 'attendencePageController@writeJSON');
 
 Route::get('/issueCard/{id}','attendencePageController@issueCard');
 
+
  
+
 
 Route::get('/test',function () {
     return view('Attendence.test');
@@ -47,6 +51,15 @@ Route::post('/scan', 'attendencePageController@scanCard');
 Route::post('/send', 'attendencePageController@movePic');
 
 Route::post('/record', 'attendencePageController@recordFees');
+//admins
+Route::get('/adminArea', function () {
+    $admins=User::all();
+     
+    return view('Attendence.adminArea', ['admins' => $admins,'status' => 0]);
+});
+
+Route::post('/adminDelete', 'attendencePageController@deleteAdmin');
+Route::post('/adminUpdate', 'attendencePageController@updatePassword');
 
 //maill
 Route::get('/sendbasicemail','MailController@basic_email');
@@ -68,9 +81,9 @@ Route::get('/studentregister', function () {
     return view('StudentManagemt.studentRegister_R');
 });
 
-Route::get('/Studentprofile', function () {
-    return view('StudentManagemt.StudentProfile');
-});
+Route::post('/savetask','RStudentController@retriveProfile');
+
+
 
 Route::get('/studentPrint','RStudentController@DelretriveTablePrint');
 
@@ -78,7 +91,7 @@ Route::get('/studentUpdate','RStudentController@testupdate');
 
 Route::get('/deletedStudentsDetails','RStudentController@DelretriveTable');
 
-Route::post('/savetask','RStudentController@store');
+Route::post('/studentregister2','RStudentController@store');
 
 Route::post('/StudentManagement_index','RStudentController@test');
 
@@ -91,7 +104,8 @@ Route::get('/DelProfiles/{id}','RStudentController@Delviewprofile');
 Route::get('indexxx','RStudentController@recoverData');
 
 Route::get('deletedStudentsDetails', 'RStudentController@searchDetails');
-//Route::get('/deletedStudentsDetails/{id}','RStudentController@searchDetails');
+
+Route::get('allStudentsDetails', 'RStudentController@searchDetailsAllStudents');
 
  
 

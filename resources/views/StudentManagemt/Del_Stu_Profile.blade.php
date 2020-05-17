@@ -170,35 +170,29 @@ tr:nth-child(even) {
 </br>
 
   <div id="profile"><CENTER>
-  	<table border="1">
+	@foreach($profileArray1 as $studentdata1)
+  	<table>
     	<tr>
       		<th>SUBJECT</th>
       		<th>TEACHER</th>
     	</tr>
 
-    	<tr>
-    		<td>{{$studentdata['subject1']}}</td>
-    		<td>{{$studentdata['teacher1']}}</td>
+      </tr>
+      <tr>
+        <td>
+        <input type="text" id="status" name="subject" value="{{$studentdata1['subName']}}">
     
-    	</tr>
+        </td>
         
-    	<tr>
-    		<td>{{$studentdata['subject2']}}</td>
-    		<td>{{$studentdata['teacher2']}}</td>
-    	</tr>
+        <td>
+        <input type="text" id="status" name="teacher" value="{{$studentdata1['Tname']}}">
+      
+        </td>
+
+  </tr>
+    </table></CENTER>
     
-    	<tr>
-    		<td>{{$studentdata['subject3']}}</td>
-    		<td>{{$studentdata['teacher3']}}</td>
-    	</tr>
-        
-    	<tr>
-    		<td>{{$studentdata['subject4']}}</td>
-    		<td>{{$studentdata['teacher4']}}</td>
-    	</tr>
-
-	  </table></CENTER>
-
+    @endforeach
 	  @endforeach
 
 	  

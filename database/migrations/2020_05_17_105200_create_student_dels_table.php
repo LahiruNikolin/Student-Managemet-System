@@ -14,7 +14,7 @@ class CreateStudentDelsTable extends Migration
     public function up()
     {
         Schema::create('student_dels', function (Blueprint $table) {
-            $table->increments('id');
+            $table->Integer('id');
             $table->string('firstname');
             $table->string('lastname');
             $table->string('address');
@@ -23,14 +23,7 @@ class CreateStudentDelsTable extends Migration
             $table->date('DOB');
             $table->string('year');
             $table->string('status');
-            $table->string('subject1');
-            $table->string('teacher1');
-            $table->string('subject2');
-            $table->string('teacher2');
-            $table->string('subject3');
-            $table->string('teacher3');
-            $table->string('subject4');
-            $table->string('teacher4');
+
             $table->timestamps();
         });
     }

@@ -7,6 +7,12 @@ $id=$_GET['id'];
 $emp = DB::table('subject')->where('id',$id)->get();
 
 ?>
+
+<?php
+
+$userType=auth::user()->role;
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

@@ -41,8 +41,14 @@
 
 <div class="bar">
 
-<input type="text" id="search" name="search" placeholder="Search here..">
-<button type="submit"><i class="fa fa-search"></i></button>
+        <form action="" method="GET">
+
+            <input type="text" id="search" name="s" placeholder="Search here..">
+            <button type="submit"><i class="fa fa-search"></i></button>
+
+        <a href="./AllstudentPrint" class="btn btn-success">print document</a>
+
+</form>
 
 </div> </br></br>
   

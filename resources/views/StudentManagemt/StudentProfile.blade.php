@@ -163,7 +163,7 @@ tr:nth-child(even) {
 
 	<img id="img2" src="{{asset('imgs/images/stu.png')}}">
 	
-	@foreach($rowsArray as $studentdata)
+	@foreach($profileArray as $studentdata)
 
 <div class="serbar" style="  height:4rem;">
   <div class="cust-dropdown">
@@ -180,9 +180,8 @@ tr:nth-child(even) {
 
 		</form>
 
-		<form id='delStForm' action="{{action('RStudentController@test') }}" method="POST" >
-
-			{{ csrf_field() }}
+		<form id='delStForm' action="{{action('RStudentController@test') }}" method="post" >
+    {{ csrf_field() }}
 
 			<input type="hidden" name="st_id"  value="{{$studentdata['id']}}"></input>
 			<button class="btn" onclick="myFunction()" >Delete Profile</button>	
@@ -227,35 +226,32 @@ tr:nth-child(even) {
 </br>
 
   <div id="profile"><CENTER>
+  @foreach($profileArray1 as $studentdata1)
+  <input type="hidden" name="Cid" value="{{$studentdata1['Cid']}}">
   	<table border="1">
     	<tr>
       		<th>SUBJECT</th>
       		<th>TEACHER</th>
     	</tr>
-
-    	<tr>
-    		<td>{{$studentdata['subject1']}}</td>
-    		<td>{{$studentdata['teacher1']}}</td>
-    
-    	</tr>
+      <tr>
+      @for($i=0; $i < count($studentdata1); $i++)
+        <td>
+          
+        {{$studentdata1['subName']}}
+         
+        </td>
         
-    	<tr>
-    		<td>{{$studentdata['subject2']}}</td>
-    		<td>{{$studentdata['teacher2']}}</td>
-    	</tr>
-    
-    	<tr>
-    		<td>{{$studentdata['subject3']}}</td>
-    		<td>{{$studentdata['teacher3']}}</td>
-    	</tr>
-        
-    	<tr>
-    		<td>{{$studentdata['subject4']}}</td>
-    		<td>{{$studentdata['teacher4']}}</td>
-    	</tr>
+        <td>
+          
+        {{$studentdata1['Tname']}}
+          
+        </td>
+        </tr>
+        @endfor
 
+    	
 	  </table></CENTER>
-
+    @endforeach
 	  @endforeach
 
 	  

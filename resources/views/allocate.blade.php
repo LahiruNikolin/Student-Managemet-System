@@ -1,5 +1,4 @@
- 
-
+  
 <?php
 $id=$_GET['id'];
 $type=$_GET['type'];
@@ -9,6 +8,8 @@ $sub = DB::table('subject')->where('id',$id)->get();
 foreach($sub as $subject_new) {
     $subject_name = $subject_new->subjectName;
 }
+$userType=auth::user()->role;
+
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
