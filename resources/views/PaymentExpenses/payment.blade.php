@@ -14,7 +14,7 @@
     </div>
     <form action="addPayment" method="post" class="form-group">
       {{ csrf_field() }}
-    <div class="wrap-up">
+   
       <div class="container">
         <div class="details-wrap" id="contain">
           <div class="row">
@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="addW"></div>
-    </div>
+    
     </form>
 
     <script src="./assets/js/jquery-3.2.1.min.js"></script>
