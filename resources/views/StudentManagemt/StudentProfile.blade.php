@@ -223,18 +223,19 @@ tr:nth-child(even) {
 
             </div>
 
+            @endforeach
 </br>
 
   <div id="profile"><CENTER>
-  @foreach($profileArray1 as $studentdata1)
-  <input type="hidden" name="Cid" value="{{$studentdata1['Cid']}}">
+ 
   	<table border="1">
     	<tr>
       		<th>SUBJECT</th>
       		<th>TEACHER</th>
-    	</tr>
+      </tr>
+      @foreach($profileArray1 as $studentdata1)
       <tr>
-      @for($i=0; $i < count($studentdata1); $i++)
+      
         <td>
           
         {{$studentdata1['subName']}}
@@ -247,12 +248,10 @@ tr:nth-child(even) {
           
         </td>
         </tr>
-        @endfor
-
-    	
+        @endforeach
+      	
 	  </table></CENTER>
-    @endforeach
-	  @endforeach
+  
 
 	  
 	</div>

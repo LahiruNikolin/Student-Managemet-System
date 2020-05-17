@@ -8,7 +8,7 @@
     <div   style="  margin:auto;">
         <div class="text-muted font-italic pt-3 " style="text-align:right; 
         font-size:1.3rem;  padding-right:5.3rem;">
-            <p >{{$year." ". $month}} </p>
+            <p id="stamp">{{$year." ". $month}} </p>
         </div>
 
         <div style="position:absolute; top:0.4rem; right:0;">
@@ -28,12 +28,14 @@
 </div>
 
 <script>
-
+let stamp=document.querySelector('#stamp').textContent;
+ 
 function printCanvas(){
     
  
             printJS({printable: document.querySelector("#Chart1").toDataURL(), 
-            type: 'image', 
+            type: 'image',
+            header:stamp, 
             imageStyle: 'width:100%'});
         }
        

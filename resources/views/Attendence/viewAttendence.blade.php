@@ -94,12 +94,14 @@ function printCanvas(){
 
 if(document.querySelector('#Chart1').style.display=="block"){
             printJS({printable: document.querySelector("#Chart1").toDataURL(), 
-        type: 'image', 
+        type: 'image',
+        header: "<h3>Recent Months Attendance</h3>" ,
         imageStyle: 'width:100%'});
     }
     else{
                 printJS({printable: document.querySelector("#Chart2").toDataURL(), 
         type: 'image', 
+        header: '<h3>Recent Days Attendance</h3>' ,
         imageStyle: 'width:100%'});
     }
   

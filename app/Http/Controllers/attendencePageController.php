@@ -121,11 +121,7 @@ class attendencePageController extends Controller
 
      
   return $mainArray;
-
-//class_student
-
-
-   //   return teacher::all();
+ 
     }
 
 
@@ -164,9 +160,7 @@ class attendencePageController extends Controller
 
          }
 
-      //echo $mutable->isoFormat('dddd'); 
-      //echo $fee;
-      //print_r($stu_data);
+      
         return view('Attendence.issueCard')->with($stu_data);
     }
     public function scanCard(Request $request){
@@ -242,13 +236,7 @@ class attendencePageController extends Controller
 
         }
         
-        
-        
-        
-       // return $request->stu_id;
-       //
-
-
+     
     }
 
     public function recordFees(Request $request){
@@ -322,15 +310,10 @@ class attendencePageController extends Controller
 
       $classArray['fee']=$cl->fee;
 
-     // return $classFees->month;
-
-       
-
+ 
       array_push($classesArray, $classArray);
 
-      //return $classFees;
-      
-      //return DB::select("select * from class_fees where sid=".$id." order by paid_at desc");
+     
       
      }
 
@@ -376,13 +359,7 @@ class attendencePageController extends Controller
     }
 
     public function writeJSON(){
-
-     // return"FM";
-
-    //  $students=Student::all();
-
-      //Storage::disk('public')->put('json/st.json', json_encode($students));
-
+ 
       
       $lastSixMonths=array();
       $lastSixDays=array();
@@ -390,12 +367,7 @@ class attendencePageController extends Controller
       $lastYears=array();
 
       $date =  Carbon::now();
-
-      //return $date->dayName->subs(1,'day');
-    // return $date->subDays(3)->dayName;
-    // return $date->subDays(4)->isoFormat('GGGG-MM-DD');
-
-
+ 
      array_push($lastSixDays,$date->isoFormat('GGGG-MM-DD'));
      array_push($lastSixDaysName,$date->dayName);
 
@@ -409,12 +381,7 @@ class attendencePageController extends Controller
         array_push($lastSixDaysName,$dName);
   
       }
-
-    //  dd( $lastSixDays);
-     // dd( $lastSixDaysName);
-      
-    
-
+ 
       $thisMonth =  Carbon::now()->startOfMonth();
       $months=explode(" ",$thisMonth);
 
@@ -445,22 +412,7 @@ class attendencePageController extends Controller
      
     return view('Attendence.viewAttendence',['years' => $lastYears] );
 
-   // print_r($lastSixMonths);
-     // echo $date->format('F'); // July
-     // echo $date->subMonth()->format('F');
-
-       
   
-      //echo( $ok);
-      
-
-   // $json = Storage::disk('public')->get('json/st.json');
-   // $json = json_decode($json, true);
-
-   // dd($json);
-
-    
-      
     }
 
     public function lastMonthsAttend($months){
@@ -470,7 +422,7 @@ class attendencePageController extends Controller
 
       $lastSixAttend=array();
 
-     //dd(Carbon::now()->subDays(85)->format('F'));
+  
 
       for ($x = 0; $x <= 5; $x++) {
         
@@ -498,17 +450,10 @@ class attendencePageController extends Controller
   
   
     }
-
-     
-     
-
+ 
      // $results=DB::table('students')->get();
      array_push($mainArray,$lastSixAttend);
-     //array_push($mainArray,$dRay);
-
-   // dd($mainArray);
-     
-    //foreach()
+    
 
     Storage::disk('public')->put('json/attendence.json', json_encode($mainArray));
 
@@ -540,17 +485,12 @@ class attendencePageController extends Controller
 
 
     public function redirectAfterReg($stu){
-
-      
+  
       $students=Student::all();
-       
-         
-
+        
       $todayAttend= $this->attendenceDataReturning();
 
       $todayClasses=$this->todayClasses();
-
-     
 
       return view('Attendence.attendence', [ 'todayClasses'=> $todayClasses,'newStudents' => $students,'todayStudents'=> $todayAttend,'status'=>$stu]);
     }
@@ -584,9 +524,6 @@ class attendencePageController extends Controller
         array_push($datesInMonth,$current_date->isoFormat('GGGG-MM-DD'));
 
         $i++;
-
-       
-
        }
 
        $this->getSpecificAttendencce($datesInMonth);

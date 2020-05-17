@@ -17,7 +17,7 @@ class RStudentController extends Controller
 
         $StudentReg = new student; 
 
-        $rowsArray=array();
+        $studentArray=array();
 
  
         $this->validate($request,[
@@ -45,30 +45,39 @@ class RStudentController extends Controller
 
  
         $classArray=array();
-        $classArray2=array();
+      // $classArray2=array();
 
-        $alldata= student::where('email', '=', $email)->get();
+        $alldata= student::where('email', '=',$email)->get();
 
         foreach ($alldata as $data){
+             
             
-            $dataArray = array();
-        
-            $data=student::where(['email'=> $email])->orderBy('created_at', 'desc')->first();
-            $dataArray['id']= $data->id;
-            $dataArray['email']=$data->email;
+            //$data=student::where(['email'=> $email])->orderBy('created_at', 'desc')->first();
             
-
-            array_push($rowsArray, $dataArray);
-           
+            $studentArray['id']= $data->id;
+            $studentArray['email']=$data->email;
+            $studentArray['year']=$data->year;
            // print_r($data);
-        break;
+        
 
         }
-  
-    $class=tution::where('year', '=', $year)->get();
+      
+        
+    $classes=tution::where('year', '=', $year)->get();
+     
+        foreach ($classes as $class){
+            $subArray=array();
+            $subname=subject::where('id', '=', $class->sub_id)->first()->subjectName;
+            $tFname=teacher::where('id', '=', $class->tid)->first()->fname;
+            $tLname=teacher::where('id', '=', $class->tid)->first()->lname;
+            $tName= $tFname.' '.$tLname;
+            $classId=$class['id'];
 
-        foreach ($class as $classdata){
+            $subArray['teacherName']= $tName;
+            $subArray['subName']= $subname;
+            $subArray['classId']=$classId;
             
+           /* 
             $classdataArray = array();
 
             $classdata=tution::where(['year'=> $year])->first();
@@ -81,37 +90,55 @@ class RStudentController extends Controller
  
             $classdataArray['Tname']=$classdata->fname." ".$classdata->lname;
 
-            array_push($classArray, $classdataArray);
+            
  
         break;
-    }
-
-        foreach ($class as $classdata){
-            
-            $classdataArray2 = array();
-        
-            $classdata=tution::where(['year'=> $year])->get()->first();
-            
-            $classdataArray2['id']= $classdata->id;
-            $subID= $classdata->sub_id;
-
-            $classdata=subject::where( ['id' => $subID])->first();
-            $classdataArray2['subName']=$classdata->subjectName;
-
-            array_push($classArray2, $classdataArray2);
-            
-        break;
-
+        */
+            array_push($classArray, $subArray);
         }
 
-        return view('StudentManagemt.StudentSubject_register',['classArray'=>$classArray,'classArray2'=>$classArray2,'rowsArray'=>$rowsArray]);
+       // return $classArray;
+
+      
+
+        return view('StudentManagemt.StudentSubject_register',['classArray'=>$classArray,
+        'studentArray'=>$studentArray]);
 
     }
+     
 
     public function retriveProfile(Request $request){
-
-        $email=($request->email);
+        $classIds=array();
+        $email=$request->email;
+        $size=$request->size;
+        $sid=$request->sid;
+        $data= $request->all();
         
+      
+        //$cl= $data['class1'];
+
+        for ($x = 1; $x <= $size; $x++) {
+        
+             $cid=0;
+             if(isset($data['class'.$x])){
+                
+                $cid=$data['class'.$x];
+                //array_push($classIds, $cid) ;
+                $classStu = new class_student;
+                
+                $classStu->sid=$sid;
+                $classStu->cid=$cid;
+                $classStu->save();
+
+             }
+              
+            
+      
+          }
+
+        //return $classIds;
+
+
         $profileArray = array();        
         $alldata= student::where('email', '=', $email)->get();
         
@@ -135,10 +162,11 @@ class RStudentController extends Controller
         break;
 
         }
-
+        $profileArray1 = array();
+/*
         $classStu = new class_student;
 
-        $profileArray1 = array();
+       
 
         $stuID=($request->Sid);
         $classID=($request->Cid);
@@ -146,35 +174,36 @@ class RStudentController extends Controller
         $classStu->sid=$stuID;
         $classStu->cid=$classID;
         $classStu->save();
-           
+     */      
         
-        $classStudents=class_student::where('cid', '=', $classID)->get();
+        $classStudents=class_student::where('sid', '=', $sid)->get();
 
         
         foreach($classStudents as $classStudent){
 
-        $classStudent=class_student::where(['cid'=> $classID])->first();    
-
-        $dataArray1 = array();
+       // $classStudent=class_student::where(['cid'=> $classID])->first();    
+ 
+            $dataArray1 = array();
             
             $studID=$classStudent->sid;
             $ClassID=$classStudent->cid;
             $dataArray1['Cid']=$ClassID;
 
-            $classStudent=tution::where( ['id' => $ClassID])->first();
-            $subID= $classStudent->sub_id;
-            $TID= $classStudent->tid;
+           
 
-            $classdata=subject::where( ['id' => $subID])->first();
-            $dataArray1['subName']=$classdata->subjectName;
-
-            $classdata1=teacher::where( ['id' => $TID])->first();
-            $dataArray1['Tname']=$classdata1->fname." ".$classdata1->lname;
+            $class=tution::where( ['id' => $ClassID])->first();
+            $subID= $class->sub_id;
+            $TID= $class->tid;
+            
+            $subject=subject::where( ['id' => $subID])->first();
+            $dataArray1['subName']=$subject->subjectName;
+            
+            $teacher=teacher::where( ['id' => $TID])->first();
+            $dataArray1['Tname']=$teacher->fname." ".$teacher->lname;
             
             array_push($profileArray1, $dataArray1);
-        break;
+        
         }
-
 
         return view('StudentManagemt.StudentProfile',['profileArray'=>$profileArray,'profileArray1'=>$profileArray1]);
 
@@ -206,43 +235,28 @@ class RStudentController extends Controller
      }
 
 
-public function searchDetails(Request $request){
+     public function searchDetails(Request $request){
 
-    $s=$request->input('s');
+        $s=$request->input('s');
+    
+        $DeleteData = StudentDel::where('firstname', 'like', '%' . $s . '%')->orWhere('lastname', 'like','%' . $s . '%')->orWhere('address', 'like','%' . $s . '%')->orWhere('email', 'like','%' . $s . '%')->orWhere('DOB', 'like','%' . $s . '%')->orWhere('telephone', 'like','%' . $s . '%') ->get();
+    
+       return view('StudentManagemt.deleted_students', compact('DeleteData'));
+    
+    
+    }
+    public function searchDetailsAllStudents(Request $request){
 
-    $DeleteData = StudentDel::where([
-        
-        ['fname', 'like', '%' . $s . '%'],
-        ['lname', 'like','%' . $s . '%'],
-        ['address', 'like','%' . $s . '%'],
-        ['email', 'like','%' . $s . '%'],
-        ['DOB', 'like','%' . $s . '%'],
-        ['telephone', 'like','%' . $s . '%'],
-    ])->get();
-
-   return view('StudentManagemt.deleted_students', compact('DeleteData'));
-
-
-}
-public function searchDetailsAllStudents(Request $request){
-
-    $s=$request->input('s');
-
-    $StudentsData = student::where([
-        
-        ['fname', 'like', '%' . $s . '%'],
-        //['lname', 'like','%' . $s . '%'],
-        //['address', 'like','%' . $s . '%'],
-        //['email', 'like','%' . $s . '%'],
-        //['DOB', 'like','%' . $s . '%'],
-        //['mobile', 'like','%' . $s . '%'],
-    ])->get();
-
-   return view('StudentManagemt.allStudentsDetails', compact('StudentsData',$StudentsData));
-
-
-}
-
+        $s=$request->input('s');
+    
+        $StudentsData = student::where('fname', 'like', '%' . $s . '%')->orWhere('lname', 'like','%' . $s . '%')->orWhere('address', 'like','%' . $s . '%')->orWhere('email', 'like','%' . $s . '%')->orWhere('DOB', 'like','%' . $s . '%')->orWhere('mobile', 'like','%' . $s . '%') ->get();
+    
+    
+       return view('StudentManagemt.allStudentsDetails', compact('StudentsData',$StudentsData));
+    
+    
+    }
+    
 public function test(Request $request){
 
     $studentdata=student::find($request->st_id);
@@ -487,17 +501,12 @@ public function viewprofile($id){
 
     break;
     }
-    
 
     $profileArray1 = array(); 
        
-    
     $classStudents=class_student::where('sid', '=', $id)->get();
 
-    
-    foreach($classStudents as $classStudent){
-
-    $classStudent=class_student::where(['sid'=> $id])->first();    
+    foreach($classStudents as $classStudent){ 
 
     $dataArray1 = array();
         
@@ -516,8 +525,10 @@ public function viewprofile($id){
         $dataArray1['Tname']=$classdata1->fname." ".$classdata1->lname;
         
         array_push($profileArray1, $dataArray1);
-    break;
+    
     }
+
+    //print_r($profileArray1);
 
     return view('StudentManagemt.StudentProfile',['profileArray'=>$profileArray,'profileArray1'=>$profileArray1]);
 
@@ -652,7 +663,6 @@ public function recoverData(Request $request){
 
 
 }
-
 
 
 }

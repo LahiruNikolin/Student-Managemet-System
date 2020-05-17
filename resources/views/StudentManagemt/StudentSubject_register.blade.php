@@ -65,70 +65,50 @@ tr:nth-child(even) {
 
 
  </style>
-
-<div class="page_1"><center>
-  <h2>Student Registration Form</h2>
-    
-  <div class="form_1">
-
-      @foreach($errors->all() as $error)
-
-      <div class="alert alert-danger" role="alert">
-          {{$error}}
-
-      </div>
-
-      @endforeach
-
-      <form id='prof' action="{{action('RStudentController@retriveProfile') }}" method="post" >
-      {{ csrf_field() }}
-      @foreach($rowsArray as $rowsArray)
-      <input type="hidden" name="email" value="{{$rowsArray['email']}}">
-      <input type="hidden" name="Sid" value="{{$rowsArray['id']}}">
-      
-      @endforeach
-
-  @foreach($classArray as $studentTeacher)
-    
-      <label for="yr">Year___________________________________________________</label>
-      <input type="text" id="year" name="year" placeholder="year.." value="{{$studentTeacher['year']}}">
-      <input type="hidden" name="Cid" value="{{$studentTeacher['Cid']}}">
-  @foreach($classArray2 as $studentSubject)
-  
-  <table>
-    <tr>
-      <th>SUBJECT</th>  
-      <th>TEACHER</th>
-    
-    </tr>
-    @for($i=0; $i < count($studentTeacher); $i++)
-      <tr>
-        <td>
-        
-        <input type="text" name="subject" value="{{$studentSubject['subName']}}">
-        
-       
-        </td>
-        
-        <td>
-          
-            {{$studentTeacher['Tname']}} 
-          
-            <input type="checkbox" name="t1"value="{{$studentTeacher['Tname']}}" >
-            <input type="hidden" id="teacher" name="subject"value="{{$studentTeacher['Tname']}}">
-          
-        </td>
-        </tr>
-    @endfor
-
-  </table>
-
-  @endforeach
-  @endforeach
-
- <input type="submit" value="Submit">
-  </form>
-  
-    </div></center>
+ <div class="alert alert-primary" role="alert" style="font-size:2rem;">
+  <p class="text-center">Classes for {{$studentArray['year']}}</p>
 </div>
+ <div class="bg-primary p-2" style=" border-radius:5%;
+  width:40rem; margin:auto; margin-top:8rem; font-size:1.4rem; color:white;" >
+
+ <form method="POST"  action="{{action('RStudentController@retriveProfile') }}" >
+ {{csrf_field()}}
+  <fieldset class="form-group">
+    <div class="row">
+    <input style="display:none;" type="text" name="size" value='{{count($classArray)}}'>
+    <input style="display:none;" type="text" name="email" value="{{ $studentArray['email']}}">  
+    <input style="display:none;" type="text" name="sid" value="{{ $studentArray['id']}}">  
+    </div>
+  </fieldset>
+  <?php $i=1; ?>
+    @foreach($classArray as $class)
+  <div class="form-group row">
+   
+ 
+    <div class="col-sm-2">{{$class['subName']}}</div>
+    <div class="col-sm-10">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1" 
+        value="{{$class['classId']}}"
+        name="class{{$i}}">
+        <label class="form-check-label" for="gridCheck1">
+        {{$class['teacherName']}}
+        </label>
+      </div>
+     
+    </div>
+  </div>
+  
+  <?php $i++; ?>
+  @endforeach
+  
+    <div class="col-sm-10">
+      <button type="submit" class="mt-4 btn btn-primary float-right">Enroll</button>
+    </div>
+  </div>
+</form>
+
+  
+ </div>
+
 @stop
