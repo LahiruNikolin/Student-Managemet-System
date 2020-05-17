@@ -15,6 +15,8 @@ use App\attendence;
 use App\class_fee;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class attendencePageController extends Controller
 {
@@ -616,6 +618,35 @@ class attendencePageController extends Controller
       Storage::disk('public')->put('json/specificAttendence.json', json_encode($mainArray));
 
     
+
+    }
+//admins
+    public function deleteAdmin(Request $request){
+     $id= $request->aid;
+     $admin = User::find($id);
+
+      $admin->delete();
+
+      $admins=User::all();
+     
+      return view('Attendence.adminArea', ['admins' => $admins,'status' => 2]);
+
+    }
+
+    public function updatePassword(Request $request){
+
+      $id= $request->aid;
+      $newPass=$request->newPassword;
+      $admin = User::find($id);
+       
+
+      $admin->password =  Hash::make($newPass);
+      
+      $admin->save();
+
+      $admins=User::all();
+     
+      return view('Attendence.adminArea', ['admins' => $admins,'status' => 1]);
 
     }
 

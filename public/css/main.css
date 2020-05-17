@@ -169,6 +169,12 @@ section#man{
 		height: 35vh;
 		overflow: auto;
 }
+.my-custom-scrollbar2 {
+	position: relative;
+	height: 85vh;
+	overflow: auto;
+}
+
 .table-wrapper-scroll-y {
 	display: block;}
 

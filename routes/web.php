@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\student;
 use App\StudentDel;
+use App\User;
+
 use Illuminate\Support\Facades\Session;
  
 
@@ -25,7 +27,9 @@ Route::get('/viewAttendence', 'attendencePageController@writeJSON');
 
 Route::get('/issueCard/{id}','attendencePageController@issueCard');
 
+
  
+
 
 Route::get('/test',function () {
     return view('Attendence.test');
@@ -47,6 +51,15 @@ Route::post('/scan', 'attendencePageController@scanCard');
 Route::post('/send', 'attendencePageController@movePic');
 
 Route::post('/record', 'attendencePageController@recordFees');
+//admins
+Route::get('/adminArea', function () {
+    $admins=User::all();
+     
+    return view('Attendence.adminArea', ['admins' => $admins,'status' => 0]);
+});
+
+Route::post('/adminDelete', 'attendencePageController@deleteAdmin');
+Route::post('/adminUpdate', 'attendencePageController@updatePassword');
 
 //maill
 Route::get('/sendbasicemail','MailController@basic_email');
@@ -69,6 +82,8 @@ Route::get('/studentregister', function () {
 });
 
 Route::post('/savetask','RStudentController@retriveProfile');
+
+
 
 Route::get('/studentPrint','RStudentController@DelretriveTablePrint');
 
@@ -149,6 +164,63 @@ Route::get('/logout',  function () {
     return redirect('login');
 });
 
+//external
+
+Route::get('/External', function () {
+    return view('External/staffManagementHome');
+});
+
+Route::get('employeeDetails', function () {
+    return view('External/employeeDetails');
+});
+
+Route::get('reciptionist', function () {
+    return view('External/reciptionist');
+});
+
+Route::get('clearner', function () {
+    return view('External/clearner');
+});
+
+Route::get('add-reciptionist', function () {
+    return view('External/add-reciptionist');
+});
+
+Route::get('addEmployee', function () {
+    return view('External/addEmployee');
+});
+
+Route::get('add-clearner', function () {
+    return view('External/add-clearner');
+});
+
+Route::get('employee-detalis', function () {
+    return view('External/employee-details');
+});
+
+Route::get('remove-list', function () {
+    return view('External/remove-list');
+});
+
+Route::get('empattendence', function () {
+    return view('External/exAttendence');
+});
+
+Route::post('addEmp','externelController@addEmp');
+
+Route::post('addReci','externelController@addReci');
+
+Route::post('addCleaner','externelController@addCleaner');
+
+Route::post('addAttendence','externelController@addAttendence');
+
+Route::get('removeList','externelController@removeList');
+
+Route::get('removeRecipList','externelController@removeRecipList');
+
+Route::get('removeCleanList','externelController@removeCleanList');
+
+
 //thisura routes
 Route::get('/PaymentExpenses', function () {
     return view('PaymentExpenses.home');
@@ -211,3 +283,4 @@ Route::get('deleteExpense','mainController@deleteExpense');
 Route::post('calSal','mainController@calSal');
 
 Route::post('addPayment','mainController@addPayment');
+
