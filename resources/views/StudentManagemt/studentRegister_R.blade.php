@@ -104,111 +104,16 @@ tr:nth-child(even) {
       <label for="dob">Date of Birth______________________________________</label>
       <input type="text" id="DOB" name="birthday" placeholder="Your birthday..">
 
-      <label for="yr">Year______________________________________________</label>
-      <input type="text" id="year" name="year" placeholder="year..">
-      
       <label for="status">Status______________________________________</label>
       <select name="status">
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
           </select>
+
+      <label for="yr">Year______________________________________</label>
+      <input type="text" id="yr" name="year" placeholder="year..">
   
   
-  <table>
-    <tr>
-      <th>SUBJECT</th>  
-      <th>TEACHER</th>
-    
-    </tr>
-      <tr>
-        <td>
-          <select name="Subject1">
-            <option value="-">Select</option>
-            <option value="sub1">sub 1</option>
-            <option value="sub2">sub 2</option>
-            <option value="sub3">sub 3</option>
-            <option value="sub4">sub 4</option>
-          </select>
-        </td>
-    
-        <td>
-          <select name="Teach1">
-            <option value="-">Select</option>
-            <option value="Teacher1">Teacher 1</option>
-            <option value="Teacher2">Teacher 2</option>
-            <option value="Teacher3">Teacher 3</option>
-            <option value="Teacher4">Teacher 4</option>
-          </select>
-        </td>
-
-  </tr>
-  
-  <tr>
-        <td>
-          <select name="Subject2">
-            <option value="-">Select</option>
-            <option value="sub1">sub 1</option>
-            <option value="sub2">sub 2</option>
-            <option value="sub3">sub 3</option>
-            <option value="sub4">sub 4</option>
-          </select>
-        </td>
-
-        <td>
-          <select name="Teach2">
-            <option value="-">Select</option>
-            <option value="Teacher1">Teacher 1</option>
-            <option value="Teacher2">Teacher 2</option>
-            <option value="Teacher3">Teacher 3</option>
-            <option value="Teacher4">Teacher 4</option>
-          </select>
-        </td>
-  </tr>
-
-  <tr>
-        <td>
-          <select name="Subject3">
-            <option value="-">Select</option>
-            <option value="sub1">sub 1</option>
-            <option value="sub2">sub 2</option>
-            <option value="sub3">sub 3</option>
-            <option value="sub4">sub 4</option>
-          </select>
-        </td>
-        <td>
-          <select name="Teach3">
-            <option value="-">Select</option>
-            <option value="Teacher1">Teacher 1</option>
-            <option value="Teacher2">Teacher 2</option>
-            <option value="Teacher3">Teacher 3</option>
-            <option value="Teacher4">Teacher 4</option>
-          </select>
-        </td>
-  </tr>
-        <tr>
-        <td>
-          <select name="Subject4">
-            <option value="-">Select</option>
-            <option value="sub1">sub 1</option>
-            <option value="sub2">sub 2</option>
-            <option value="sub3">sub 3</option>
-            <option value="sub4">sub 4</option>
-          </select>
-        </td>
-        
-        <td>
-          <select name="Teach4">
-            <option value="-">Select</option>
-            <option value="Teacher1">Teacher 1</option>
-            <option value="Teacher2">Teacher 2</option>
-            <option value="Teacher3">Teacher 3</option>
-            <option value="Teacher4">Teacher 4</option>
-          </select>
-        </td>
-  </tr>
-
-
-  </table>
     <input type="submit" value="Submit">
   </form></div></center>
 </div>

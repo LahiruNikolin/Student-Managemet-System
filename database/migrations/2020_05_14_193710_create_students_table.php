@@ -18,23 +18,15 @@ class CreateStudentsTable extends Migration
             $table->string('fname');
             $table->string('lname');
             $table->string('address');
-            $table->string('email');
+            $table->string('email')->uniqid();
             $table->Integer('mobile');
             $table->date('DOB');
-            $table->string('year');
             $table->string('status');
-            $table->string('subject1');
-            $table->string('teacher1');
-            $table->string('subject2');
-            $table->string('teacher2');
-            $table->string('subject3');
-            $table->string('teacher3');
-            $table->string('subject4');
-            $table->string('teacher4');
+            $table->string('year');
+
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\StudentDel;
 use App\student;
-
+use App\tution;
+use App\subject;
+use App\teacher;
+use App\class_student;
+use App\class_student_dels;
 
 class RStudentController extends Controller
 {
@@ -22,7 +26,6 @@ class RStudentController extends Controller
             'address'=>'required',
             'email'=>'required|email',
             'telephone'=>'required',
-            'year'=>'required',
             'birthday'=>'required|date',
             
 
@@ -35,59 +38,149 @@ class RStudentController extends Controller
         $email=$StudentReg->email=$request->input('email');
         $tp=$StudentReg->mobile=$request->input('telephone');
         $dob=$StudentReg->DOB=$request->input('birthday');
-        $year=$StudentReg->year=$request->input('year');
         $status=$StudentReg->status=$request->input('status');
-        $subject1=$StudentReg->subject1=$request->input('Subject1');
-        $teacher1=$StudentReg->teacher1=$request->input('Teach1');
-        $subject2=$StudentReg->subject2=$request->input('Subject2');
-        $teacher2=$StudentReg->teacher2=$request->input('Teach2');
-        $subject3=$StudentReg->subject3=$request->input('Subject3');
-        $teacher3=$StudentReg->teacher3=$request->input('Teach3');
-        $subject4=$StudentReg->subject4=$request->input('Subject4');
-        $teacher4=$StudentReg->teacher4=$request->input('Teach4');
-        
-        
+        $year=$StudentReg->year=$request->input('year');
+
         $StudentReg->save();
 
+ 
+        $classArray=array();
+        $classArray2=array();
+
+        $alldata= student::where('email', '=', $email)->get();
+
+        foreach ($alldata as $data){
+            
+            $dataArray = array();
+        
+            $data=student::where(['email'=> $email])->orderBy('created_at', 'desc')->first();
+            $dataArray['id']= $data->id;
+            $dataArray['email']=$data->email;
+            
+
+            array_push($rowsArray, $dataArray);
+           
+           // print_r($data);
+        break;
+
+        }
+  
+    $class=tution::where('year', '=', $year)->get();
+
+        foreach ($class as $classdata){
+            
+            $classdataArray = array();
+
+            $classdata=tution::where(['year'=> $year])->first();
+
+            $classdataArray['Cid']= $classdata->id;
+            $TID= $classdata->tid;
+            $classdataArray['year']= $classdata->year;
+
+            $classdata=teacher::where( ['id' => $TID])->first();
+ 
+            $classdataArray['Tname']=$classdata->fname." ".$classdata->lname;
+
+            array_push($classArray, $classdataArray);
+ 
+        break;
+    }
+
+        foreach ($class as $classdata){
+            
+            $classdataArray2 = array();
+        
+            $classdata=tution::where(['year'=> $year])->get()->first();
+            
+            $classdataArray2['id']= $classdata->id;
+            $subID= $classdata->sub_id;
+
+            $classdata=subject::where( ['id' => $subID])->first();
+            $classdataArray2['subName']=$classdata->subjectName;
+
+            array_push($classArray2, $classdataArray2);
+            
+        break;
+
+        }
+
+        return view('StudentManagemt.StudentSubject_register',['classArray'=>$classArray,'classArray2'=>$classArray2,'rowsArray'=>$rowsArray]);
+
+    }
+
+    public function retriveProfile(Request $request){
+
+        $email=($request->email);
+        
+        $profileArray = array();        
         $alldata= student::where('email', '=', $email)->get();
         
         foreach ($alldata as $data){
             
             $dataArray = array();
         
-            $data=student::where(['email'=> $email])->orderBy('created_at', 'desc')->take(1)->first();
+            $data=student::where(['email'=> $email])->first();
             $dataArray['id']= $data->id;
-            $dataArray['fullname']= $firstname." ".$lastname;
-            $dataArray['address']=$address;
-            $dataArray['email']=$email;
-            $dataArray['year']=$year;
-            $dataArray['telephone']=$tp;
-            $dataArray['DOB']=$dob;
-            $dataArray['year']=$year;
-            $dataArray['status']=$status;
-            $dataArray['subject1']=$subject1;
-            $dataArray['teacher1']=$teacher1;
-            $dataArray['subject2']=$subject2; 
-            $dataArray['teacher2']=$teacher2;
-            $dataArray['subject3']=$subject3;
-            $dataArray['teacher3']=$teacher3;
-            $dataArray['subject4']=$subject4;
-            $dataArray['teacher4']=$teacher4;
+            $dataArray['fullname']= $data->fname." ".$data->lname;
+            $dataArray['address']=$data->address;
+            $dataArray['email']=$data->email;
+            $dataArray['telephone']=$data->mobile;
+            $dataArray['DOB']=$data->DOB;
+            $dataArray['status']=$data->status;
+            $dataArray['year']=$data->year;
 
-            array_push($rowsArray, $dataArray);
+            array_push($profileArray, $dataArray);
+            
 
-           // print_r($data);
         break;
 
         }
 
-        
+        $classStu = new class_student;
 
-        return view('StudentManagemt.StudentProfile',['rowsArray'=>$rowsArray,'email'=>$email]);
+        $profileArray1 = array();
+
+        $stuID=($request->Sid);
+        $classID=($request->Cid);
+        
+        $classStu->sid=$stuID;
+        $classStu->cid=$classID;
+        $classStu->save();
+           
+        
+        $classStudents=class_student::where('cid', '=', $classID)->get();
+
+        
+        foreach($classStudents as $classStudent){
+
+        $classStudent=class_student::where(['cid'=> $classID])->first();    
+
+        $dataArray1 = array();
+            
+            $studID=$classStudent->sid;
+            $ClassID=$classStudent->cid;
+            $dataArray1['Cid']=$ClassID;
+
+            $classStudent=tution::where( ['id' => $ClassID])->first();
+            $subID= $classStudent->sub_id;
+            $TID= $classStudent->tid;
+
+            $classdata=subject::where( ['id' => $subID])->first();
+            $dataArray1['subName']=$classdata->subjectName;
+
+            $classdata1=teacher::where( ['id' => $TID])->first();
+            $dataArray1['Tname']=$classdata1->fname." ".$classdata1->lname;
+            
+            array_push($profileArray1, $dataArray1);
+        break;
+        }
+
+
+        return view('StudentManagemt.StudentProfile',['profileArray'=>$profileArray,'profileArray1'=>$profileArray1]);
 
         }
 
-    
+
     
     public function retriveTable(){
 
@@ -119,27 +212,44 @@ public function searchDetails(Request $request){
 
     $DeleteData = StudentDel::where([
         
-        ['firstname', 'like', '%' . $s . '%'],
-        ['lastname', 'like','%' . $s . '%'],
+        ['fname', 'like', '%' . $s . '%'],
+        ['lname', 'like','%' . $s . '%'],
         ['address', 'like','%' . $s . '%'],
         ['email', 'like','%' . $s . '%'],
         ['DOB', 'like','%' . $s . '%'],
         ['telephone', 'like','%' . $s . '%'],
-
     ])->get();
 
    return view('StudentManagemt.deleted_students', compact('DeleteData'));
 
 
 }
+public function searchDetailsAllStudents(Request $request){
+
+    $s=$request->input('s');
+
+    $StudentsData = student::where([
+        
+        ['fname', 'like', '%' . $s . '%'],
+        //['lname', 'like','%' . $s . '%'],
+        //['address', 'like','%' . $s . '%'],
+        //['email', 'like','%' . $s . '%'],
+        //['DOB', 'like','%' . $s . '%'],
+        //['mobile', 'like','%' . $s . '%'],
+    ])->get();
+
+   return view('StudentManagemt.allStudentsDetails', compact('StudentsData',$StudentsData));
+
+
+}
 
 public function test(Request $request){
 
-
-
     $studentdata=student::find($request->st_id);
-    $studentdata->delete();
     
+    $studentdata->delete();
+
+    $Sid = $studentdata->id;
     $firstname=$studentdata->fname;
     $lastname=$studentdata->lname;
     $address=$studentdata->address;
@@ -148,17 +258,36 @@ public function test(Request $request){
     $year=$studentdata->year;
     $status=$studentdata->status;
     $dob=$studentdata->DOB;
-    $subject1=$studentdata->subject1;
-    $teacher1=$studentdata->teacher1;
-    $subject2=$studentdata->subject2;
-    $teacher2=$studentdata->teacher2;
-    $subject3=$studentdata->subject3;
-    $teacher3=$studentdata->teacher3;
-    $subject4=$studentdata->subject4;
-    $teacher4=$studentdata->teacher4;
+
+
+    $studentId=($request->st_id);
+
+    $studentdata1=class_student::where('sid','=',$studentId)->get();
+
+    foreach($studentdata1 as $classStudent){
+
+        $classStudent=class_student::where(['sid'=> $studentId])->first();    
+
+        $dataArray1 = array();
+        $id=$classStudent->id;
+        $sid=$classStudent->sid;
+        $cid=$classStudent->cid;
+        
+        $classStudent->delete();
+
+        $classDels = new class_student_dels; 
+        $classDels->sid=$sid;
+        $classDels->cid=$cid;
+        $classDels->save();
+
+    
+    }
+
+
 
     $StudentDel = new StudentDel;
 
+    $StudentDel->id=$Sid;
     $StudentDel->firstname=$firstname;
     $StudentDel->lastname=$lastname;
     $StudentDel->address=$address;
@@ -167,15 +296,7 @@ public function test(Request $request){
     $StudentDel->year=$year;
     $StudentDel->status=$status;
     $StudentDel->DOB=$dob;
-    $StudentDel->subject1=$subject1;
-    $StudentDel->teacher1=$teacher1;
-    $StudentDel->subject2=$subject2;
-    $StudentDel->teacher2=$teacher2;
-    $StudentDel->subject3=$subject3;
-    $StudentDel->teacher3=$teacher3;
-    $StudentDel->subject4=$subject4;
-    $StudentDel->teacher4=$teacher4;
-    
+
     $StudentDel->save();
 
     return view('StudentManagemt.student_Management_index')->with('status',1);
@@ -188,15 +309,48 @@ public function test(Request $request){
 
 public function testupdate(Request $request){
 
-            
+    $profileArray1 = array();    
     $studentdata=student::find($request->st_id);
-    return view('StudentManagemt.studentUpdate')->with('stuUpdate',$studentdata);
+    $StID= ($request->st_id);
+    
+    $classID=($request->Cid);
+    
+    $classStudents=class_student::where('sid', '=', $StID)->get();
+
+        
+    foreach($classStudents as $classStudent){
+
+    $classStudent=class_student::where(['sid'=> $StID])->first();    
+
+    $dataArray1 = array();
+
+        $studID=$classStudent->sid;
+        $ClassID=$classStudent->cid;
+
+        $classStudent=tution::where( ['id' => $ClassID])->first();
+        $subID= $classStudent->sub_id;
+        $TID= $classStudent->tid;
+        $dataArray1['Cid']=$classStudent->id;
+
+        $classdata=subject::where( ['id' => $subID])->first();
+        $dataArray1['subName']=$classdata->subjectName;
+
+        $classdata1=teacher::where( ['id' => $TID])->first();
+        $dataArray1['Tname']=$classdata1->fname." ".$classdata1->lname;
+        
+        array_push($profileArray1, $dataArray1);
+    
+    break;
+    }
+    return view('StudentManagemt.studentUpdate',['profileArray1'=>$profileArray1])->with('stuUpdate',$studentdata);
+
+    
 
 
 }
     public function taskupdate(Request $request){
 
-        $rowsArray=array();
+        $profileArray=array();
 
         
         $this->validate($request,[
@@ -220,14 +374,8 @@ public function testupdate(Request $request){
     $dob=$request->birthday;
     $year=$request->year;
     $status=$request->status;
-    $subject1=$request->Subject1;
-    $teacher1=$request->Teach1;
-    $subject2=$request->Subject2;
-    $teacher2=$request->Teach2;
-    $subject3=$request->Subject3;
-    $teacher3=$request->Teach3;
-    $subject4=$request->Subject4;
-    $teacher4=$request->Teach4;
+
+ 
 
     $studentdata1=student::find($id);
     
@@ -239,17 +387,8 @@ public function testupdate(Request $request){
     $studentdata1->DOB=$dob;
     $studentdata1->year=$year;
     $studentdata1->status=$status;
-    $studentdata1->Subject1=$subject1;
-    $studentdata1->teacher1=$teacher1;
-    $studentdata1->Subject2=$subject2;
-    $studentdata1->teacher2=$teacher2;
-    $studentdata1->Subject3=$subject3;
-    $studentdata1->teacher3=$teacher3;
-    $studentdata1->Subject4=$subject4;
-    $studentdata1->teacher4=$teacher4;
 
-
-    $studentdata1->save();
+     $studentdata1->save();
 
 
     
@@ -268,26 +407,56 @@ public function testupdate(Request $request){
         $dataArray['DOB']=$dob;
         $dataArray['year']=$year;
         $dataArray['status']=$status;
-        $dataArray['subject1']=$subject1;
-        $dataArray['teacher1']=$teacher1;
-        $dataArray['subject2']=$subject2; 
-        $dataArray['teacher2']=$teacher2;
-        $dataArray['subject3']=$subject3;
-        $dataArray['teacher3']=$teacher3;
-        $dataArray['subject4']=$subject4;
-        $dataArray['teacher4']=$teacher4;
 
-        array_push($rowsArray, $dataArray);
+
+        array_push($profileArray, $dataArray);
 
     }
+    
+    $classStu = new class_student;
 
-    return view('StudentManagemt.StudentProfile',['rowsArray'=>$rowsArray,'id'=>$id]);
+    $profileArray1 = array();  
+    
+    $classID=($request->Cid);
+    
+    $classStu->sid=$id;
+    $classStu->cid=$classID;
+    $classStu->save();
+    
+    $classStudents=class_student::where('cid', '=', $classID)->get();
+
+    
+    foreach($classStudents as $classStudent){
+
+    $classStudent=class_student::where(['cid'=> $classID])->first();    
+
+    $dataArray1 = array();
+        
+        $studID=$classStudent->sid;
+        $ClassID=$classStudent->cid;
+        $dataArray1['Cid']=$ClassID;
+
+        $classStudent=tution::where( ['id' => $ClassID])->first();
+        $subID= $classStudent->sub_id;
+        $TID= $classStudent->tid;
+
+        $classdata=subject::where( ['id' => $subID])->first();
+        $dataArray1['subName']=$classdata->subjectName;
+
+        $classdata1=teacher::where( ['id' => $TID])->first();
+        $dataArray1['Tname']=$classdata1->fname." ".$classdata1->lname;
+        
+        array_push($profileArray1, $dataArray1);
+    break;
+    }
+
+    return view('StudentManagemt.StudentProfile',['profileArray'=>$profileArray,'profileArray1'=>$profileArray1]);
 
 }
 
 public function viewprofile($id){
 
-    $rowsArray=array();
+    $profileArray=array();
 
     $student=student::where('id', '=', $id)->first();
 
@@ -299,14 +468,6 @@ public function viewprofile($id){
     $dob=$student->DOB;
     $year=$student->year;
     $status=$student->status;
-    $subject1=$student->subject1;
-    $teacher1=$student->teacher1;
-    $subject2=$student->subject2;
-    $teacher2=$student->teacher2;
-    $subject3=$student->subject3;
-    $teacher3=$student->teacher3;
-    $subject4=$student->subject4;
-    $teacher4=$student->teacher4;
 
     foreach ($student as $data){
 
@@ -321,21 +482,44 @@ public function viewprofile($id){
             $dataArray['DOB']=$dob;
             $dataArray['year']=$year;
             $dataArray['status']=$status;
-            $dataArray['subject1']=$subject1;
-            $dataArray['teacher1']=$teacher1;
-            $dataArray['subject2']=$subject2; 
-            $dataArray['teacher2']=$teacher2;
-            $dataArray['subject3']=$subject3;
-            $dataArray['teacher3']=$teacher3;
-            $dataArray['subject4']=$subject4;
-            $dataArray['teacher4']=$teacher4;
 
-            array_push($rowsArray, $dataArray);
+            array_push($profileArray, $dataArray);
 
     break;
     }
+    
 
-    return view('StudentManagemt.StudentProfile',['rowsArray'=>$rowsArray]);
+    $profileArray1 = array(); 
+       
+    
+    $classStudents=class_student::where('sid', '=', $id)->get();
+
+    
+    foreach($classStudents as $classStudent){
+
+    $classStudent=class_student::where(['sid'=> $id])->first();    
+
+    $dataArray1 = array();
+        
+        $studID=$classStudent->sid;
+        $ClassID=$classStudent->cid;
+        $dataArray1['Cid']=$ClassID;
+
+        $classStudent=tution::where( ['id' => $ClassID])->first();
+        $subID= $classStudent->sub_id;
+        $TID= $classStudent->tid;
+
+        $classdata=subject::where( ['id' => $subID])->first();
+        $dataArray1['subName']=$classdata->subjectName;
+
+        $classdata1=teacher::where( ['id' => $TID])->first();
+        $dataArray1['Tname']=$classdata1->fname." ".$classdata1->lname;
+        
+        array_push($profileArray1, $dataArray1);
+    break;
+    }
+
+    return view('StudentManagemt.StudentProfile',['profileArray'=>$profileArray,'profileArray1'=>$profileArray1]);
 
 }
 public function Delviewprofile($id){
@@ -352,14 +536,6 @@ public function Delviewprofile($id){
     $dob=$student->DOB;
     $year=$student->year;
     $status=$student->status;
-    $subject1=$student->subject1;
-    $teacher1=$student->teacher1;
-    $subject2=$student->subject2;
-    $teacher2=$student->teacher2;
-    $subject3=$student->subject3;
-    $teacher3=$student->teacher3;
-    $subject4=$student->subject4;
-    $teacher4=$student->teacher4;
 
     foreach ($student as $data){
 
@@ -374,21 +550,44 @@ public function Delviewprofile($id){
             $dataArray['DOB']=$dob;
             $dataArray['year']=$year;
             $dataArray['status']=$status;
-            $dataArray['subject1']=$subject1;
-            $dataArray['teacher1']=$teacher1;
-            $dataArray['subject2']=$subject2; 
-            $dataArray['teacher2']=$teacher2;
-            $dataArray['subject3']=$subject3;
-            $dataArray['teacher3']=$teacher3;
-            $dataArray['subject4']=$subject4;
-            $dataArray['teacher4']=$teacher4;
 
             array_push($rowsArray, $dataArray);
 
     break;
     }
+    
+    $profileArray1 = array(); 
+       
+    
+    $classStudents=class_student_dels::where('sid', '=', $id)->get();
 
-    return view('StudentManagemt.Del_Stu_Profile',['rowsArray'=>$rowsArray]);
+    
+    foreach($classStudents as $classStudent){
+
+    $classStudent=class_student_dels::where(['sid'=> $id])->first();    
+
+    $dataArray1 = array();
+        
+        $studID=$classStudent->sid;
+        $ClassID=$classStudent->cid;
+
+        $classStudent=tution::where( ['id' => $ClassID])->first();
+        $subID= $classStudent->sub_id;
+        $TID= $classStudent->tid;
+
+        $classdata=subject::where( ['id' => $subID])->first();
+        $dataArray1['subName']=$classdata->subjectName;
+
+        $classdata1=teacher::where( ['id' => $TID])->first();
+        $dataArray1['Tname']=$classdata1->fname." ".$classdata1->lname;
+        
+        array_push($profileArray1, $dataArray1);
+        
+    break;
+    }
+
+
+    return view('StudentManagemt.Del_Stu_Profile',['rowsArray'=>$rowsArray,'profileArray1'=>$profileArray1]);
 
 }
 
@@ -397,7 +596,9 @@ public function recoverData(Request $request){
 
     $studenRec= new student;
 
-    $student=StudentDel::where('id', '=', $request->st_id)->first();
+    $studentId=($request->st_id);
+
+    $student=StudentDel::where('id', '=', $studentId)->first();
     
     $student->delete();
 
@@ -409,16 +610,42 @@ public function recoverData(Request $request){
     $studenRec->DOB=$student->DOB;
     $studenRec->year=$student->year;
     $studenRec->status=$student->status;
-    $studenRec->subject1=$student->subject1;
-    $studenRec->teacher1=$student->teacher1;
-    $studenRec->subject2=$student->subject2;
-    $studenRec->teacher2=$student->teacher2;
-    $studenRec->subject3=$student->subject3;
-    $studenRec->teacher3=$student->teacher3;
-    $studenRec->subject4=$student->subject4;
-    $studenRec->teacher4=$student->teacher4;
 
     $studenRec->save();
+
+    foreach($student as $students){
+
+        $students=StudentDel::where(['id'=> $studentId])->orderBy('created_at', 'desc')->first();
+        $Did=$studentId;
+        $NDid=$Did + '1';
+
+    }
+
+
+
+
+    $studentdata1=class_student_dels::where('sid','=',$studentId)->get();
+
+    foreach($studentdata1 as $classStudent){
+
+        $classStudent=class_student_dels::where(['sid'=> $studentId])->first();   
+
+        $dataArray1 = array();
+        $id=$classStudent->id;
+        $sid=$classStudent->sid;
+        $cid=$classStudent->cid;
+        
+        $classStudent->delete();
+
+        $classSt = new class_student; 
+        $classSt->sid=$NDid;
+        $classSt->cid=$cid;
+        $classSt->save();
+
+    }
+
+
+
     
 
     return view('StudentManagemt.student_Management_index')->with('status',2);

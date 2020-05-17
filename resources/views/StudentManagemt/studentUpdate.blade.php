@@ -109,7 +109,11 @@ tr:nth-child(even) {
       <label for="status">Status___________________________________________</label>
       <input type="text" id="status" name="status" value="{{$stuUpdate['status']}}">
       
-      <table>
+      
+      
+@foreach($profileArray1 as $profileArray)
+<input type="hidden" name="Cid" value="{{$profileArray['Cid']}}">
+  <table>
     <tr>
       <th>SUBJECT</th>  
       <th>TEACHER</th>
@@ -117,93 +121,20 @@ tr:nth-child(even) {
     </tr>
       <tr>
         <td>
-          <select name="Subject1">
-          <option value="-">Select</option>
-            <option value="sub1">sub 1</option>
-            <option value="sub2">sub 2</option>
-            <option value="sub3">sub 3</option>
-            <option value="sub4">sub 4</option>
-          </select>
+        <input type="text" id="status" name="subject" value="{{$profileArray['subName']}}">
+    
         </td>
         
         <td>
-          <select name="Teach1">
-            <option value="-">Select</option>
-            <option value="Teacher1">Teacher 1</option>
-            <option value="Teacher2">Teacher 2</option>
-            <option value="Teacher3">Teacher 3</option>
-            <option value="Teacher4">Teacher 4</option>
-          </select>
+        <input type="text" id="status" name="teacher" value="{{$profileArray['Tname']}}">
+      
         </td>
 
   </tr>
   
-  <tr>
-        <td>
-          <select name="Subject2">
-            <option value="-">Select</option>
-            <option value="sub1">sub 1</option>
-            <option value="sub2">sub 2</option>
-            <option value="sub3">sub 3</option>
-            <option value="sub4">sub 4</option>
-          </select>
-        </td>
-
-        <td>
-          <select name="Teach2">
-            <option value="-">Select</option>
-            <option value="Teacher1">Teacher 1</option>
-            <option value="Teacher2">Teacher 2</option>
-            <option value="Teacher3">Teacher 3</option>
-            <option value="Teacher4">Teacher 4</option>
-          </select>
-        </td>
-  </tr>
-
-  <tr>
-        <td>
-          <select name="Subject3">
-            <option value="-">Select</option>
-            <option value="sub1">sub 1</option>
-            <option value="sub2">sub 2</option>
-            <option value="sub3">sub 3</option>
-            <option value="sub4">sub 4</option>
-          </select>
-        </td>
-        <td>
-          <select name="Teach3">
-            <option value="-">Select</option>
-            <option value="Teacher1">Teacher 1</option>
-            <option value="Teacher2">Teacher 2</option>
-            <option value="Teacher3">Teacher 3</option>
-            <option value="Teacher4">Teacher 4</option>
-          </select>
-        </td>
-  </tr>
-        <tr>
-        <td>
-          <select name="Subject4">
-            <option value="-">Select</option>
-            <option value="sub1">sub 1</option>
-            <option value="sub2">sub 2</option>
-            <option value="sub3">sub 3</option>
-            <option value="sub4">sub 4</option>
-          </select>
-        </td>
-        
-        <td>
-          <select name="Teach4">
-            <option value="-">Select</option>
-            <option value="Teacher1">Teacher 1</option>
-            <option value="Teacher2">Teacher 2</option>
-            <option value="Teacher3">Teacher 3</option>
-            <option value="Teacher4">Teacher 4</option>
-          </select>
-        </td>
-  </tr>
-
 
   </table>
+  @endforeach
     <input type="submit" value="Update"/>
   </form></div></center>
 </div>

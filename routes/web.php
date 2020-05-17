@@ -68,9 +68,7 @@ Route::get('/studentregister', function () {
     return view('StudentManagemt.studentRegister_R');
 });
 
-Route::get('/Studentprofile', function () {
-    return view('StudentManagemt.StudentProfile');
-});
+Route::post('/savetask','RStudentController@retriveProfile');
 
 Route::get('/studentPrint','RStudentController@DelretriveTablePrint');
 
@@ -78,7 +76,7 @@ Route::get('/studentUpdate','RStudentController@testupdate');
 
 Route::get('/deletedStudentsDetails','RStudentController@DelretriveTable');
 
-Route::post('/savetask','RStudentController@store');
+Route::post('/studentregister2','RStudentController@store');
 
 Route::post('/StudentManagement_index','RStudentController@test');
 
@@ -91,7 +89,8 @@ Route::get('/DelProfiles/{id}','RStudentController@Delviewprofile');
 Route::get('indexxx','RStudentController@recoverData');
 
 Route::get('deletedStudentsDetails', 'RStudentController@searchDetails');
-//Route::get('/deletedStudentsDetails/{id}','RStudentController@searchDetails');
+
+Route::get('allStudentsDetails', 'RStudentController@searchDetailsAllStudents');
 
  
 
