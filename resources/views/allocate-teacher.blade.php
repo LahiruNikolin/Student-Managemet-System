@@ -4,6 +4,11 @@
 $subid=$_GET['subid'];
 
 ?>
+<?php
+
+$userType=auth::user()->role;
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
