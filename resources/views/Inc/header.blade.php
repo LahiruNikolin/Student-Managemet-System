@@ -20,7 +20,7 @@ $clzCount=count($classes);
 <header>
 		<div id='lil-hero'><span class="mr-2"  ><i class="fas fa-universal-access"></i></span>Student Manager</div>
 		<div id='head-mid' class="d-flex justify-content-center">
-
+		 
 			<button type="button" class="btn btn-primary m-1">
 				Students <span class="badge badge-warning"><?php echo $stCount;?></span>
 			  </button>
@@ -50,9 +50,10 @@ $clzCount=count($classes);
 					  {{auth::user()->name}}
 					</button>
 					<div class="dropdown-menu dropdown-menu-right" style=" " aria-labelledby="dropdownMenu1" data-container="body">
-				 
+					@if($userType=='p')
+									<a class="dropdown-item" href="{{url('adminArea')}}">{{ __('Manage') }}</a>
                                     <a class="dropdown-item" href="{{ route('register') }}">{{ __('New Admin') }}</a>
-                   
+					@endif
 					  <a class="dropdown-item" href="{{asset('/logout')}}">Logout</a>
 					   
 					</div>

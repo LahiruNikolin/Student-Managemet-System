@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\student;
 use App\StudentDel;
+use App\User;
+
 use Illuminate\Support\Facades\Session;
  
 
@@ -25,7 +27,9 @@ Route::get('/viewAttendence', 'attendencePageController@writeJSON');
 
 Route::get('/issueCard/{id}','attendencePageController@issueCard');
 
+
  
+
 
 Route::get('/test',function () {
     return view('Attendence.test');
@@ -47,6 +51,15 @@ Route::post('/scan', 'attendencePageController@scanCard');
 Route::post('/send', 'attendencePageController@movePic');
 
 Route::post('/record', 'attendencePageController@recordFees');
+//admins
+Route::get('/adminArea', function () {
+    $admins=User::all();
+     
+    return view('Attendence.adminArea', ['admins' => $admins,'status' => 0]);
+});
+
+Route::post('/adminDelete', 'attendencePageController@deleteAdmin');
+Route::post('/adminUpdate', 'attendencePageController@updatePassword');
 
 //maill
 Route::get('/sendbasicemail','MailController@basic_email');
@@ -71,6 +84,8 @@ Route::get('/studentregister', function () {
 Route::get('/Studentprofile', function () {
     return view('StudentManagemt.StudentProfile');
 });
+
+
 
 Route::get('/studentPrint','RStudentController@DelretriveTablePrint');
 

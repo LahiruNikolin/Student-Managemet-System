@@ -67,7 +67,7 @@ $userType=auth::user()->role;
 						<div class="lis-active"></div>
                     </li>
                     <li><span class="ic"><i class="fas fa-ticket-alt"></i></span>
-						<span> <a href="ticket.html"> External Staff Management</a></span>
+						<span> <a href="{{url('External')}}"> External Staff Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 					@if($userType=='p')
