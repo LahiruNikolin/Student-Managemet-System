@@ -34,13 +34,13 @@
                       @foreach ($todayStudents as $todayStudent)
 
                       <tr>
-                      
+                      <?php $id=$todayStudent["sid"];?>
 
                         <td>{{$todayStudent["sid"]}}</td>
                         <td>{{$todayStudent["subject"]}} </td>
                         <td>{{$todayStudent["year"]}} </td>
                         <td>{{$todayStudent["time"]}} </td>
-                        <td><a class="btn btn-sm btn-success" href="#">View</a></td>
+                        <td><a class="btn btn-sm btn-success" href="./savetask/{{$id}}">View</a></td>
                         
                       </tr>
                       @endforeach
@@ -58,7 +58,7 @@
                       <button style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#recordFeeModal" onclick="recordFees()" >Record Fees</button>
                   </div>
                     <div class="col-md-12 mt-2 text-white">
-                        <a  style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#issueCardModal">New Cards</a>
+                        <a  style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" data-toggle="modal" data-target="#issueCardModal">Class Cards</a>
                     </div>
                     <div class="col-md-12 mt-2">
                        <a  style="width:100%;" class="btn btn-cust btn-lg btn-primary float-right" href="./viewAttendence">Attendence </a> 
@@ -163,35 +163,7 @@
         </div>
       <div id="recordFeeModalBody" class="modal-body">
          
-        <!--
-        <div id="loader">
-          <div class="d-flex justify-content-center"  >
-            <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
-        </div>
-        
-          <div  class="card"  id="printJS-card" >
-            <div class="card-body"    >
-                <div style="background-color:#0984e3; color:white;" class="p-1">
-                    <h5 class="card-title">Excellent Institute</h5>
-                    <h6 class="card-subtitle mb-1 font-weight-normal">Class card</h6>
-                </div>
-                <div style="background-color:red;">
-                    <div class="text-left float-left">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Ravindu Shanthalal</li>
-                            <li class="list-group-item">Chemistry,Physics</li>
-                            <li class="list-group-item">077-3213660</li>
-                            <li class="list-group-item">Fees Rs.800</li>
-                          </ul>
-                    </div>
-                    <img src="{{asset('/imgs/student/qr1.png ')}}" height="170rem" alt="..." class="mt-2 float-right">                   
-                </div>
-            </div>              
-        </div>
-      -->
+       
       </div>
       <div class="modal-footer" id="recordFeesFoot">
          
@@ -203,23 +175,29 @@
  
   
    <!-- Issue card modal -->
-  <div class="modal fade" id="issueCardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+  <div class="modal fade" id="issueCardModal" tabindex="-1" 
+  role="dialog" aria-labelledby="exampleModalCenterTitle" 
+  aria-hidden="true"
+   
+  >
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">New Students</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Students</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="container">
-            <table class="table table-hover">
+          <input class="form-control" id="myInput2" type="text" placeholder="Search..">
+            <table class="table table-hover" id="cardTbl">
                 <thead>
                   <tr>
-                    
+                    <th>ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Email</th>
                     <th>Year</th>
                     <th>Action</th>
                   </tr>
@@ -228,8 +206,10 @@
                   @if (count($newStudents)> 0)
                       @foreach ($newStudents as $newStudent)
                       <tr>
-                        <th scope="row">{{$newStudent->fname}}</th>
+                      <th scope="row">{{$newStudent->id}}</th>
+                        <th >{{$newStudent->fname}}</th>
                         <td>{{$newStudent->lname}}</td>
+                        <td>{{$newStudent->email}}</td>
                         <td>{{$newStudent->year}}</td>
                       <td><a href="./issueCard/{{$newStudent->id}}"class="btn btn-success">Issue</a></td>
                       </tr>
@@ -250,7 +230,7 @@
 
 
 <script>
-
+//todays attends
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
      
@@ -260,29 +240,21 @@ $(document).ready(function(){
     });
   });
 });
+//issue card search
+$(document).ready(function(){
+  $("#myInput2").on("keyup", function() {
+     
+    var value = $(this).val().toLowerCase();
+    $("#cardTbl tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
  
   function markAttendence(){
 
     initScan(document.querySelector('#scanModalBody'),1);
     
-    /*
-    $('#recordFeesFoot').hide();
-    $('#printJS-card').hide();
-
-    $('#loader').show()
-      
-     
-
-    setTimeout(function(){
-
-      $('#loader').hide();
-      $('#recordFeesFoot').show();
-      $('#printJS-card').show();
-
-     document.querySelector('#rfmTtitle').textContent="Student Details";
-      
-   
-}, 2000); */
   }
   
   function recordFees(){

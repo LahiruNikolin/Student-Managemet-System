@@ -106,8 +106,7 @@ tr:nth-child(even) {
       <label for="year">Year___________________________________________</label>
       <input type="text" id="year" name="year" value="{{$stuUpdate['year']}}">
 
-      <label for="status">Status___________________________________________</label>
-      <input type="text" id="status" name="status" value="{{$stuUpdate['status']}}">
+       
       
       
       

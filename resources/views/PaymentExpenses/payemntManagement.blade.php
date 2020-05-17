@@ -64,10 +64,10 @@
                     </div>
                   </li>
                 </div>
-                <div class="list-wrap">
+                <div class="list-wrap gpr">
                   <li class="list-group-item" id="items-access">
                     <div class="msg">Generate Payment Report</div>
-                    <div class="button-cls-child-second">
+                    <div class="button-cls-child-second gpr2">
                       <button type="button" onclick="window.location.href = 'paymentreport';" class="btn btn-primary" id="linked">
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                       </button>

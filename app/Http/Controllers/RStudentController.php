@@ -38,7 +38,7 @@ class RStudentController extends Controller
         $email=$StudentReg->email=$request->input('email');
         $tp=$StudentReg->mobile=$request->input('telephone');
         $dob=$StudentReg->DOB=$request->input('birthday');
-        $status=$StudentReg->status=$request->input('status');
+        $status=$StudentReg->status="Active";
         $year=$StudentReg->year=$request->input('year');
 
         $StudentReg->save();
@@ -387,7 +387,7 @@ public function testupdate(Request $request){
     $tp=$request->telephone;
     $dob=$request->birthday;
     $year=$request->year;
-    $status=$request->status;
+    $status="Active";
 
  
 

@@ -223,7 +223,6 @@ tr:nth-child(even) {
 
             </div>
 
-            @endforeach
 </br>
 
   <div id="profile"><CENTER>
@@ -251,7 +250,8 @@ tr:nth-child(even) {
         @endforeach
       	
 	  </table></CENTER>
-  
+    
+	  @endforeach
 
 	  
 	</div>

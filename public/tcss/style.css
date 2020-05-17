@@ -152,6 +152,19 @@ h2.expense-manage {
   padding-left: 59px;
   width: auto;
 }
+  
+.gpr li{
+ 
+  display: flex;
+  justify-content: space-between;
+   
+}
+.gpr2  {
+  
+  width: 3rem;
+  padding-right: 0.2rem;
+  
+}
 .list-wrapper {
   padding-top: 7px;
   

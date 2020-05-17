@@ -104,11 +104,8 @@ tr:nth-child(even) {
       <label for="dob">Date of Birth______________________________________</label>
       <input type="text" id="DOB" name="birthday" placeholder="Your birthday..">
 
-      <label for="status">Status______________________________________</label>
-      <select name="status">
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-          </select>
+      
+     
 
       <label for="yr">Year______________________________________</label>
       <input type="text" id="yr" name="year" placeholder="year..">
