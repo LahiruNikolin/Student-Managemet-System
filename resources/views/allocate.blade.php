@@ -137,37 +137,38 @@ $userType=auth::user()->role;
         <ul>
            
           <li><span  class="ic"><i class="fas fa-bookmark"></i></span>
-            <span> <a href="{{url('attendence')}}"> Attendence & Card Management</a></span>
-            <div class="lis-active"></div>
-          </li>
-         
-          <li><span  class="ic"><i class="fab fa-sellsy"></i></span>
-            <span> <a href="#"> Students Management</a></span>
-            <div class="lis-active"></div>
-          </li>
-           
-          <li><span  class="ic"><i class="fas fa-users"></i></span>
-            <span> <a href="customer.html">Teacher Management</a></span>
-            <div class="lis-active"></div>
-          </li>
+						<span> <a href="{{url('attendence')}}"> Attendence & Card Management</a></span>
+						<div class="lis-active"></div>
+					</li>
+				 
+					<li><span  class="ic"><i class="fab fa-sellsy"></i></span>
+						<span> <a href="{{url('StudentManagement_index')}}"> Students Management</a></span>
+						<div class="lis-active"></div>
+					</li>
+					 
+					<li><span  class="ic"><i class="fas fa-users"></i></span>
+						<span> <a href="{{url('External')}}">Teacher Management</a></span>
+						<div class="lis-active"></div>
+					</li>
 
-          <li><span class="ic"><i class="fas fa-lemon"></i></span>
-            <span> <a href="subject"> Subject Management</a></span>
-            <div class="lis-active"></div>
+					<li><span class="ic"><i class="fas fa-lemon"></i></span>
+						<span> <a href="{{asset('subject')}}"> Subject Management</a></span>
+						<div class="lis-active"></div>
                     </li>
                     <li><span class="ic"><i class="fas fa-ticket-alt"></i></span>
-            <span> <a href="ticket.html"> External Staff Management</a></span>
-            <div class="lis-active"></div>
-          </li>
-          
-          <li><span class="ic"><i class="fas fa-city"></i></span>
-            <span> <a href="#"> Payment Management</a></span>
-            <div class="lis-active"></div>
-          </li>
-          <li><span class="ic"><i class="fas fa-file-invoice-dollar"></i></span>
-            <span> <a href="#"> Expenses Management</a></span>
-            <div class="lis-active"></div>
-          </li>
+						<span> <a href="{{url('External')}}"> External Staff Management</a></span>
+						<div class="lis-active"></div>
+					</li>
+					@if($userType=='p')
+					<li><span class="ic"><i class="fas fa-city"></i></span>
+						<span> <a href="{{asset('payemntManagement')}}"> Payment Management</a></span>
+						<div class="lis-active"></div>
+					</li>
+					<li><span class="ic"><i class="fas fa-file-invoice-dollar"></i></span>
+						<span> <a href="{{asset('PaymentExpenses')}}"> Expenses Management</a></span>
+						<div class="lis-active"></div>
+					</li>
+					@endif
           
         </ul>
       </nav>
