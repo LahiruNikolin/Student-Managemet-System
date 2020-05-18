@@ -14,8 +14,8 @@
 @if(Session::has('success'))
       <script>
       swal({
-        title: "Good job!",
-        text: "Expense Added Successfully",
+        title: "Expense Added Successfully",
+        text: "",
         icon: "success",
         button: "OK!",
       });

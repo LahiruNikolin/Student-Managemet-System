@@ -14,8 +14,8 @@
 @if(Session::has('success'))
       <script>
       swal({
-        title: "Good job!",
-        text: "Deleted",
+        title: "Deleted Successfully!",
+        text: "",
         icon: "warning",
         button: "OK!",
       });
