@@ -20,9 +20,13 @@ body {
   height: 390px;
   width: 870px;
   margin: 80px 0px 0px 150px;
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  align-content: center;
+   
+  display:flex;
+  justify-content:center;
   font-size: 20px;
+}
+#profile1 button{
+      width:17rem;
 }
 
 </style>

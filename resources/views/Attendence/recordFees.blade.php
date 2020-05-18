@@ -140,16 +140,7 @@
     });
     updateForm();
 
-/*
-    function showRay(){
-       
-        classIdsArray.forEach((i)=>{
-            
-            console.log(i);
-            
-        });
-    }
-*/
+ 
     sumField.value="Rs."+totFees;
 
     function updateTot(){

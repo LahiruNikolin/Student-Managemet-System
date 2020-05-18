@@ -62,6 +62,25 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+div.row{
+  
+   justify-content:center;
+}
+
+div.tname{
+   
+  width:12rem; !important
+}
+.form-check{
+  display:flex;
+  
+}
+.form-check input{
+  margin-left:10rem;
+}
+.form-check label{
+  margin-left:1rem;
+}
 
 
  </style>
@@ -84,10 +103,9 @@ tr:nth-child(even) {
     @foreach($classArray as $class)
   <div class="form-group row">
    
- 
-    <div class="col-sm-2">{{$class['subName']}}</div>
     <div class="col-sm-10">
       <div class="form-check">
+      <div class=" tname">{{$class['subName']}}</div>
         <input class="form-check-input" type="checkbox" id="gridCheck1" 
         value="{{$class['classId']}}"
         name="class{{$i}}">

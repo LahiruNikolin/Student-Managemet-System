@@ -48,6 +48,7 @@ class RStudentController extends Controller
       // $classArray2=array();
 
         $alldata= student::where('email', '=',$email)->get();
+      
 
         foreach ($alldata as $data){
              

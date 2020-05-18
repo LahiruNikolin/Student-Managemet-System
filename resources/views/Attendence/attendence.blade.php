@@ -322,7 +322,8 @@ function tick() {
             document.querySelector('#stu_id2').value=result;
             document.querySelector('#recordFeeModalBody')
             .removeChild(document.querySelector('#video-container'));
-            setTimeout(function(){  document.getElementById("feesForm").submit(); }, 1000);
+            
+            document.getElementById("feesForm").submit();
           }
         
          
