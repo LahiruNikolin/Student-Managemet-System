@@ -272,6 +272,80 @@ class mainController extends Controller
         ->with('to', $to);
     }
 
+    //teacher managent
+
+    public function addTeacher(Request $request){
+    $fname = $request->input('fname');
+    $lname = $request->input('lname');
+    $email = $request->input('email');
+    $address = $request->input('address');
+    $age = $request->input('age');
+    $qualification = $request->input('qualification');
+    $joinDate = $request->input('joinDate');
+
+    $data = array(
+      'fname'=>$fname,
+      'lname'=>$lname,
+      'email'=>$email,
+      'address'=>$address,
+      'age'=>$age,
+      'qualification'=>$qualification,
+      'joinDate'=>$joinDate,
+      'created_at' => Carbon::now(),
+      'updated_at' => Carbon::now()
+    );
+
+    DB::table('teacher')->insert($data);
+
+    return Redirect::back()->withSuccess('success');
+
+  }
+
+  public function updateTeacher(Request $request){
+    $id = $request->input('id');
+    $fname = $request->input('fname');
+    $lname = $request->input('lname');
+    $email = $request->input('email');
+    $address = $request->input('address');
+    $age = $request->input('age');
+    $qualification = $request->input('qualification');
+    $joinDate = $request->input('joinDate');
+
+    $data = array(
+      'fname'=>$fname,
+      'lname'=>$lname,
+      'email'=>$email,
+      'address'=>$address,
+      'age'=>$age,
+      'qualification'=>$qualification,
+      'joinDate'=>$joinDate,
+      'created_at' => Carbon::now(),
+      'updated_at' => Carbon::now()
+    );
+
+    DB::table('teacher')->where('id', $id)->update($data);
+
+    return Redirect::back()->withSuccess('success');
+
+  }
+
+  public function deleteTeacher(Request $request){
+      $id = $request->input('id');
+
+      DB::table('teacher')->where('id', '=', $id)->delete();
+
+      return Redirect::back()->withSuccess('success');
+    }
+
+    public function Report(Request $request){
+      $day = $request->input('day');
+      $id = $request->input('id');
+
+      return view('print')
+        ->with('id', $id)
+        ->with('day', $day);
+    }
+
 
 
 }

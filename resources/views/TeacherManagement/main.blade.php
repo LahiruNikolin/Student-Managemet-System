@@ -1,8 +1,4 @@
-<?php
-
-$userType=auth::user()->role;
-
-?>
+ 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -20,13 +16,20 @@ $userType=auth::user()->role;
 
 		<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-toggle.min.css')}}">  
 
-
+		<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Teachers</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/page01.css">
+    <link rel="stylesheet" href="assets/css/page02.css">
+    <link rel="stylesheet" href="assets/css/page02N-itp.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 		
 		<script src="{{asset('js/jquery.js')}}" ></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="{{asset('../node_modules/chart.js/dist/Chart.bundle.js')}}"></script>
 	 
-	@include('Inc.scannerImports')
+	
 
     <title>Student Manager</title>
     
@@ -39,7 +42,50 @@ $userType=auth::user()->role;
 </head>
 <body>
 	    <!-- header-->
-	@include('Inc.header')
+	
+<header>
+		<div id='lil-hero'><span class="mr-2"  ><i class="fas fa-universal-access"></i></span>Student Manager</div>
+		<div id='head-mid' class="d-flex justify-content-center">
+
+			<button type="button" class="btn btn-primary m-1">
+				Students <span class="badge badge-warning">47</span>
+			  </button>
+
+			  <button type="button" class="btn btn-primary m-1">
+				Teachers <span class="badge badge-warning">12</span>
+			  </button>
+
+			  <button type="button" class="btn btn-primary m-1">
+				Subjects <span class="badge badge-warning">9</span>
+			  </button>
+			  <button type="button" class="btn btn-primary m-1">
+				Classes <span class="badge badge-warning">11</span>
+			  </button>
+
+
+
+		</div>
+		<div id='admin-ic-area'>
+			<span class="avatar"><i class="fas fa-user-alt"></i></span>
+			<div class="d-flex justify-content-end  mt-3 mr-4">
+				<div class="dropdown">
+					<button class="btn btn-light dropdown-toggle"
+							type="button" id="dropdownMenu1" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+                        Pamudi
+					</button>
+					<div class="dropdown-menu dropdown-menu-right" style=" " aria-labelledby="dropdownMenu1" data-container="body">
+				 
+                                    <a class="dropdown-item" href="#">New Admin</a>
+                   
+					  <a class="dropdown-item" href="#">Logout</a>
+					   
+					</div>
+				  </div>
+			</div>
+			 
+		</div>
+	</header>
 	<section id='man'>
 		<div class="side-list">
 			<nav>
@@ -56,7 +102,7 @@ $userType=auth::user()->role;
 					</li>
 					 
 					<li><span  class="ic"><i class="fas fa-users"></i></span>
-						<span> <a href="{{url('view-teacher')}}">Teacher Management</a></span>
+						<span> <a href="customer.html">Teacher Management</a></span>
 						<div class="lis-active"></div>
 					</li>
 
@@ -68,7 +114,7 @@ $userType=auth::user()->role;
 						<span> <a href="{{url('External')}}"> External Staff Management</a></span>
 						<div class="lis-active"></div>
 					</li>
-					@if($userType=='p')
+				 
 					<li><span class="ic"><i class="fas fa-city"></i></span>
 						<span> <a href="{{asset('payemntManagement')}}"> Payment Management</a></span>
 						<div class="lis-active"></div>
@@ -76,8 +122,7 @@ $userType=auth::user()->role;
 					<li><span class="ic"><i class="fas fa-file-invoice-dollar"></i></span>
 						<span> <a href="{{asset('PaymentExpenses')}}"> Expenses Management</a></span>
 						<div class="lis-active"></div>
-					</li>
-					@endif
+			 
 				</ul>
 			</nav>
 			

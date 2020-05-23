@@ -284,3 +284,26 @@ Route::post('calSal','mainController@calSal');
 
 Route::post('addPayment','mainController@addPayment');
 
+//teacherMana
+
+Route::get('add-teacher', function () {
+    return view('TeacherManagement.add-teacher');
+});
+
+Route::get('view-teacher', function () {
+    return view('TeacherManagement.view-teacher');
+});
+
+Route::get('report', function () {
+    return view('TeacherManagement.report');
+});
+
+
+
+Route::post('addTeacher','mainController@addTeacher');
+
+Route::post('updateTeacher','mainController@updateTeacher');
+
+Route::post('deleteTeacher','mainController@deleteTeacher');
+
+Route::get('print','mainController@Report');
