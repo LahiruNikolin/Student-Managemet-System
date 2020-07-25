@@ -479,8 +479,10 @@ class attendencePageController extends Controller
       
 
     //print_r($mainArray);
+     //check
 
     Storage::disk('public')->put('json/attendenceWeekly.json', json_encode($mainArray));
+
     }
 
 
